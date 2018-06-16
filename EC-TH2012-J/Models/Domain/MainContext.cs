@@ -1,12 +1,13 @@
 ﻿using System.Data.Entity;
+using EC_TH2012_J.Models.Domain.EfModels;
 
-namespace EC_TH2012_J.Models
+namespace EC_TH2012_J.Models.Domain
 {
-    public class Entities:DbContext
+    public class MainContext : DbContext
     {
-        public Entities():base("name=Entities")
+        public MainContext() : base("name=MainDbConnection")
         {
-            Database.CreateIfNotExists();
+            Database.SetInitializer<MainContext>(null);
         }
 
         public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
@@ -15,10 +16,10 @@ namespace EC_TH2012_J.Models
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<BinhLuan> BinhLuans { get; set; }
         public virtual DbSet<ChiTietDonHang> ChiTietDonHangs { get; set; }
-        public virtual DbSet<DonHangKH> DonHangKHs { get; set; }
+        public virtual DbSet<EfModels.DonHangKH> DonHangKHs { get; set; }
         public virtual DbSet<GiaoDien> GiaoDiens { get; set; }
         public virtual DbSet<HangSanXuat> HangSanXuats { get; set; }
-        public virtual DbSet<HopDongNCC> HopDongNCCs { get; set; }
+        public virtual DbSet<EfModels.HopDongNCC> HopDongNCCs { get; set; }
         public virtual DbSet<KhuyenMai> KhuyenMais { get; set; }
         public virtual DbSet<Link> Links { get; set; }
         public virtual DbSet<LoaiSP> LoaiSPs { get; set; }
@@ -30,6 +31,6 @@ namespace EC_TH2012_J.Models
         public virtual DbSet<Trackingaction> Trackingactions { get; set; }
         public virtual DbSet<Sanphamcanmua> Sanphamcanmuas { get; set; }
         public virtual DbSet<ConfigAPI> ConfigAPIs { get; set; }
-        public virtual DbSet<DanhsachdangkisanphamNCC> DanhsachdangkisanphamNCCs { get; set; }
+        public virtual DbSet<EfModels.DanhsachdangkisanphamNCC> DanhsachdangkisanphamNCCs { get; set; }
     }
 }

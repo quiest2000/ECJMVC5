@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using EC_TH2012_J.Models.Domain;
+using EC_TH2012_J.Models.Domain.EfModels;
 
 namespace EC_TH2012_J.Models
 {
@@ -41,7 +43,7 @@ namespace EC_TH2012_J.Models
         }
         public void SaveTrackingLog(Trackingaction a)
         {
-            using (Entities db = new Entities())
+            using (MainContext db = new MainContext())
             {
                 db.Trackingactions.Add(a);
                 db.SaveChanges();

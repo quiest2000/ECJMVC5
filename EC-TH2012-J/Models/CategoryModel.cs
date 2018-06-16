@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
+using EC_TH2012_J.Models.Domain;
+using EC_TH2012_J.Models.Domain.EfModels;
 
 namespace EC_TH2012_J.Models
 {
     public class CategoryModel
     {
-        private Entities db;
+        private MainContext db;
         public CategoryModel()
         {
-            db = new Entities();
+            db = new MainContext();
         }
         public IQueryable<LoaiSP> GetCategory()
         {

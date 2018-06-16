@@ -9,13 +9,14 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using EC_TH2012_J.Models.Domain;
 
 namespace EC_TH2012_J.Controllers
 {
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class OauthController : ApiController
     {
-        private static Entities db = new Entities();
+        private static MainContext db = new MainContext();
         #region Helper
         public HttpResponseMessage CreateResponse<T>(HttpStatusCode statusCode, T data)
         {

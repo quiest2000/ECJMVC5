@@ -21,8 +21,8 @@ namespace EC_TH2012_J.Models
     {
         public string TenNCC { get; set; }
     }
-    [MetadataTypeAttribute(typeof(HopDongNCC.Metadata))]
-    public partial class HopDongNCC
+    [MetadataTypeAttribute(typeof(HopDongNCCPartitial.Metadata))]
+    public partial class HopDongNCCPartitial
     {
         public string TenNCC { get; set; }
         internal sealed class Metadata

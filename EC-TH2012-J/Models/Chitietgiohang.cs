@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using EC_TH2012_J.Models.Domain.EfModels;
 
 namespace EC_TH2012_J.Models
 {
@@ -16,7 +17,7 @@ namespace EC_TH2012_J.Models
             get { return (double)sanPham.GiaTien * Soluong; }
             set { thanhtien = value; }
         }
-        public DonHangKH Donhangkh { get; set; }
+        public Domain.EfModels.DonHangKH Donhangkh { get; set; }
        
         public void Tinhtien()
         {

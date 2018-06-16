@@ -7,6 +7,7 @@ using PagedList;
 using PagedList.Mvc;
 using EC_TH2012_J.Models;
 using EC_TH2012_J.Models.B2B;
+using DanhsachdangkisanphamNCC = EC_TH2012_J.Models.Domain.EfModels.DanhsachdangkisanphamNCC;
 
 
 namespace EC_TH2012_J.Controllers.B2B

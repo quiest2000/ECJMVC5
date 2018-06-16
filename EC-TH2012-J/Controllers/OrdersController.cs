@@ -16,13 +16,15 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin;
 using System.Web.Http.Cors;
+using EC_TH2012_J.Models.Domain;
+using HopDongNCC = EC_TH2012_J.Models.Domain.EfModels.HopDongNCC;
 
 namespace EC_TH2012_J.Controllers
 {
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class OrdersController : ApiController
     {
-        private Entities db = new Entities();
+        private MainContext db = new MainContext();
 
         // GET api/Orders
         //[HttpGet]

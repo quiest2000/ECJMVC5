@@ -7,12 +7,14 @@ using EC_TH2012_J.Models;
 using PagedList;
 using PagedList.Mvc;
 using EC_TH2012_J.App_Start;
+using EC_TH2012_J.Models.Domain;
+using EC_TH2012_J.Models.Domain.EfModels;
 
 namespace EC_TH2012_J.Controllers
 {
     public class SanPhamController : Controller
     {
-        private Entities db = new Entities();
+        private MainContext db = new MainContext();
         private SanPhamModel sp = new SanPhamModel();
         // GET: SanPham
         [Trackingactionfilter]

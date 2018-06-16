@@ -4,13 +4,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using EC_TH2012_J.Models.Domain;
+using EC_TH2012_J.Models.Domain.EfModels;
 using Microsoft.AspNet.Identity;
 
 namespace EC_TH2012_J.Controllers
 {
     public class HomeController : Controller
     {
-        private static Entities db = new Entities();
+        private static MainContext db = new MainContext();
 
         public static List<Thanhviennhom> Ds_Group;
         public ActionResult Index()

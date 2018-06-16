@@ -11,6 +11,7 @@ using Microsoft.Owin.Security;
 using EC_TH2012_J.Models;
 using EC_TH2012_J.Models.B2B;
 using System.IO;
+using EC_TH2012_J.Models.Domain.EfModels;
 using PagedList;
 using PagedList.Mvc;
 

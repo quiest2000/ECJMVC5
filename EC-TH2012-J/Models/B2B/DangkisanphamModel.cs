@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using EC_TH2012_J.Models.Domain;
+using EC_TH2012_J.Models.Domain.EfModels;
 
 namespace EC_TH2012_J.Models
 {
@@ -21,13 +23,13 @@ namespace EC_TH2012_J.Models
         public int TienmoiSP { get; set; }
         public bool ThemDanhKi(DangkisanphamModel a)
         {
-            using(Entities db = new Entities())
+            using(MainContext db = new MainContext())
             {
                 try
                 {
                     a.NgayDK = DateTime.Now;
                     a.Trangthai = 0;
-                    DanhsachdangkisanphamNCC temp = new DanhsachdangkisanphamNCC()
+                    Domain.EfModels.DanhsachdangkisanphamNCC temp = new Domain.EfModels.DanhsachdangkisanphamNCC()
                     {
                         MaSPCanMua = a.MaSPCM,
                         MaNCC = a.MaNCC,
@@ -48,7 +50,7 @@ namespace EC_TH2012_J.Models
         }
         public DangkisanphamModel createDangKiSanPham(string name, int ID_SPCM)
         {
-            using(Entities db = new Entities())
+            using(MainContext db = new MainContext())
             {
                 DangkisanphamModel temp = new DangkisanphamModel();
                 SanPham spcm = (from p in db.Sanphamcanmuas where p.ID == ID_SPCM select p.SanPham).FirstOrDefault();
@@ -61,9 +63,9 @@ namespace EC_TH2012_J.Models
                 return temp;
             }
         }
-        public List<DanhsachdangkisanphamNCC> getDSDKNCC(int IDSPCM)
+        public List<Domain.EfModels.DanhsachdangkisanphamNCC> getDSDKNCC(int IDSPCM)
         {
-            using(Entities db = new Entities())
+            using(MainContext db = new MainContext())
             {
                 var ds =  db.DanhsachdangkisanphamNCCs.Where(m => m.MaSPCanMua == IDSPCM).ToList();
                 foreach(var temp in ds)

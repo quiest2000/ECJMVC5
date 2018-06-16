@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
+using EC_TH2012_J.Models.Domain;
+using EC_TH2012_J.Models.Domain.EfModels;
 
 namespace EC_TH2012_J.Models
 {
     public class SanPhamModel
     {
-        Entities db = new Entities();
+        MainContext db = new MainContext();
         public IQueryable<SanPham> SearchByName(string term)
         {
             IQueryable<SanPham> lst;
@@ -149,7 +151,7 @@ namespace EC_TH2012_J.Models
 
         private bool KiemtraID(string maID)
         {
-            using (Entities db = new Entities())
+            using (MainContext db = new MainContext())
             {
                 var temp = db.SanPhams.Find(maID);
                 if (temp == null)
@@ -195,7 +197,7 @@ namespace EC_TH2012_J.Models
 
         internal void UpdateGiaBans(List<SanPham> lst)
         {
-            using (var db = new Entities())
+            using (var db = new MainContext())
             {
                 lst.ForEach(m => m.GiaTien = tinhgiatien(m.MaSP, m.GiaGoc));
                 db.SaveChanges();

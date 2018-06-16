@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
+using EC_TH2012_J.Models.Domain;
+using EC_TH2012_J.Models.Domain.EfModels;
 
 namespace EC_TH2012_J.Models
 {
@@ -10,7 +12,7 @@ namespace EC_TH2012_J.Models
     {
         public bool ThemmoiConfig(ConfigAPI a)
         {
-            using(Entities db = new Entities())
+            using(MainContext db = new MainContext())
             {
                 try
                 {
@@ -29,7 +31,7 @@ namespace EC_TH2012_J.Models
                 catch (Exception e) { return false; }
             }
         }
-        private bool kiemtratontai(string NCC,Entities db)
+        private bool kiemtratontai(string NCC,MainContext db)
         {
             var config = (from p in db.ConfigAPIs where p.MaNCC == NCC select new { p.MaNCC }).ToList();
             if (config.Count == 0)
@@ -38,7 +40,7 @@ namespace EC_TH2012_J.Models
         }
         public ConfigAPI getConfig(string MaNCC)
         {
-            using(Entities db = new Entities())
+            using(MainContext db = new MainContext())
             {
                 var config = (from p in db.ConfigAPIs where p.MaNCC == MaNCC select p).FirstOrDefault();
                 return config;

@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
+using EC_TH2012_J.Models.Domain;
+using EC_TH2012_J.Models.Domain.EfModels;
 
 namespace EC_TH2012_J.Models
 {
     public class UserModel
     {
-        Entities db = new Entities();
+        MainContext db = new MainContext();
         internal AspNetUser FindById(string p)
         {
             return db.AspNetUsers.Find(p);

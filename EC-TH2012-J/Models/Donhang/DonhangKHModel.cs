@@ -3,18 +3,20 @@ using System.Collections.Generic;
 using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Web;
+using EC_TH2012_J.Models.Domain;
+using EC_TH2012_J.Models.Domain.EfModels;
 
 namespace EC_TH2012_J.Models
 {
     public class DonhangKHModel
     {
-        public DonHangKH donHang;
+        public Domain.EfModels.DonHangKH donHang;
         public AspNetUser nguoiMua;
         public String nguoiNhan;
         public String tinhTrangDH;
         public List<DonhangKHModel> Xemdonhang(string makh)
         {
-            using (Entities db = new Entities())
+            using (MainContext db = new MainContext())
             {
                 List<DonhangKHModel> listDh = new List<DonhangKHModel>();
                 db.DonHangKHs.AsNoTracking();
@@ -65,7 +67,7 @@ namespace EC_TH2012_J.Models
         {
             try
             {
-                using (Entities db = new Entities())
+                using (MainContext db = new MainContext())
                 {
                     string query = "update DonHangKH set TinhTrangDH = '4' where MaDH ='" + maDH + "'";
                     db.Database.ExecuteSqlCommand(query);
@@ -80,7 +82,7 @@ namespace EC_TH2012_J.Models
 
         public AspNetUser Xemttnguoidung(string id)
         {
-            using (Entities db = new Entities())
+            using (MainContext db = new MainContext())
             {
                 AspNetUser users = (from p in db.AspNetUsers where p.Id == id select p).FirstOrDefault();
                 return users;
@@ -90,9 +92,9 @@ namespace EC_TH2012_J.Models
         {
             try
             {
-                using (Entities db = new Entities())
+                using (MainContext db = new MainContext())
                 {
-                    DonHangKH dhkh = new DonHangKH();
+                    Domain.EfModels.DonHangKH dhkh = new Domain.EfModels.DonHangKH();
                     dhkh.MaDH = RandomMa();
                     dhkh.MaKH = maKH;
 
@@ -113,7 +115,7 @@ namespace EC_TH2012_J.Models
             catch (Exception e) { }
         }
 
-        private void Luuchitietdonhang(Giohang giohang, Entities db, string maDH)
+        private void Luuchitietdonhang(Giohang giohang, MainContext db, string maDH)
         {
             foreach (var temp in giohang.getGiohang())
             {
@@ -147,7 +149,7 @@ namespace EC_TH2012_J.Models
 
         private bool KiemtraID(string maID)
         {
-            using (Entities db = new Entities())
+            using (MainContext db = new MainContext())
             {
                 var temp = db.DonHangKHs.Find(maID);
                 if (temp == null)
@@ -156,11 +158,11 @@ namespace EC_TH2012_J.Models
             }
         }
 
-        internal IQueryable<DonHangKH> TimDonHang(string key, string mobile, DateTime? date, int? status)
+        internal IQueryable<Domain.EfModels.DonHangKH> TimDonHang(string key, string mobile, DateTime? date, int? status)
         {
-            Entities db = new Entities();
+            MainContext db = new MainContext();
 
-            IQueryable<DonHangKH> lst = db.DonHangKHs;
+            IQueryable<Domain.EfModels.DonHangKH> lst = db.DonHangKHs;
             if (!string.IsNullOrEmpty(key))
                 lst = lst.Where(m => m.MaDH.Contains(key));
             if (!string.IsNullOrEmpty(mobile))
@@ -178,8 +180,8 @@ namespace EC_TH2012_J.Models
             if (tt == null) return false;
             try
             {
-                Entities db = new Entities();
-                DonHangKH dh = db.DonHangKHs.Find(madh);
+                MainContext db = new MainContext();
+                Domain.EfModels.DonHangKH dh = db.DonHangKHs.Find(madh);
                 if (dh.TinhTrangDH == 4 || dh.TinhTrangDH == 3)
                     return false;
                 if (dh.TinhTrangDH == 1)
@@ -216,13 +218,13 @@ namespace EC_TH2012_J.Models
 
         internal IQueryable<ChiTietDonHang> ChiTietDonHang(string maDH)
         {
-            Entities db = new Entities();
+            MainContext db = new MainContext();
             return db.ChiTietDonHangs.Where(m => m.MaDH.Contains(maDH));
         }
 
         internal IQueryable<object> ThongKeDoanhThu(DateTime? froms, DateTime? tos)
         {           
-            Entities db = new Entities();
+            MainContext db = new MainContext();
             var s = from p in db.DonHangKHs
                     where p.TinhTrangDH == 3 && p.NgayDatMua >= froms && p.NgayDatMua <= tos
                     group p by EntityFunctions.TruncateTime(p.NgayDatMua) into gro
@@ -233,7 +235,7 @@ namespace EC_TH2012_J.Models
 
         internal IQueryable<object> ThongKeTiTrong(DateTime? froms, DateTime? tos)
         {
-            Entities db = new Entities();
+            MainContext db = new MainContext();
             var s = from p in db.ChiTietDonHangs
                     where p.DonHangKH.TinhTrangDH == 3 && p.DonHangKH.NgayDatMua >= froms && p.DonHangKH.NgayDatMua <= tos
                     group p by p.SanPham.TenSP into gro

@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
+using EC_TH2012_J.Models.Domain;
+using EC_TH2012_J.Models.Domain.EfModels;
 
 namespace EC_TH2012_J.Models
 {
     public class HangSanXuatModel
     {
-        private Entities db = new Entities();
+        private MainContext db = new MainContext();
         public IQueryable<HangSanXuat> GetHangSX()
         {
             IQueryable<HangSanXuat> lst = db.HangSanXuats;

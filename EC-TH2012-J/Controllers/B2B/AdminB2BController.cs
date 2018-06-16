@@ -8,8 +8,10 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using EC_TH2012_J.Models.Domain.EfModels;
 using PagedList;
 using PagedList.Mvc;
+using HopDongNCC = EC_TH2012_J.Models.Domain.EfModels.HopDongNCC;
 
 namespace EC_TH2012_J.Controllers
 {

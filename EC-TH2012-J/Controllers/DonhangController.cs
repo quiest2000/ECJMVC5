@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using PagedList;
 using PagedList.Mvc;
+using DonHangKH = EC_TH2012_J.Models.Domain.EfModels.DonHangKH;
 
 namespace EC_TH2012_J.Controllers
 {

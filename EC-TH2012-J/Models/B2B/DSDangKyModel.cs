@@ -2,17 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using EC_TH2012_J.Models.Domain;
 
 namespace EC_TH2012_J.Models.B2B
 {
     public class DSDangKyModel
     {
-        private Entities db = new Entities();
+        private MainContext db = new MainContext();
 
 
-        internal IQueryable<DanhsachdangkisanphamNCC> TimDS(string tensp, string tenncc, int? tt)
+        internal IQueryable<Domain.EfModels.DanhsachdangkisanphamNCC> TimDS(string tensp, string tenncc, int? tt)
         {
-            IQueryable<DanhsachdangkisanphamNCC> lst = db.DanhsachdangkisanphamNCCs;
+            IQueryable<Domain.EfModels.DanhsachdangkisanphamNCC> lst = db.DanhsachdangkisanphamNCCs;
             if (!string.IsNullOrEmpty(tensp))
                 lst = lst.Where(m => m.Sanphamcanmua.SanPham.TenSP.Contains(tensp));
             if (!string.IsNullOrEmpty(tenncc))
@@ -29,7 +30,7 @@ namespace EC_TH2012_J.Models.B2B
 
         internal void DeleteDSDK(int id)
         {
-            DanhsachdangkisanphamNCC loai = db.DanhsachdangkisanphamNCCs.Find(id);
+            Domain.EfModels.DanhsachdangkisanphamNCC loai = db.DanhsachdangkisanphamNCCs.Find(id);
             db.DanhsachdangkisanphamNCCs.Remove(loai);
             db.SaveChanges();
         }

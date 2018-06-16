@@ -8,6 +8,7 @@ using PagedList.Mvc;
 using EC_TH2012_J.Models;
 using System.Net;
 using System.IO;
+using EC_TH2012_J.Models.Domain.EfModels;
 
 namespace EC_TH2012_J.Controllers
 {

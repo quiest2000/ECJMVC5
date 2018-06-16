@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
+using EC_TH2012_J.Models.Domain;
+using EC_TH2012_J.Models.Domain.EfModels;
 
 namespace EC_TH2012_J.Models
 {
     public class SanphamcanmuaModel
     {
-        Entities db = new Entities();
+        MainContext db = new MainContext();
         public List<Sanphamcanmua> getDS(int index,int count)
         {
-            using(Entities db = new Entities())
+            using(MainContext db = new MainContext())
             {
                 var ds =  db.Sanphamcanmuas.OrderBy(m=>m.Ngaydang).Skip(index).Take(count).ToList();
                 return ds;
@@ -19,14 +21,14 @@ namespace EC_TH2012_J.Models
         }
         public SanPham getSP(string maSP)
         {
-            using (Entities db = new Entities())
+            using (MainContext db = new MainContext())
             {
                 return (from p in db.SanPhams where p.MaSP == maSP select p).FirstOrDefault();
             }
         }
         public Sanphamcanmua getSanphamcanmua(int ID)
         {
-            using(Entities db = new Entities())
+            using(MainContext db = new MainContext())
             {
                 Sanphamcanmua var = (from p in db.Sanphamcanmuas where p.ID == ID select p).FirstOrDefault();
                 return var;

@@ -4,13 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using EC_TH2012_J.Models.Domain;
 
 namespace EC_TH2012_J.Controllers
 {
     public class XacthucController : Controller
     {
         private static string Request_token;
-        private static Entities db = new Entities();
+        private static MainContext db = new MainContext();
         // GET: Xacthuc
         public ActionResult authenticate()
         {
@@ -61,7 +62,7 @@ namespace EC_TH2012_J.Controllers
         public ActionResult Kiemtra(string id)
         {
             Request_token = id;
-            db = new Entities();
+            db = new MainContext();
             if (Request.IsAuthenticated)
             {
                 return RedirectToAction("authenticate", "Xacthuc");

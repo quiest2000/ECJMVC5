@@ -4,12 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using EC_TH2012_J.Models.Domain;
 
 namespace EC_TH2012_J.Controllers
 {
     public class XuligiohangController : Controller
     {
-        private static Entities db = new Entities();
+        private static MainContext db = new MainContext();
         public ActionResult Addcart(string sp, int quantity)
         {
             try

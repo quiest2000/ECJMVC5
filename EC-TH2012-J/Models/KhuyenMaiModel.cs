@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
+using EC_TH2012_J.Models.Domain;
+using EC_TH2012_J.Models.Domain.EfModels;
 
 namespace EC_TH2012_J.Models
 {
     public class KhuyenMaiModel
     {
-        private Entities db = new Entities();
+        private MainContext db = new MainContext();
 
         internal KhuyenMai FindById(string id)
         {

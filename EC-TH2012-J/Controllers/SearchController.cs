@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using EC_TH2012_J.Models;
+using EC_TH2012_J.Models.Domain.EfModels;
 using PagedList;
 using PagedList.Mvc;
 

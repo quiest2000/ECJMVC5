@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 using System.IO;
+using EC_TH2012_J.Models.Domain.EfModels;
 
 
 namespace EC_TH2012_J.Controllers

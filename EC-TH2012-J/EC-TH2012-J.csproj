@@ -21,6 +21,7 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -203,6 +204,10 @@
     <Compile Include="Controllers\B2B\HopDongController.cs" />
     <Compile Include="Controllers\B2B\NhaCungCapController.cs" />
     <Compile Include="Controllers\ThongKeController.cs" />
+    <Compile Include="Models\Domain\EfModels\AspNetRole.cs" />
+    <Compile Include="Models\Domain\EfModels\AspNetUser.cs" />
+    <Compile Include="Models\Domain\EfModels\AspNetUserClaim.cs" />
+    <Compile Include="Models\Domain\EfModels\AspNetUserLogin.cs" />
     <Compile Include="Models\B2B\Classsupport.cs" />
     <Compile Include="Models\B2B\ConfigAPIModel.cs" />
     <Compile Include="Models\B2B\DoitacModel.cs" />
@@ -231,110 +236,48 @@
     </Compile>
     <Compile Include="Models\Access_token.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\AspNetRole.cs">
-      <DependentUpon>ECModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\AspNetUser.cs">
-      <DependentUpon>ECModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\AspNetUserClaim.cs">
-      <DependentUpon>ECModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\AspNetUserLogin.cs">
-      <DependentUpon>ECModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\B2B\DangkisanphamModel.cs" />
     <Compile Include="Models\B2B\NhaCungCapModel.cs" />
     <Compile Include="Models\B2B\SanphamcanmuaModel.cs" />
-    <Compile Include="Models\BinhLuan.cs">
-      <DependentUpon>ECModel.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Models\Domain\EfModels\BinhLuan.cs" />
     <Compile Include="Models\CategoryModel.cs" />
-    <Compile Include="Models\ChiTietDonHang.cs">
-      <DependentUpon>ECModel.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Models\Domain\EfModels\ChiTietDonHang.cs" />
     <Compile Include="Models\ClassPartial\SanphamPartial.cs" />
     <Compile Include="Models\CommentModel.cs" />
-    <Compile Include="Models\ConfigAPI.cs">
-      <DependentUpon>ECModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DanhsachdangkisanphamNCC.cs">
-      <DependentUpon>ECModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DonHangKH.cs">
-      <DependentUpon>ECModel.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Models\Domain\EfModels\ConfigAPI.cs" />
+    <Compile Include="Models\Domain\EfModels\DanhsachdangkisanphamNCC.cs" />
+    <Compile Include="Models\Domain\EfModels\DonHangKH.cs" />
     <Compile Include="Models\Donhang\ChitietdonhangModel.cs" />
     <Compile Include="Models\Donhang\DonhangKHModel.cs" />
     <Compile Include="Models\Donhang\Donhangtongquan.cs" />
-    <Compile Include="Models\ECModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ECModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ECModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ECModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ECModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ECModel.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Models\Chitietgiohang.cs" />
     <Compile Include="Models\EmailModel.cs" />
-    <Compile Include="Models\GiaoDien.cs">
-      <DependentUpon>ECModel.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Models\Domain\MainContext.cs" />
+    <Compile Include="Models\Domain\EfModels\GiaoDien.cs" />
     <Compile Include="Models\GiaoDienModel.cs" />
     <Compile Include="Models\Giohang.cs" />
-    <Compile Include="Models\HangSanXuat.cs">
-      <DependentUpon>ECModel.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Models\Domain\EfModels\HangSanXuat.cs" />
     <Compile Include="Models\HangSanXuatModel.cs" />
-    <Compile Include="Models\HopDongNCC.cs">
-      <DependentUpon>ECModel.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Models\Domain\EfModels\HopDongNCC.cs" />
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\KhuyenMai.cs">
-      <DependentUpon>ECModel.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Models\Domain\EfModels\KhuyenMai.cs" />
     <Compile Include="Models\KhuyenMaiModel.cs" />
-    <Compile Include="Models\Link.cs">
-      <DependentUpon>ECModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\LoaiSP.cs">
-      <DependentUpon>ECModel.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Models\Domain\EfModels\Link.cs" />
+    <Compile Include="Models\Domain\EfModels\LoaiSP.cs" />
     <Compile Include="Models\MainMenuModel.cs" />
     <Compile Include="Models\ManagerObiect.cs" />
     <Compile Include="Models\NGANLUONG.cs" />
-    <Compile Include="Models\NhaCungCap.cs">
-      <DependentUpon>ECModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Oauth.cs">
-      <DependentUpon>ECModel.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Models\Domain\EfModels\NhaCungCap.cs" />
+    <Compile Include="Models\Domain\EfModels\Oauth.cs" />
     <Compile Include="Models\Request_token.cs" />
-    <Compile Include="Models\SanPham.cs">
-      <DependentUpon>ECModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Sanphamcanmua.cs">
-      <DependentUpon>ECModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\SanPhamKhuyenMai.cs">
-      <DependentUpon>ECModel.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Models\Domain\EfModels\SanPham.cs" />
+    <Compile Include="Models\Domain\EfModels\Sanphamcanmua.cs" />
+    <Compile Include="Models\Domain\EfModels\SanPhamKhuyenMai.cs" />
     <Compile Include="Models\SanPhamModel.cs" />
     <Compile Include="Models\Shipping.cs" />
     <Compile Include="Models\Thanhviennhom.cs" />
-    <Compile Include="Models\ThongSoKyThuat.cs">
-      <DependentUpon>ECModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Trackingaction.cs">
-      <DependentUpon>ECModel.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Models\Domain\EfModels\ThongSoKyThuat.cs" />
+    <Compile Include="Models\Domain\EfModels\Trackingaction.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Provider\ApplicationOAuthProvider.cs" />
@@ -725,23 +668,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
-    <EntityDeploy Include="Models\ECModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ECModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\ECModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ECModel.edmx</DependentUpon>
-      <LastGenOutput>ECModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\ECModel.edmx.diagram">
-      <DependentUpon>ECModel.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\ECModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ECModel.edmx</DependentUpon>
-      <LastGenOutput>ECModel.cs</LastGenOutput>
-    </Content>
     <Content Include="Content\fonts\fontawesome-webfont.eot" />
     <Content Include="Content\fonts\fontawesome-webfont.ttf" />
     <Content Include="Content\fonts\fontawesome-webfont.woff" />

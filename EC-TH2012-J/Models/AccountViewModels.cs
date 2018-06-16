@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using EC_TH2012_J.Models.Domain.EfModels;
 
 namespace EC_TH2012_J.Models
 {
@@ -173,8 +174,8 @@ namespace EC_TH2012_J.Models
 
         public bool RememberMe { get; set; }
     }
-    [MetadataTypeAttribute(typeof(DonHangKH.Metadata))]
-    public partial class DonHangKH
+    [MetadataTypeAttribute(typeof(DonHangKHPartial.Metadata))]
+    public partial class DonHangKHPartial
     {
         internal sealed class Metadata
         {

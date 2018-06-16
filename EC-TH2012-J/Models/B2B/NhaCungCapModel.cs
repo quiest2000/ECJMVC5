@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
+using EC_TH2012_J.Models.Domain;
+using EC_TH2012_J.Models.Domain.EfModels;
 
 namespace EC_TH2012_J.Models
 {
     public class NhaCungCapModel
     {
-        protected Entities db = new Entities();
+        protected MainContext db = new MainContext();
 
 
         internal IQueryable<NhaCungCap> TimNCC(string key)
@@ -26,12 +28,12 @@ namespace EC_TH2012_J.Models
 
         internal void DeleteHopDong(string id)
         {
-            HopDongNCC loai = db.HopDongNCCs.Find(id);
+            Domain.EfModels.HopDongNCC loai = db.HopDongNCCs.Find(id);
             db.HopDongNCCs.Remove(loai);
             db.SaveChanges();
         }
 
-        internal string ThemHopDong(HopDongNCC loai)
+        internal string ThemHopDong(Domain.EfModels.HopDongNCC loai)
         {
             loai.MaHD = TaoMa();
             loai.TinhTrang = true;
@@ -45,7 +47,7 @@ namespace EC_TH2012_J.Models
 
         private EmailModel GetParent(string mahd)
         {
-            HopDongNCC loai = db.HopDongNCCs.Where(m => m.MaHD.Equals(mahd)).FirstOrDefault();
+            Domain.EfModels.HopDongNCC loai = db.HopDongNCCs.Where(m => m.MaHD.Equals(mahd)).FirstOrDefault();
             NhaCungCap ncc = db.NhaCungCaps.Where(m => m.MaNCC.Equals(loai.MaNCC)).FirstOrDefault();
             SanPham sp = db.SanPhams.Where(m => m.MaSP.Equals(loai.MaSP)).FirstOrDefault();
             string mail = ncc.Email;
@@ -90,9 +92,9 @@ namespace EC_TH2012_J.Models
         }
 
 
-        internal IQueryable<HopDongNCC> TimHopDong(string key, string tensp, bool? loaihd)
+        internal IQueryable<Domain.EfModels.HopDongNCC> TimHopDong(string key, string tensp, bool? loaihd)
         {
-            IQueryable<HopDongNCC> lst = db.HopDongNCCs;
+            IQueryable<Domain.EfModels.HopDongNCC> lst = db.HopDongNCCs;
             if (!string.IsNullOrEmpty(key))
                 lst = lst.Where(m => m.MaHD.Contains(key));
             if (!string.IsNullOrEmpty(tensp))
@@ -156,9 +158,9 @@ namespace EC_TH2012_J.Models
             db.SaveChanges();
         }
 
-        internal IQueryable<HopDongNCC> TimHopDong(string key, string tensp, bool? loaihd, bool? tt)
+        internal IQueryable<Domain.EfModels.HopDongNCC> TimHopDong(string key, string tensp, bool? loaihd, bool? tt)
         {
-            IQueryable<HopDongNCC> lst = db.HopDongNCCs;
+            IQueryable<Domain.EfModels.HopDongNCC> lst = db.HopDongNCCs;
             if (!string.IsNullOrEmpty(key))
                 lst = lst.Where(m => m.MaHD.Contains(key));
             if (!string.IsNullOrEmpty(tensp))
@@ -172,7 +174,7 @@ namespace EC_TH2012_J.Models
 
         internal void XacNhanDaGiao(string item, bool tt)
         {
-            HopDongNCC lsp = db.HopDongNCCs.Find(item);
+            Domain.EfModels.HopDongNCC lsp = db.HopDongNCCs.Find(item);
 
             if (lsp.TinhTrang == false && tt == true)
             {
@@ -188,7 +190,7 @@ namespace EC_TH2012_J.Models
 
         internal void XacNhanDaTT(string item, bool tt)
         {
-            HopDongNCC lsp = db.HopDongNCCs.Find(item);
+            Domain.EfModels.HopDongNCC lsp = db.HopDongNCCs.Find(item);
 
             lsp.TTThanhToan = tt;
             db.Entry(lsp).State = EntityState.Modified;
