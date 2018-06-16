@@ -11,9 +11,10 @@ namespace EC_TH2012_J.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    [System.ComponentModel.DataAnnotations.Schema.Table("GiaoDien")]
     public partial class GiaoDien
     {
+        [System.ComponentModel.DataAnnotations.Key]
         public int Id { get; set; }
         public string ThuocTinh { get; set; }
         public string GiaTri { get; set; }

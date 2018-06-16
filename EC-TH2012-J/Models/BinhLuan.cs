@@ -7,14 +7,17 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace EC_TH2012_J.Models
 {
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    
+    [System.ComponentModel.DataAnnotations.Schema.Table("BinhLuan")]
     public partial class BinhLuan
     {
+        [Key]
         [Display(Name = "Mã bình luận")]
         public int MaBL { get; set; }
         [Display(Name = "Mã sản phẩm")]
@@ -32,8 +35,9 @@ namespace EC_TH2012_J.Models
         [Display(Name = "Đã trả lời")]
         public string DaTraLoi { get; set; }
         public Nullable<int> Parent { get; set; }
-    
+        [ForeignKey(nameof(MaKH))]
         public virtual AspNetUser AspNetUser { get; set; }
+        [ForeignKey(nameof(MaSP))]
         public virtual SanPham SanPham { get; set; }
     }
 }

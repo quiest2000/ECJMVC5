@@ -7,18 +7,20 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace EC_TH2012_J.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    [System.ComponentModel.DataAnnotations.Schema.Table("AspNetUserClaims")]
     public partial class AspNetUserClaim
     {
         public int Id { get; set; }
         public string UserId { get; set; }
         public string ClaimType { get; set; }
         public string ClaimValue { get; set; }
-    
+        [ForeignKey(nameof(UserId))]
         public virtual AspNetUser AspNetUser { get; set; }
     }
 }

@@ -7,20 +7,21 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace EC_TH2012_J.Models
 {
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    
+    [System.ComponentModel.DataAnnotations.Schema.Table("DonHangKH")]
     public partial class DonHangKH
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public DonHangKH()
         {
             this.ChiTietDonHangs = new HashSet<ChiTietDonHang>();
         }
-
+        [Key]
         [Display(Name = "Mã đơn hàng")]
         public string MaDH { get; set; }
         [Display(Name = "Mã khách hàng")]
@@ -41,9 +42,8 @@ namespace EC_TH2012_J.Models
         public string Diachi { get; set; }
         [Display(Name = "Điện thoại")]
         public string Dienthoai { get; set; }
-    
+        [ForeignKey(nameof(MaKH))]
         public virtual AspNetUser AspNetUser { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ChiTietDonHang> ChiTietDonHangs { get; set; }
     }
 }

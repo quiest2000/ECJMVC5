@@ -11,9 +11,10 @@ namespace EC_TH2012_J.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    [System.ComponentModel.DataAnnotations.Schema.Table("Trackingaction")]
     public partial class Trackingaction
     {
+        [System.ComponentModel.DataAnnotations.Key]
         public int Id { get; set; }
         public string Username { get; set; }
         public string MaSP { get; set; }

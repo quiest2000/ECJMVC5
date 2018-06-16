@@ -7,15 +7,17 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace EC_TH2012_J.Models
 {
     using System;
     using System.Collections.Generic;
     using System.Web.Mvc;
-    
+    [System.ComponentModel.DataAnnotations.Schema.Table("SanPham")]
     public partial class SanPham
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public SanPham()
         {
             this.BinhLuans = new HashSet<BinhLuan>();
@@ -25,10 +27,12 @@ namespace EC_TH2012_J.Models
             this.ThongSoKyThuats = new HashSet<ThongSoKyThuat>();
             this.Sanphamcanmuas = new HashSet<Sanphamcanmua>();
         }
-
+        [System.ComponentModel.DataAnnotations.Key]
         public string MaSP { get; set; }
         public string TenSP { get; set; }
         public string LoaiSP { get; set; }
+        [ForeignKey(nameof(LoaiSP))]
+        public virtual LoaiSP LoaiSanPham { get; set; }
         public Nullable<int> SoLuotXemSP { get; set; }
         public string HangSX { get; set; }
         public string XuatXu { get; set; }
@@ -42,20 +46,14 @@ namespace EC_TH2012_J.Models
         public Nullable<bool> isnew { get; set; }
         public Nullable<bool> ishot { get; set; }
         public Nullable<decimal> GiaGoc { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
         public virtual ICollection<BinhLuan> BinhLuans { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ChiTietDonHang> ChiTietDonHangs { get; set; }
+        [ForeignKey(nameof(HangSX))]
         public virtual HangSanXuat HangSanXuat { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HopDongNCC> HopDongNCCs { get; set; }
-        public virtual LoaiSP LoaiSP1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SanPhamKhuyenMai> SanPhamKhuyenMais { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ThongSoKyThuat> ThongSoKyThuats { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Sanphamcanmua> Sanphamcanmuas { get; set; }
     }
 }

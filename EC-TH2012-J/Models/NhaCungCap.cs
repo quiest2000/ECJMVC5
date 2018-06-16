@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace EC_TH2012_J.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    [System.ComponentModel.DataAnnotations.Schema.Table("NhaCungCap")]
     public partial class NhaCungCap
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,7 +24,7 @@ namespace EC_TH2012_J.Models
             this.ConfigAPIs = new HashSet<ConfigAPI>();
             this.DanhsachdangkisanphamNCCs = new HashSet<DanhsachdangkisanphamNCC>();
         }
-    
+        [System.ComponentModel.DataAnnotations.Key]
         public string MaNCC { get; set; }
         public string TenNCC { get; set; }
         public string DiaChi { get; set; }
@@ -31,14 +33,11 @@ namespace EC_TH2012_J.Models
         public string Website { get; set; }
         public string Net_user { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HopDongNCC> HopDongNCCs { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Oauth> Oauths { get; set; }
+        [ForeignKey(nameof(Net_user))]
         public virtual AspNetUser AspNetUser { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ConfigAPI> ConfigAPIs { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DanhsachdangkisanphamNCC> DanhsachdangkisanphamNCCs { get; set; }
     }
 }

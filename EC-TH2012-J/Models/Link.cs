@@ -11,9 +11,10 @@ namespace EC_TH2012_J.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    [System.ComponentModel.DataAnnotations.Schema.Table("Link")]
     public partial class Link
     {
+        [System.ComponentModel.DataAnnotations.Key]
         public int id { get; set; }
         public string Url { get; set; }
         public string Image { get; set; }

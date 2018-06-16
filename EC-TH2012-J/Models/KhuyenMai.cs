@@ -11,17 +11,17 @@ namespace EC_TH2012_J.Models
 {
     using System;
     using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Web.Mvc;
-    
+    using System.ComponentModel.DataAnnotations;
+    using System.Web.Mvc;
+    using System.ComponentModel.DataAnnotations.Schema;
+    [System.ComponentModel.DataAnnotations.Schema.Table("KhuyenMai")]
     public partial class KhuyenMai
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public KhuyenMai()
         {
             this.SanPhamKhuyenMais = new HashSet<SanPhamKhuyenMai>();
         }
-    
+        [Key]
         [Display(Name = "Mã khuyến mãi ")]
         public string MaKM { get; set; }
         [Display(Name = "Ngày bắt đầu")]
@@ -39,8 +39,7 @@ using System.Web.Mvc;
         public string TenCT { get; set; }
         [Display(Name = "Ảnh chương trình")]
         public string AnhCT { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
         public virtual ICollection<SanPhamKhuyenMai> SanPhamKhuyenMais { get; set; }
     }
 }

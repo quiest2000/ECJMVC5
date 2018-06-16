@@ -7,14 +7,17 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace EC_TH2012_J.Models
 {
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    
+    [System.ComponentModel.DataAnnotations.Schema.Table("ChiTietDonHang")]
     public partial class ChiTietDonHang
     {
+        [Key]
         [Display(Name = "Mã đơn hàng")]
         public string MaDH { get; set; }
         [Display(Name = "Mã sản phẩm")]
@@ -23,8 +26,9 @@ namespace EC_TH2012_J.Models
         public Nullable<int> SoLuong { get; set; }
         [Display(Name = "Thành tiền")]
         public Nullable<decimal> ThanhTien { get; set; }
-    
+        [ForeignKey(nameof(MaDH))]
         public virtual DonHangKH DonHangKH { get; set; }
+        [ForeignKey(nameof(MaSP))]
         public virtual SanPham SanPham { get; set; }
     }
 }

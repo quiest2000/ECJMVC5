@@ -11,9 +11,12 @@ namespace EC_TH2012_J.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations.Schema;
+    using  System.ComponentModel.DataAnnotations;
+    [Table("HopDongNCC")]
     public partial class HopDongNCC
     {
+        [Key]
         public string MaHD { get; set; }
         public string MaNCC { get; set; }
         public Nullable<System.DateTime> NgayKy { get; set; }
@@ -28,8 +31,9 @@ namespace EC_TH2012_J.Models
         public Nullable<decimal> DonGia { get; set; }
         public Nullable<bool> TinhTrang { get; set; }
         public Nullable<bool> TTThanhToan { get; set; }
-    
+        [ForeignKey(nameof(MaSP))]
         public virtual SanPham SanPham { get; set; }
+        [ForeignKey(nameof(MaNCC))]
         public virtual NhaCungCap NhaCungCap { get; set; }
     }
 }

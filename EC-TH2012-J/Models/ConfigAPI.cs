@@ -7,20 +7,24 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 namespace EC_TH2012_J.Models
 {
     using System;
     using System.Collections.Generic;
-    
+   
+    [Table("ConfigAPI")]
     public partial class ConfigAPI
     {
+        [Key]
         public int ID { get; set; }
         public string MaNCC { get; set; }
         public string LinkRequesrToken { get; set; }
         public string LinkAccessToken { get; set; }
         public string LinkKiemTraLuongTon { get; set; }
         public string LinkXacNhanGiaoHang { get; set; }
-    
+        [ForeignKey(nameof(MaNCC))]
         public virtual NhaCungCap NhaCungCap { get; set; }
     }
 }

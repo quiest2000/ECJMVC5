@@ -7,13 +7,16 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace EC_TH2012_J.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    [System.ComponentModel.DataAnnotations.Schema.Table("Oauth")]
     public partial class Oauth
     {
+        [System.ComponentModel.DataAnnotations.Key]
         public string ID { get; set; }
         public string Consumer_key { get; set; }
         public string Callback { get; set; }
@@ -23,7 +26,7 @@ namespace EC_TH2012_J.Models
         public string MaNCC { get; set; }
         public string Token { get; set; }
         public Nullable<System.DateTime> ExpiresTime { get; set; }
-    
+        [ForeignKey(nameof(MaNCC))]
         public virtual NhaCungCap NhaCungCap { get; set; }
     }
 }

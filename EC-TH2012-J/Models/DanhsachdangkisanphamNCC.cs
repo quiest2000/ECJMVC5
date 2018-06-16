@@ -12,9 +12,11 @@ namespace EC_TH2012_J.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    
+    using System.ComponentModel.DataAnnotations.Schema;
+    [Table("DanhsachdangkisanphamNCC")]
     public partial class DanhsachdangkisanphamNCC
     {
+        [Key]
         [Display(Name = "ID")]
         public int ID { get; set; }
         [Display(Name = "Mã Sản phẩm cần mua")]
@@ -29,8 +31,9 @@ namespace EC_TH2012_J.Models
         public Nullable<int> Trangthai { get; set; }
         [Display(Name = "Đơn giá")]
         public Nullable<int> TienmoiSP { get; set; }
-    
+        [ForeignKey(nameof(MaNCC))]
         public virtual NhaCungCap NhaCungCap { get; set; }
+        [ForeignKey(nameof(MaSPCanMua))]
         public virtual Sanphamcanmua Sanphamcanmua { get; set; }
     }
 }

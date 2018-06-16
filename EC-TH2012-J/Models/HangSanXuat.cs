@@ -12,15 +12,14 @@ namespace EC_TH2012_J.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    
+    [System.ComponentModel.DataAnnotations.Schema.Table("HangSanXuat")]
     public partial class HangSanXuat
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public HangSanXuat()
         {
             this.SanPhams = new HashSet<SanPham>();
         }
-
+        [System.ComponentModel.DataAnnotations.Key]
         [Display(Name = "Hãng sản xuất")]
         public string HangSX { get; set; }
         [Display(Name = "Tên Hãng")]
@@ -30,7 +29,6 @@ namespace EC_TH2012_J.Models
         [Display(Name = "Quốc gia")]
         public string QuocGia { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SanPham> SanPhams { get; set; }
     }
 }

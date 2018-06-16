@@ -7,20 +7,21 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace EC_TH2012_J.Models
 {
     using System;
     using System.Collections.Generic;
     using System.Web.Mvc;
-    
+    [System.ComponentModel.DataAnnotations.Schema.Table("Sanphamcanmua")]
     public partial class Sanphamcanmua
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Sanphamcanmua()
         {
             this.DanhsachdangkisanphamNCCs = new HashSet<DanhsachdangkisanphamNCC>();
         }
-    
+        [System.ComponentModel.DataAnnotations.Key]
         public int ID { get; set; }
         public string MaSP { get; set; }
         public Nullable<int> Soluong { get; set; }
@@ -29,9 +30,8 @@ namespace EC_TH2012_J.Models
 
         [AllowHtml]
         public string Mota { get; set; }
-    
+        [ForeignKey(nameof(MaSP))]
         public virtual SanPham SanPham { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DanhsachdangkisanphamNCC> DanhsachdangkisanphamNCCs { get; set; }
     }
 }

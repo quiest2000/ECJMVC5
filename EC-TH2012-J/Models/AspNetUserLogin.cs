@@ -7,17 +7,20 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace EC_TH2012_J.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    [System.ComponentModel.DataAnnotations.Schema.Table("AspNetUserLogins")]
     public partial class AspNetUserLogin
     {
         public string LoginProvider { get; set; }
         public string ProviderKey { get; set; }
+        [System.ComponentModel.DataAnnotations.Key]
         public string UserId { get; set; }
-    
+        [ForeignKey(nameof(UserId))]
         public virtual AspNetUser AspNetUser { get; set; }
     }
 }

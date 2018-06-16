@@ -18,11 +18,12 @@ namespace EC_TH2012_J.Models
         public Entities()
             : base("name=Entities")
         {
+            Database.SetInitializer<Entities>(null);
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            throw new UnintentionalCodeFirstException();
+           base.OnModelCreating(modelBuilder);
         }
     
         public virtual DbSet<AspNetRole> AspNetRoles { get; set; }

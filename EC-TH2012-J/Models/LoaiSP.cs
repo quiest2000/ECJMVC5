@@ -11,19 +11,17 @@ namespace EC_TH2012_J.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    [System.ComponentModel.DataAnnotations.Schema.Table("LoaiSP")]
     public partial class LoaiSP
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public LoaiSP()
         {
             this.SanPhams = new HashSet<SanPham>();
         }
-    
+        [System.ComponentModel.DataAnnotations.Key]
         public string MaLoai { get; set; }
         public string TenLoai { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SanPham> SanPhams { get; set; }
     }
 }
