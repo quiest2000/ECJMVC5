@@ -28,7 +28,7 @@ namespace EC_TH2012_J.Models
 
         internal void EditLoaiSP(LoaiSP loai)
         {
-            LoaiSP lsp = db.LoaiSPs.Find(loai.MaLoai);
+            var lsp = db.LoaiSPs.Find(loai.MaLoai);
             lsp.TenLoai = loai.TenLoai;
             db.Entry(lsp).State = EntityState.Modified;
             db.SaveChanges();
@@ -36,7 +36,7 @@ namespace EC_TH2012_J.Models
 
         internal void DeleteLoaiSP(string id)
         {
-            LoaiSP loai = db.LoaiSPs.Find(id);
+            var loai = db.LoaiSPs.Find(id);
             db.LoaiSPs.Remove(loai);
             db.SaveChanges();
         }
@@ -52,11 +52,11 @@ namespace EC_TH2012_J.Models
         private string TaoMa()
         {
             string maID;
-            Random rand = new Random();
+            var rand = new Random();
             do
             {
                 maID = "";
-                for (int i = 0; i < 5; i++)
+                for (var i = 0; i < 5; i++)
                 {
                     maID += rand.Next(9);
                 }

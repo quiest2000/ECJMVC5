@@ -7,17 +7,17 @@ namespace EC_TH2012_J.Models
 {
     public class Giohang
     {
-        private List<Chitietgiohang> Cart;
+        private List<ChiTietGioHang> Cart;
         public double phiVanChuyen = 0;
         public Giohang()
         {
-            Cart = new List<Chitietgiohang>();
+            Cart = new List<ChiTietGioHang>();
         }
-        public List<Chitietgiohang> getGiohang()
+        public List<ChiTietGioHang> getGiohang()
         {
             return Cart;
         }
-        public void addCart(Chitietgiohang a)
+        public void addCart(ChiTietGioHang a)
         {
             Cart.Add(a);
         }
@@ -62,7 +62,7 @@ namespace EC_TH2012_J.Models
         }
         public int Tinhtongsoluongtronggio()
         {
-            int count = 0;
+            var count = 0;
             foreach (var temp in Cart)
             {
                 count += temp.Soluong;

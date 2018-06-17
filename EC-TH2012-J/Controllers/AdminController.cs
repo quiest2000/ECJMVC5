@@ -28,7 +28,7 @@ namespace EC_TH2012_J.Controllers
         [AuthLog(Roles = "Quản trị viên,Nhân viên")]
         public ActionResult SanPham()
         {
-            SanPhamModel spm = new SanPhamModel();
+            var spm = new SanPhamModel();
             ViewBag.HangSX = new SelectList(spm.GetAllHangSX(), "HangSX", "TenHang");
             ViewBag.LoaiSP = new SelectList(spm.GetAllLoaiSP(), "MaLoai", "TenLoai");
             return View();
@@ -41,8 +41,8 @@ namespace EC_TH2012_J.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SanPhamModel spm = new SanPhamModel();
-            SanPham sp = spm.FindById(id);
+            var spm = new SanPhamModel();
+            var sp = spm.FindById(id);
             if (sp == null)
             {
                 return HttpNotFound();
@@ -57,7 +57,7 @@ namespace EC_TH2012_J.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditSP([Bind(Include = "MaSP,TenSP,LoaiSP,HangSX,XuatXu,GiaGoc,MoTa,SoLuong,isnew,ishot")] SanPham sanpham, HttpPostedFileBase ad, HttpPostedFileBase an, HttpPostedFileBase ak)
         {
-            SanPhamModel spm = new SanPhamModel();
+            var spm = new SanPhamModel();
             if (ModelState.IsValid)
             {
                 spm.EditSP(sanpham);
@@ -78,7 +78,7 @@ namespace EC_TH2012_J.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SanPhamModel spm = new SanPhamModel();
+            var spm = new SanPhamModel();
             DeleteAnh(spm.FindById(id).AnhDaiDien);
             DeleteAnh(spm.FindById(id).AnhNen);
             DeleteAnh(spm.FindById(id).AnhKhac);
@@ -112,16 +112,16 @@ namespace EC_TH2012_J.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ThemSP([Bind(Include = "TenSP,LoaiSP,HangSX,XuatXu,GiaGoc,MoTa,SoLuong,isnew,ishot")] SanPham sanpham, HttpPostedFileBase ad, HttpPostedFileBase an, HttpPostedFileBase ak)
         {
-            SanPhamModel spm = new SanPhamModel();
+            var spm = new SanPhamModel();
             if (ModelState.IsValid)
             {
-                string masp = spm.ThemSP(sanpham);
+                var masp = spm.ThemSP(sanpham);
                 UploadAnh(ad, masp + "1");
                 UploadAnh(an, masp + "2");
                 UploadAnh(ak, masp + "3");
-                ThongSoKyThuat ts = new ThongSoKyThuat();
+                var ts = new ThongSoKyThuat();
                 ts.MaSP = masp;
-                List<ThongSoKyThuat> lst = new List<ThongSoKyThuat>();
+                var lst = new List<ThongSoKyThuat>();
                 lst.Add(ts);
                 return View("ThemThongSoKT", lst);
             }
@@ -133,7 +133,7 @@ namespace EC_TH2012_J.Controllers
         [AuthLog(Roles = "Quản trị viên,Nhân viên")]
         public ActionResult SPDetail(string id)
         {
-            SanPhamModel sp = new SanPhamModel();
+            var sp = new SanPhamModel();
             return PartialView("SPDetail", sp.FindById(id));
         }
 
@@ -147,7 +147,7 @@ namespace EC_TH2012_J.Controllers
             }
             foreach (var item in lstdel)
             {
-                SanPhamModel spm = new SanPhamModel();
+                var spm = new SanPhamModel();
                 DeleteAnh(spm.FindById(item).AnhDaiDien);
                 DeleteAnh(spm.FindById(item).AnhNen);
                 DeleteAnh(spm.FindById(item).AnhKhac);
@@ -164,7 +164,7 @@ namespace EC_TH2012_J.Controllers
             {
                 return RedirectToAction("SanPham");
             }
-            SanPhamModel spm = new SanPhamModel();
+            var spm = new SanPhamModel();
             foreach (var item in lstkt)
             {
                 if (!string.IsNullOrEmpty(item.ThuocTinh))
@@ -181,7 +181,7 @@ namespace EC_TH2012_J.Controllers
             {
                 return RedirectToAction("SanPham");
             }
-            SanPhamModel spm = new SanPhamModel();
+            var spm = new SanPhamModel();
             spm.DelAllTSKT(lstkt[0].MaSP);
             foreach (var item in lstkt)
             {
@@ -194,12 +194,12 @@ namespace EC_TH2012_J.Controllers
         [AuthLog(Roles = "Quản trị viên,Nhân viên")]
         public ActionResult SuaThongSoKT(string masp)
         {
-            SanPhamModel spm = new SanPhamModel();
+            var spm = new SanPhamModel();
             if (spm.GetTSKT(masp).ToList().Count == 0)
             {
-                ThongSoKyThuat ts = new ThongSoKyThuat();
+                var ts = new ThongSoKyThuat();
                 ts.MaSP = masp;
-                List<ThongSoKyThuat> lst = new List<ThongSoKyThuat>();
+                var lst = new List<ThongSoKyThuat>();
                 lst.Add(ts);
                 return View("ThemThongSoKT", lst);
             }
@@ -209,7 +209,7 @@ namespace EC_TH2012_J.Controllers
         [AuthLog(Roles = "Quản trị viên,Nhân viên")]
         public ActionResult TimSP(string key,string maloai,int? page)
         {
-            SanPhamModel spm = new SanPhamModel();
+            var spm = new SanPhamModel();
             ViewBag.key = key;
             ViewBag.maloai = maloai;
             return PhanTrangSP(spm.AdvancedSearch(key, maloai, null, null, null),page,null);
@@ -218,15 +218,15 @@ namespace EC_TH2012_J.Controllers
         [AuthLog(Roles = "Quản trị viên,Nhân viên")]
         public ActionResult PhanTrangSP(IQueryable<SanPham> lst,int? page, int? pagesize)
         {
-            int pageSize = (pagesize ?? 10);
-            int pageNumber = (page ?? 1);
+            var pageSize = (pagesize ?? 10);
+            var pageNumber = (page ?? 1);
             return PartialView("SanPhamPartial", lst.OrderBy(m => m.MaSP).ToPagedList(pageNumber, pageSize));
         }
 
         [AuthLog(Roles = "Quản trị viên")]
         public bool DeleteAnh(string filename)
         {
-            string fullPath = Request.MapPath("~/images/products/" + filename);
+            var fullPath = Request.MapPath("~/images/products/" + filename);
             if (System.IO.File.Exists(fullPath))
             {
                 System.IO.File.Delete(fullPath);

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using EC_TH2012_J.Models.B2B;
 using EC_TH2012_J.Models.Domain.EfModels;
 
 namespace EC_TH2012_J.Controllers.B2B
@@ -18,38 +19,38 @@ namespace EC_TH2012_J.Controllers.B2B
         }
         public ActionResult Danhsachcanmua()
         {
-            SanphamcanmuaModel sp = new SanphamcanmuaModel();
+            var sp = new SanPhamCanMuaModel();
             var temp = sp.getDS(0, 5);
             return View(temp);        
         }
         public ActionResult ProductFilterB2B()
         {
-            CategoryModel cat = new CategoryModel();
+            var cat = new CategoryModel();
             return View(cat.GetCategory());
         }
         public ActionResult ChitietAuction(Sanphamcanmua a)
         {
-            SanphamcanmuaModel sp = new SanphamcanmuaModel();
+            var sp = new SanPhamCanMuaModel();
             a.SanPham = sp.getSP(a.MaSP);
             return View(a);
         }
         public ActionResult ChitietSanphamAuction(int spcm)
         {
-            SanphamcanmuaModel spmodel = new SanphamcanmuaModel();
-            Sanphamcanmua temp = spmodel.getSanphamcanmua(spcm);
+            var spmodel = new SanPhamCanMuaModel();
+            var temp = spmodel.getSanphamcanmua(spcm);
             temp.SanPham = spmodel.getSP(temp.MaSP);
             return View(temp);
         }
         public ActionResult ModalRegister(int ID)
         {
-            DangkisanphamModel model = new DangkisanphamModel();
+            var model = new DangKySanPhamModel();
             var temp = model.createDangKiSanPham(User.Identity.Name,ID);
             return View(temp);
         }
         [HttpPost]
-        public ActionResult RegisterProduct(DangkisanphamModel a)
+        public ActionResult RegisterProduct(DangKySanPhamModel a)
         {
-            if(new DangkisanphamModel().ThemDanhKi(a))
+            if(new DangKySanPhamModel().ThemDanhKi(a))
             {
                 Session["TB"] = true;
             }
@@ -62,7 +63,7 @@ namespace EC_TH2012_J.Controllers.B2B
         }
         public ActionResult DanhsachNCCDK(int IDSPCM)
         {
-            var ds = new DangkisanphamModel().getDSDKNCC(IDSPCM);
+            var ds = new DangKySanPhamModel().getDSDKNCC(IDSPCM);
             return View(ds);
         }
         public ActionResult Hopdong()

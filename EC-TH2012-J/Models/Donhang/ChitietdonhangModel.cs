@@ -1,36 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using EC_TH2012_J.Models.Domain;
 using EC_TH2012_J.Models.Domain.EfModels;
 
-namespace EC_TH2012_J.Models
+namespace EC_TH2012_J.Models.Donhang
 {
-    public class ChitietdonhangModel
+    public class ChiTietDonHangModel
     {
         public string MaDH { get; set; }
-        public Nullable<int> SoLuong { get; set; }
-        public Nullable<decimal> ThanhTien { get; set; }
+        public int? SoLuong { get; set; }
+        public decimal? ThanhTien { get; set; }
         public SanPham SanPham { get; set; }
 
-        public List<ChitietdonhangModel>getChiTietDonHang(string maDH)
+        public List<ChiTietDonHangModel>getChiTietDonHang(string maDH)
         {
-            using(MainContext db = new MainContext())
+            using(var db = new MainContext())
             {
-                List<ChitietdonhangModel> danhSachChiTiet = new List<ChitietdonhangModel>();
+                var danhSachChiTiet = new List<ChiTietDonHangModel>();
                 var ds = (from p in db.ChiTietDonHangs where p.MaDH == maDH select p).ToList();
                 foreach(var temp in ds)
                 {
                     
-                    ChitietdonhangModel tam = new ChitietdonhangModel()
+                    var tam = new ChiTietDonHangModel()
                     {
                         MaDH = temp.MaDH,
                         SoLuong = temp.SoLuong,
                         ThanhTien = temp.ThanhTien,
                         SanPham = temp.SanPham
                     };
-                    string tt = temp.SanPham.GiaTien.ToString();
+                    var tt = temp.SanPham.GiaTien.ToString();
                     danhSachChiTiet.Add(tam);
                 }
                 return danhSachChiTiet;

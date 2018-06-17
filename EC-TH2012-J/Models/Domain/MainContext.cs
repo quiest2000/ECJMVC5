@@ -5,7 +5,7 @@ namespace EC_TH2012_J.Models.Domain
 {
     public class MainContext : DbContext
     {
-        public MainContext() : base("name=MainDbConnection")
+        public MainContext() : base("name=OracleDbContext")
         {
             Database.SetInitializer<MainContext>(null);
         }

@@ -24,7 +24,7 @@ namespace EC_TH2012_J.Models
 
         internal void EditHangSX(HangSanXuat loai)
         {
-            HangSanXuat lsp = db.HangSanXuats.Find(loai.HangSX);
+            var lsp = db.HangSanXuats.Find(loai.HangSX);
             lsp.TenHang = loai.TenHang;
             lsp.TruSoChinh = loai.TruSoChinh;
             lsp.QuocGia = loai.QuocGia;
@@ -34,7 +34,7 @@ namespace EC_TH2012_J.Models
 
         internal void DeleteHangSX(string id)
         {
-            HangSanXuat loai = db.HangSanXuats.Find(id);
+            var loai = db.HangSanXuats.Find(id);
             db.HangSanXuats.Remove(loai);
             db.SaveChanges();
         }
@@ -58,11 +58,11 @@ namespace EC_TH2012_J.Models
         private string TaoMa()
         {
             string maID;
-            Random rand = new Random();
+            var rand = new Random();
             do
             {
                 maID = "";
-                for (int i = 0; i < 5; i++)
+                for (var i = 0; i < 5; i++)
                 {
                     maID += rand.Next(9);
                 }

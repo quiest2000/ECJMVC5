@@ -20,7 +20,7 @@ namespace EC_TH2012_J.Controllers
         [Trackingactionfilter]
         public ActionResult Index(string id)
         {
-            SanPham sp = db.SanPhams.Find(id);
+            var sp = db.SanPhams.Find(id);
             return View("ProductDetail",sp);
         }
         public ActionResult SearchByName(string tensp)
@@ -38,14 +38,14 @@ namespace EC_TH2012_J.Controllers
         }
         public ActionResult Loadsplienquan(string maloai,int sl)
         {
-            IQueryable<SanPham> splist = sp.SearchByType(maloai);
+            var splist = sp.SearchByType(maloai);
             splist = splist.Take(sl);
             return PartialView("_PartialSanPhamLienQuan", splist);
         }
         
         public ActionResult ThongSoKyThuat(string MaSP)
         {
-            SanPhamModel spm = new SanPhamModel();
+            var spm = new SanPhamModel();
             return PartialView("ThongSoKyThuatPartial", spm.GetTSKT(MaSP));
         }
 

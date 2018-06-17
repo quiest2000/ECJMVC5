@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using EC_TH2012_J.Models.Domain;
 using EC_TH2012_J.Models.Domain.EfModels;
+using EC_TH2012_J.Models.Donhang;
 using Microsoft.AspNet.Identity;
 
 namespace EC_TH2012_J.Controllers
@@ -14,7 +15,7 @@ namespace EC_TH2012_J.Controllers
     {
         private static MainContext db = new MainContext();
 
-        public static List<Thanhviennhom> Ds_Group;
+        public static List<Member> Ds_Group;
         public ActionResult Index()
         {
             ManagerObiect.getIntance();
@@ -39,44 +40,44 @@ namespace EC_TH2012_J.Controllers
         {
             if (Ds_Group == null)
             {
-                Ds_Group = new List<Thanhviennhom>();
-                Ds_Group.Add(new Thanhviennhom
+                Ds_Group = new List<Member>();
+                Ds_Group.Add(new Member
                 {
                     MSSV = "1212293",
                     Hoten = "Nguyễn Ngọc Phúc",
                     LinkFacebook = "https://www.facebook.com/phuc.nguyen.eccentric?fref=pb_friends"
                 });
-                Ds_Group.Add(new Thanhviennhom
+                Ds_Group.Add(new Member
                 {
                     MSSV = "1212080",
                     Hoten = "Huỳnh Phạm Hải Đăng",
                     LinkFacebook = "https://www.facebook.com/wayne.pham.507?fref=pb_friends"
                 });
-                Ds_Group.Add(new Thanhviennhom
+                Ds_Group.Add(new Member
                 {
                     MSSV = "1212276",
                     Hoten = "Nguyễn Thành Nhân",
                     LinkFacebook = "https://www.facebook.com/GanderNguyen?fref=pb_friends"
                 });
-                Ds_Group.Add(new Thanhviennhom
+                Ds_Group.Add(new Member
                 {
                     MSSV = "1212437",
                     Hoten = "Phan Ngọc Triều",
                     LinkFacebook = "https://www.facebook.com/taolibra?fref=pb_friends"
                 });
-                Ds_Group.Add(new Thanhviennhom
+                Ds_Group.Add(new Member
                 {
                     MSSV = "1212502",
                     Hoten = "Nguyễn Văn Ty",
                     LinkFacebook = "https://www.facebook.com/vanty8"
                 });
-                Ds_Group.Add(new Thanhviennhom
+                Ds_Group.Add(new Member
                 {
                     MSSV = "1212526",
                     Hoten = "Nguyễn Trương Vương",
                     LinkFacebook = "https://www.facebook.com/vuongtruong.nguyen?fref=pb_friends"
                 });
-                Ds_Group.Add(new Thanhviennhom
+                Ds_Group.Add(new Member
                 {
                     MSSV = "1212535",
                     Hoten = "Vũ Thị Thanh Xuân",
@@ -95,10 +96,10 @@ namespace EC_TH2012_J.Controllers
         //Đơn hàng
         public ActionResult Xemdonhang(string maKH)
         {
-            List<DonhangKHModel> temp = new List<DonhangKHModel>();
+            var temp = new List<DonHangKHModel>();
             if (maKH.Length != 0)
             {
-                DonhangKHModel dh = new DonhangKHModel();
+                var dh = new DonHangKHModel();
                 temp = dh.Xemdonhang(maKH);
             }
             return View(temp);
@@ -107,7 +108,7 @@ namespace EC_TH2012_J.Controllers
         [AuthLog(Roles = "Quản trị viên,Nhân viên,Khách hàng")]
         public ActionResult Huydonhang(string maDH)
         {
-            DonhangKHModel dh = new DonhangKHModel();
+            var dh = new DonHangKHModel();
             dh.HuyDH(maDH);
             var donhang = dh.Xemdonhang(User.Identity.GetUserId());
             return View(donhang);
@@ -116,9 +117,9 @@ namespace EC_TH2012_J.Controllers
         {
             if (Request.IsAuthenticated)
             {
-                DonhangKHModel dh = new DonhangKHModel();
+                var dh = new DonHangKHModel();
                 dh.nguoiMua = dh.Xemttnguoidung(User.Identity.GetUserId());
-                Donhangtongquan dhtq = new Donhangtongquan()
+                var dhtq = new Donhangtongquan()
                 {
                     buyer = dh.nguoiMua.HoTen,
                     seller = dh.nguoiMua.HoTen,
@@ -139,7 +140,7 @@ namespace EC_TH2012_J.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-                DonhangKHModel dhmodel = new DonhangKHModel();
+                var dhmodel = new DonHangKHModel();
                 dhmodel.Luudonhang(dh, User.Identity.GetUserId(), ManagerObiect.getIntance().giohang);
                 return RedirectToAction("Index", "Home");
             }
@@ -151,16 +152,16 @@ namespace EC_TH2012_J.Controllers
 
         public ActionResult MainMenu()
         {
-            MainMenuModel mnmodel = new MainMenuModel();
+            var mnmodel = new MainMenuModel();
             var menulist = mnmodel.GetMenuList();
             return PartialView("_MainMenuPartial", menulist);
         }
 
         public ActionResult SPNoiBat(int? skip)
         {
-            SanPhamModel sp = new SanPhamModel();
-            int skipnum = (skip ?? 0);
-            IQueryable<SanPham> splist = sp.SPHot();
+            var sp = new SanPhamModel();
+            var skipnum = (skip ?? 0);
+            var splist = sp.SPHot();
             splist = splist.OrderBy(r => r.MaSP).Skip(skipnum).Take(4);
             if (splist.Any())
                 return PartialView("_ProductTabLoadMorePartial", splist);
@@ -170,9 +171,9 @@ namespace EC_TH2012_J.Controllers
 
         public ActionResult SPMoiNhap(int? skip)
         {
-            SanPhamModel sp = new SanPhamModel();
-            int skipnum = (skip ?? 0);
-            IQueryable<SanPham> splist = sp.SPMoiNhap();
+            var sp = new SanPhamModel();
+            var skipnum = (skip ?? 0);
+            var splist = sp.SPMoiNhap();
             splist = splist.OrderBy(r => r.MaSP).Skip(skipnum).Take(4);
             if (splist.Any())
                 return PartialView("_ProductTabLoadMorePartial", splist);
@@ -182,9 +183,9 @@ namespace EC_TH2012_J.Controllers
 
         public ActionResult SPKhuyenMai(int? skip)
         {
-            SanPhamModel sp = new SanPhamModel();
-            int skipnum = (skip ?? 0);
-            IQueryable<SanPham> splist = sp.SPKhuyenMai();
+            var sp = new SanPhamModel();
+            var skipnum = (skip ?? 0);
+            var splist = sp.SPKhuyenMai();
             splist = splist.OrderBy(r => r.MaSP).Skip(skipnum).Take(4);
             if (splist.Any())
                 return PartialView("_ProductTabLoadMorePartial", splist);
@@ -194,8 +195,8 @@ namespace EC_TH2012_J.Controllers
 
         public ActionResult SPBanChay()
         {
-            SanPhamModel sp = new SanPhamModel();
-            IQueryable<SanPham> splist = sp.SPBanChay(7);      
+            var sp = new SanPhamModel();
+            var splist = sp.SPBanChay(7);      
             if (splist.Any())
                 return PartialView("_BestSellerPartial", splist.ToList());
             else

@@ -106,7 +106,7 @@ namespace EC_TH2012_J.Controllers
                 if (result.Succeeded)
                 {
                     UserManager.AddToRole(user.Id, "Nhà cung cấp");
-                    NhaCungCapModel ncc = new NhaCungCapModel();
+                    var ncc = new NhaCungCapModel();
                     ncc.ThemNCC(model, user.Id);
                     await SignInAsync(user, isPersistent: false);
                     ManagerObiect.getIntance().userName = model.UserName;
@@ -156,7 +156,7 @@ namespace EC_TH2012_J.Controllers
 
         private void SendMailConfirm(string p)
         {
-            UserModel us = new UserModel();
+            var us = new UserModel();
             us.SendMailConfirm(p, Url.Action("ConfirmMail", "Account", new { id = p }, this.Request.Url.Scheme));
             ////http://account/ConfirmMail/dbaf5ac1-9ac3-4fbb-a5a0-891ea80cd0e7
         }
@@ -168,7 +168,7 @@ namespace EC_TH2012_J.Controllers
         public async Task<ActionResult> Disassociate(string loginProvider, string providerKey)
         {
             ManageMessageId? message = null;
-            IdentityResult result = await UserManager.RemoveLoginAsync(User.Identity.GetUserId(), new UserLoginInfo(loginProvider, providerKey));
+            var result = await UserManager.RemoveLoginAsync(User.Identity.GetUserId(), new UserLoginInfo(loginProvider, providerKey));
             if (result.Succeeded)
             {
                 message = ManageMessageId.RemoveLoginSuccess;
@@ -201,14 +201,14 @@ namespace EC_TH2012_J.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Manage(ManageUserViewModel model)
         {
-            bool hasPassword = HasPassword();
+            var hasPassword = HasPassword();
             ViewBag.HasLocalPassword = hasPassword;
             ViewBag.ReturnUrl = Url.Action("Manage");
             if (hasPassword)
             {
                 if (ModelState.IsValid)
                 {
-                    IdentityResult result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
+                    var result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
                     if (result.Succeeded)
                     {
                         return RedirectToAction("Manage", new { Message = ManageMessageId.ChangePasswordSuccess });
@@ -222,7 +222,7 @@ namespace EC_TH2012_J.Controllers
             else
             {
                 // User does not have a password so remove any validation errors caused by a missing OldPassword field
-                ModelState state = ModelState["OldPassword"];
+                var state = ModelState["OldPassword"];
                 if (state != null)
                 {
                     state.Errors.Clear();
@@ -230,7 +230,7 @@ namespace EC_TH2012_J.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    IdentityResult result = await UserManager.AddPasswordAsync(User.Identity.GetUserId(), model.NewPassword);
+                    var result = await UserManager.AddPasswordAsync(User.Identity.GetUserId(), model.NewPassword);
                     if (result.Succeeded)
                     {
                         return RedirectToAction("Manage", new { Message = ManageMessageId.SetPasswordSuccess });
@@ -485,15 +485,15 @@ namespace EC_TH2012_J.Controllers
 
         public ActionResult EditInfo()
         {
-            UserModel user = new UserModel();
-            EditInfoModel info = new EditInfoModel(user.FindById(User.Identity.GetUserId()));
+            var user = new UserModel();
+            var info = new EditInfoModel(user.FindById(User.Identity.GetUserId()));
             return View(info);
         }
 
         public ActionResult EditNCCInfo()
         {
-            NhaCungCapModel ncc = new NhaCungCapModel();
-            EditInfo2B2ViewModel info = new EditInfo2B2ViewModel(ncc.FindByNetUser(User.Identity.GetUserId()));
+            var ncc = new NhaCungCapModel();
+            var info = new EditInfo2B2ViewModel(ncc.FindByNetUser(User.Identity.GetUserId()));
             return View(info);
         }
 
@@ -503,7 +503,7 @@ namespace EC_TH2012_J.Controllers
         {
             if (ModelState.IsValid)
             {
-                NhaCungCapModel ncc = new NhaCungCapModel();
+                var ncc = new NhaCungCapModel();
                 ncc.UpdateInfo(info);
                 ViewBag.StatusMessage = "Cập nhật thông tin thành công";
             }
@@ -516,7 +516,7 @@ namespace EC_TH2012_J.Controllers
         {
             if (ModelState.IsValid)
             {
-                UserModel user = new UserModel();
+                var user = new UserModel();
                 user.UpdateInfo(info, User.Identity.GetUserId());
                 info.Avatar = user.FindById(User.Identity.GetUserId()).Avatar;
                 ViewBag.StatusMessage = "Cập nhật thông tin thành công";
@@ -536,13 +536,13 @@ namespace EC_TH2012_J.Controllers
                 // extract only the filename
                 if (!Path.GetExtension(file.FileName).Equals(".jpg"))
                 {
-                    HttpStatusCodeResult status = new HttpStatusCodeResult(400);
+                    var status = new HttpStatusCodeResult(400);
                     return status;
                 }
                 // store the file inside ~/App_Data/uploads folder
                 var path = Path.Combine(Server.MapPath("~/images/avatars"), User.Identity.GetUserId() + ".jpg");
                 file.SaveAs(path);
-                UserModel user = new UserModel();
+                var user = new UserModel();
                 user.UpdateImage(User.Identity.GetUserId());
             }
             // redirect back to the index action to show the form once again
@@ -552,7 +552,7 @@ namespace EC_TH2012_J.Controllers
         [AllowAnonymous]
         public ActionResult ConfirmMail(string id)
         {
-            UserModel us = new UserModel();
+            var us = new UserModel();
             if (us.ConfirmMail(id))
                 return RedirectToAction("ThongBao", "Account", new { mesage = "Đã xác nhận mail thành công, bạn có thể đăng nhập và sử dụng" });
             return RedirectToAction("ThongBao", "Account", new { mesage = "Có lỗi trong quá trình xác nhận mail" });
@@ -570,7 +570,7 @@ namespace EC_TH2012_J.Controllers
         [AuthLog(Roles = "Quản trị viên")]
         public ActionResult Index()
         {
-            UserModel us = new UserModel();
+            var us = new UserModel();
             ViewBag.Roleseach = new SelectList(us.GetAllRole(), "Id", "Name");
             ViewBag.Role = new SelectList(us.GetAllRole(), "Name", "Name");
             return View();
@@ -580,7 +580,7 @@ namespace EC_TH2012_J.Controllers
         [HttpPost]
         public ActionResult PhanQuyen(List<string> lstu, string quyen)
         {
-            UserModel u = new UserModel();
+            var u = new UserModel();
             foreach (var item in lstu)
             {
                 if (!item.Equals(User.Identity.GetUserId()))
@@ -595,14 +595,14 @@ namespace EC_TH2012_J.Controllers
         [AuthLog(Roles = "Quản trị viên")]
         public ActionResult UserDetail(string id)
         {
-            UserModel usm = new UserModel();
+            var usm = new UserModel();
             return PartialView("UserDetail", usm.FindById(id));
         }
 
         [AuthLog(Roles = "Quản trị viên")]
         public ActionResult TimUser(string key, string email, string hoten, string phone, string quyen, int? page)
         {
-            UserModel spm = new UserModel();
+            var spm = new UserModel();
             ViewBag.key = key;
             ViewBag.email = email;
             ViewBag.hoten = hoten;
@@ -614,8 +614,8 @@ namespace EC_TH2012_J.Controllers
         [AuthLog(Roles = "Quản trị viên")]
         public ActionResult PhanTrangUser(IQueryable<AspNetUser> lst, int? page, int? pagesize)
         {
-            int pageSize = (pagesize ?? 10);
-            int pageNumber = (page ?? 1);
+            var pageSize = (pagesize ?? 10);
+            var pageNumber = (page ?? 1);
             return PartialView("UserList", lst.OrderBy(m => m.HoTen).ToPagedList(pageNumber, pageSize));
         }
 

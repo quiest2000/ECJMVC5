@@ -26,7 +26,7 @@ namespace EC_TH2012_J.Controllers.B2B
 
         public ActionResult TimHopDong(string key, string tensp, bool? loaihd, int? page)
         {
-            NhaCungCapModel ncc = new NhaCungCapModel();
+            var ncc = new NhaCungCapModel();
             ViewBag.key = key;
             ViewBag.tensp = tensp;
             ViewBag.loaihd = loaihd;
@@ -34,7 +34,7 @@ namespace EC_TH2012_J.Controllers.B2B
         }
         public ActionResult TimHopDongB2B(string key, string tensp, bool? loaihd, int? page)
         {
-            NhaCungCapModel ncc = new NhaCungCapModel();
+            var ncc = new NhaCungCapModel();
             ViewBag.key = key;
             ViewBag.tensp = tensp;
             ViewBag.loaihd = loaihd;
@@ -44,7 +44,7 @@ namespace EC_TH2012_J.Controllers.B2B
 
         public ActionResult DeleteHopDong(string id)
         {
-            NhaCungCapModel ncc = new NhaCungCapModel();
+            var ncc = new NhaCungCapModel();
             if (ncc.FindById(id) == null)
             {
                 return HttpNotFound();
@@ -57,10 +57,10 @@ namespace EC_TH2012_J.Controllers.B2B
         [ValidateAntiForgeryToken]
         public ActionResult ThemHopDong([Bind(Include = "MaNCC,NgayKy,ThoiHanHD,MaSP,SLToiThieu,SLCungCap,SoNgayGiao,isBuy,DonGia")] HopDongNCC loai)
         {
-            NhaCungCapModel ncc = new NhaCungCapModel();
+            var ncc = new NhaCungCapModel();
             if (ModelState.IsValid)
             {
-                string maHD = ncc.ThemHopDong(loai);
+                var maHD = ncc.ThemHopDong(loai);
                 if(!(bool)loai.IsBuy)
                 {
                     return RedirectToAction("ConfigAPI", "AdminB2B", new { MaNCC = loai.MaNCC });
@@ -75,7 +75,7 @@ namespace EC_TH2012_J.Controllers.B2B
         {
             foreach (var item in lstdel)
             {
-                NhaCungCapModel ncc = new NhaCungCapModel();
+                var ncc = new NhaCungCapModel();
                 ncc.DeleteHopDong(item);
             }
             return TimHopDong(null, null, null, null);
@@ -83,26 +83,26 @@ namespace EC_TH2012_J.Controllers.B2B
 
         public ActionResult PhanTrangHopDong(IQueryable<HopDongNCC> lst, int? page, int? pagesize)
         {
-            int pageSize = (pagesize ?? 10);
-            int pageNumber = (page ?? 1);
+            var pageSize = (pagesize ?? 10);
+            var pageNumber = (page ?? 1);
             return PartialView("HopDongPartial", lst.OrderByDescending(m => m.NgayKy).ToPagedList(pageNumber, pageSize));
         }
         public ActionResult PhanTrangHopDongB2B(IQueryable<HopDongNCC> lst, int? page, int? pagesize)
         {
-            int pageSize = (pagesize ?? 10);
-            int pageNumber = (page ?? 1);
+            var pageSize = (pagesize ?? 10);
+            var pageNumber = (page ?? 1);
             return PartialView("HopDongB2BPartial", lst.OrderByDescending(m => m.NgayKy).ToPagedList(pageNumber, pageSize));
         }
 
 
         public ActionResult TTGiaoHang(string key, string tensp, bool? loaihd, bool? tt,int? page)
         {
-            NhaCungCapModel ncc = new NhaCungCapModel();
+            var ncc = new NhaCungCapModel();
             ViewBag.key = key;
             ViewBag.tensp = tensp;
             ViewBag.loaihd = loaihd;
             ViewBag.tt = tt;
-            int pageNumber = (page ?? 1);
+            var pageNumber = (page ?? 1);
             return PartialView("TTGiaoHangPartial", ncc.TimHopDong(key, tensp, loaihd,tt).OrderByDescending(m=>m.SoNgayGiao).ToPagedList(pageNumber, 10));
         }
 
@@ -111,7 +111,7 @@ namespace EC_TH2012_J.Controllers.B2B
         {
             foreach (var item in lstdel)
             {
-                NhaCungCapModel ncc = new NhaCungCapModel();
+                var ncc = new NhaCungCapModel();
                 ncc.XacNhanDaGiao(item,true);
             }
             return TTGiaoHang(null, null, null, null,null);
@@ -122,14 +122,14 @@ namespace EC_TH2012_J.Controllers.B2B
         {
             foreach (var item in lstdel)
             {
-                NhaCungCapModel ncc = new NhaCungCapModel();
+                var ncc = new NhaCungCapModel();
                 ncc.XacNhanDaTT(item, true);
             }
             return TTGiaoHang(null, null, null, null, null);
         }
         public JsonResult Xacnhanthanhtoan(string MaHD)
         {
-            HopdongNCCModel modelNCC = new HopdongNCCModel();
+            var modelNCC = new HopdongNCCModel();
             if(modelNCC.SetTTThanhtoan(MaHD,true))
             {
                 return Json("success", JsonRequestBehavior.AllowGet);

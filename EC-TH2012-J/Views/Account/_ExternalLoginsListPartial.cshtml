@@ -20,7 +20,7 @@
             @Html.AntiForgeryToken()
             <div id="socialLoginList">
                 <p>
-                    @foreach (AuthenticationDescription p in loginProviders)
+                    @foreach (var p in loginProviders)
                     {
                         <div class="col-md-6">
                             <button type="submit" class="btn-block btn-lg btn btn-facebook" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Đăg nhập bằng tài khoản @p.Caption của bạn"><i class="fa fa-facebook"></i>@p.AuthenticationType</button>

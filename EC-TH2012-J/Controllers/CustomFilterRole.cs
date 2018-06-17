@@ -40,7 +40,7 @@ namespace EC_TH2012_J.Controllers
                 var vr = new ViewResult();
                 vr.ViewName = View;
 
-                ViewDataDictionary dict = new ViewDataDictionary();
+                var dict = new ViewDataDictionary();
                 dict.Add("Message", "Sorry you are not Authorized to Perform this Action");
 
                 vr.ViewData = dict;

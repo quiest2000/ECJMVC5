@@ -25,7 +25,7 @@ namespace EC_TH2012_J.App_Start
 
         public async Task<HttpResponseMessage> ExecuteAsync(CancellationToken cancellationToken)
         {
-            HttpResponseMessage response = await InnerResult.ExecuteAsync(cancellationToken);
+            var response = await InnerResult.ExecuteAsync(cancellationToken);
 
             if (response.StatusCode == HttpStatusCode.Unauthorized)
             {

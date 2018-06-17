@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
-namespace EC_TH2012_J.Models
+namespace EC_TH2012_J.Models.ClassPartial
 {
-    [MetadataTypeAttribute(typeof(SanphamPartial.Metadata))]
+    [MetadataType(typeof(SanphamPartial.Metadata))]
     public partial class SanphamPartial
     {
         internal sealed class Metadata
@@ -21,18 +18,18 @@ namespace EC_TH2012_J.Models
     {
         public string TenNCC { get; set; }
     }
-    [MetadataTypeAttribute(typeof(HopDongNCCPartitial.Metadata))]
+    [MetadataType(typeof(HopDongNCCPartitial.Metadata))]
     public partial class HopDongNCCPartitial
     {
         public string TenNCC { get; set; }
         internal sealed class Metadata
         {
             [Range(1,999999999,ErrorMessage="Mời bạn nhập trong khoảng 1 -> 999999999")]
-            public Nullable<int> ThoiHanHD { get; set; }
+            public int? ThoiHanHD { get; set; }
             [Range(1, 999999, ErrorMessage = "Mời bạn nhập trong khoảng 1 -> 999999")]
-            public Nullable<int> SLToiThieu { get; set; }
+            public int? SLToiThieu { get; set; }
             [Range(1, 999999, ErrorMessage = "Mời bạn nhập trong khoảng 1 -> 999999")]
-            public Nullable<int> SLCungCap { get; set; }
+            public int? SLCungCap { get; set; }
         }
     }
 }

@@ -67,7 +67,7 @@ namespace System.Web.Http
     }
     protected virtual bool OnAuthorizeUser(string username, string password, HttpActionContext actionContext)
     {
-        AccountController cc =new AccountController();
+        var cc =new AccountController();
         if (cc.Kiemtrataikhoan(username, password))
             return true;
         else

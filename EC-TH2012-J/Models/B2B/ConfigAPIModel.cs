@@ -1,18 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using EC_TH2012_J.Models.Domain;
 using EC_TH2012_J.Models.Domain.EfModels;
 
-namespace EC_TH2012_J.Models
+namespace EC_TH2012_J.Models.B2B
 {
     public class ConfigAPIModel
     {
         public bool ThemmoiConfig(ConfigAPI a)
         {
-            using(MainContext db = new MainContext())
+            using(var db = new MainContext())
             {
                 try
                 {
@@ -40,7 +38,7 @@ namespace EC_TH2012_J.Models
         }
         public ConfigAPI getConfig(string MaNCC)
         {
-            using(MainContext db = new MainContext())
+            using(var db = new MainContext())
             {
                 var config = (from p in db.ConfigAPIs where p.MaNCC == MaNCC select p).FirstOrDefault();
                 return config;

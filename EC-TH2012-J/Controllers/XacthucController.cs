@@ -30,8 +30,8 @@ namespace EC_TH2012_J.Controllers
                 }
                 else
                 {
-                    string url = temp.Callback;
-                    string ver = create_verifier(Request_token);
+                    var url = temp.Callback;
+                    var ver = create_verifier(Request_token);
                     url += "?verifier_token=" + ver + "&request_token=" + Request_token;
                     temp.Verifier_token = ver;
                     db.SaveChanges();
@@ -43,17 +43,17 @@ namespace EC_TH2012_J.Controllers
 
         private string create_verifier(string Request_token)
         {
-            Random rand = new Random();
-            string username = User.Identity.Name;
-            string verifier = Request_token;
-            for(int i = 0 ; i < username.Length ; i++)
+            var rand = new Random();
+            var username = User.Identity.Name;
+            var verifier = Request_token;
+            for(var i = 0 ; i < username.Length ; i++)
             {
-                int index = rand.Next() % username.Length;
+                var index = rand.Next() % username.Length;
                 verifier += username[index];
             }
-            for(int i = 0 ; i < 5 ; i++)
+            for(var i = 0 ; i < 5 ; i++)
             {
-                int index = rand.Next() % 10;
+                var index = rand.Next() % 10;
                 verifier += index.ToString();
             }
             

@@ -51,7 +51,7 @@ namespace EC_TH2012_J.Controllers
             try
             {
                     var maNcc = from p in db.Oauths where p.Consumer_key == supplier_key select new { MaNCC = p.MaNCC };
-                    string ma = maNcc.ToList()[0].MaNCC;
+                    var ma = maNcc.ToList()[0].MaNCC;
                     var listofHD = (from p in db.HopDongNCCs where p.MaNCC == ma select new { order_id = p.MaHD, product_id = p.MaSP, product_name = p.SanPham.TenSP, product_quantity = p.SanPham.SoLuong });
                     return Request.CreateResponse(HttpStatusCode.OK, listofHD.ToList());
 
@@ -68,8 +68,8 @@ namespace EC_TH2012_J.Controllers
             try
             {
                 var maNcc = from p in db.Oauths where p.Consumer_key == param.supplier_key select new { MaNCC = p.MaNCC };
-                string MaNCC = maNcc.ToList()[0].MaNCC;
-                HopDongNCC hopdong = db.HopDongNCCs.Where(m => m.MaHD == param.order_id & m.MaNCC == MaNCC & m.MaSP == param.product_id).FirstOrDefault();
+                var MaNCC = maNcc.ToList()[0].MaNCC;
+                var hopdong = db.HopDongNCCs.Where(m => m.MaHD == param.order_id & m.MaNCC == MaNCC & m.MaSP == param.product_id).FirstOrDefault();
                 if(hopdong == null)
                 {
                     return Request.CreateResponse(HttpStatusCode.NotFound,"Không tìm thấy dữ liệu");

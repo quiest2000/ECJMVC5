@@ -37,8 +37,8 @@
                 <h5>Loại sản phẩm</h5>
                 <ul>
                     @{
-                        CategoryModel cat = new CategoryModel();
-                        IQueryable<LoaiSP> catlist = cat.GetCategory();
+                        var cat = new CategoryModel();
+                        var catlist = cat.GetCategory();
                         foreach (var item in catlist)
                         {
                             <li><input name="loai" class="le-checkbox" type="radio" value="@item.MaLoai" /> <label>@item.TenLoai</label></li>
@@ -48,8 +48,8 @@
                 <h5>Hãng sản xuất</h5>
                 <ul>
                     @{
-                        HangSanXuatModel han = new HangSanXuatModel();
-                        IQueryable<HangSanXuat> hanlist = han.GetHangSX();
+                        var han = new HangSanXuatModel();
+                        var hanlist = han.GetHangSX();
                         foreach (var item in hanlist)
                         {
                             <li><input name="hangsx" class="le-checkbox" type="radio" value="@item.HangSX" /> <label>@item.TenHang</label></li>

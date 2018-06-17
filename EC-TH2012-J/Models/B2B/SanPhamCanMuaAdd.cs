@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
-namespace EC_TH2012_J.Models
+namespace EC_TH2012_J.Models.B2B
 {
     public class SanPhamCanMuaAdd
     {
@@ -14,12 +11,12 @@ namespace EC_TH2012_J.Models
         public string MaSP { get; set; }
 
         [Display(Name = "Số lượng")]
-        public Nullable<int> Soluong { get; set; }
+        public int? Soluong { get; set; }
 
         [Display(Name = "Ngày kết thúc")]
         [DataType(DataType.Date)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
-        public Nullable<System.DateTime> Ngayketthuc { get; set; }
+        public DateTime? Ngayketthuc { get; set; }
 
         [Display(Name = "Mô tả")]
         [AllowHtml]
@@ -33,12 +30,12 @@ namespace EC_TH2012_J.Models
         public int ID { get; set; }
 
         [Display(Name = "Số lượng")]
-        public Nullable<int> Soluong { get; set; }
+        public int? Soluong { get; set; }
 
         [Display(Name = "Ngày kết thúc")]
         [DataType(DataType.Date)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
-        public Nullable<System.DateTime> Ngayketthuc { get; set; }
+        public DateTime? Ngayketthuc { get; set; }
 
         [Display(Name = "Mô tả")]
         [AllowHtml]

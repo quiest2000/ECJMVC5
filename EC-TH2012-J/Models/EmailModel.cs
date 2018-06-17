@@ -30,14 +30,14 @@ namespace EC_TH2012_J.Models
                 return false;
             try
             {
-                MailMessage mail = new MailMessage();
+                var mail = new MailMessage();
                 mail.To.Add(model.To);
                 mail.From = new MailAddress(model.From);
                 mail.Subject = model.Subject;
-                string Body = model.Body;
+                var Body = model.Body;
                 mail.Body = Body;
                 mail.IsBodyHtml = true;
-                SmtpClient smtp = new SmtpClient();
+                var smtp = new SmtpClient();
                 smtp.Host = "smtp.gmail.com";
                 smtp.Port = 587;
                 smtp.UseDefaultCredentials = false;

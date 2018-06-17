@@ -44,7 +44,7 @@ namespace EC_TH2012_J.Controllers
 
         public bool DeleteAnh(string filename)
         {
-            string fullPath = Request.MapPath("~/images/khuyenmai/" + filename);
+            var fullPath = Request.MapPath("~/images/khuyenmai/" + filename);
             if (System.IO.File.Exists(fullPath))
             {
                 System.IO.File.Delete(fullPath);
@@ -59,8 +59,8 @@ namespace EC_TH2012_J.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            KhuyenMaiModel lm = new KhuyenMaiModel();
-            KhuyenMai sp = lm.FindById(id);
+            var lm = new KhuyenMaiModel();
+            var sp = lm.FindById(id);
             if (sp == null)
             {
                 return HttpNotFound();
@@ -72,7 +72,7 @@ namespace EC_TH2012_J.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditKhuyenMai([Bind(Include = "MaKM,TenCT,NgayBatDau,NgayKetThuc,NoiDung")] KhuyenMai loai, HttpPostedFileBase ad)
         {
-            KhuyenMaiModel spm = new KhuyenMaiModel();
+            var spm = new KhuyenMaiModel();
             if (ModelState.IsValid)
             {
                 spm.EditKhuyenMai(loai);
@@ -86,10 +86,10 @@ namespace EC_TH2012_J.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ThemKhuyenMai([Bind(Include = "TenCT,NgayBatDau,NgayKetThuc,NoiDung")] KhuyenMai loai, HttpPostedFileBase ad)
         {
-            KhuyenMaiModel spm = new KhuyenMaiModel();
+            var spm = new KhuyenMaiModel();
             if (ModelState.IsValid && spm.KiemTraTen(loai.TenCT))
             {
-                string makm = spm.ThemKhuyenMai(loai);
+                var makm = spm.ThemKhuyenMai(loai);
                 UploadAnh(ad, makm + "1");
                 return RedirectToAction("SuaCTKhuyenMai", new { MaKM = makm });
             }
@@ -98,7 +98,7 @@ namespace EC_TH2012_J.Controllers
 
         public ActionResult DeleteKhuyenMai(string id)
         {
-            KhuyenMaiModel spm = new KhuyenMaiModel();
+            var spm = new KhuyenMaiModel();
             DeleteAnh(spm.FindById(id).AnhCT);
             spm.DeleteKhuyenMai(id);    
             return TimKhuyenMai(null, null, null, null);
@@ -113,7 +113,7 @@ namespace EC_TH2012_J.Controllers
             }
             foreach (var item in lstdel)
             {
-                KhuyenMaiModel spm = new KhuyenMaiModel();
+                var spm = new KhuyenMaiModel();
                 DeleteAnh(spm.FindById(item).AnhCT);
                 spm.DeleteKhuyenMai(item);
             }
@@ -122,7 +122,7 @@ namespace EC_TH2012_J.Controllers
 
         public ActionResult DeleteSPKhuyenMai(string makm, string masp)
         {
-            KhuyenMaiModel spm = new KhuyenMaiModel();
+            var spm = new KhuyenMaiModel();
             spm.DeleteSPKhuyenMai(makm, masp);
             
             return RedirectToAction("DSSanPham", new { makm = makm });
@@ -130,7 +130,7 @@ namespace EC_TH2012_J.Controllers
 
         public ActionResult TimKhuyenMai(string key, DateTime? start, DateTime? end, int? page)
         {
-            KhuyenMaiModel spm = new KhuyenMaiModel();
+            var spm = new KhuyenMaiModel();
             ViewBag.key = key;
             ViewBag.start = start;
             ViewBag.end = end;
@@ -139,14 +139,14 @@ namespace EC_TH2012_J.Controllers
 
         public ActionResult PhanTrangKhuyenMai(IQueryable<KhuyenMai> lst, int? page, int? pagesize)
         {
-            int pageSize = (pagesize ?? 10);
-            int pageNumber = (page ?? 1);
+            var pageSize = (pagesize ?? 10);
+            var pageNumber = (page ?? 1);
             return PartialView("KhuyenMaiPartial", lst.OrderBy(m => m.NgayBatDau).ToPagedList(pageNumber, pageSize));
         }
 
         public ActionResult kiemtra(string key)
         {
-            KhuyenMaiModel spm = new KhuyenMaiModel();
+            var spm = new KhuyenMaiModel();
             if (spm.KiemTraTen(key))
                 return Json(true, JsonRequestBehavior.AllowGet);
             return Json(false, JsonRequestBehavior.AllowGet);
@@ -154,7 +154,7 @@ namespace EC_TH2012_J.Controllers
 
         public ActionResult CTKhuyenMai(string id)
         {
-            KhuyenMaiModel km = new KhuyenMaiModel();
+            var km = new KhuyenMaiModel();
             var lst = km.CTKhuyenMai(id);
             if (lst.Any())
                 return PartialView("KhuyenMaiDetail", lst);
@@ -168,7 +168,7 @@ namespace EC_TH2012_J.Controllers
             {
                 return RedirectToAction("Index");
             }
-            KhuyenMaiModel spm = new KhuyenMaiModel();
+            var spm = new KhuyenMaiModel();
             foreach (var item in lstkt)
             {
                 if (!string.IsNullOrEmpty(item.MaSP) && !string.IsNullOrEmpty(item.MaKM))
@@ -180,7 +180,7 @@ namespace EC_TH2012_J.Controllers
         [HttpPost] 
         public ActionResult ThemSP1KhuyenMai([Bind(Include = "MaKM,MaSP,MoTa,GiamGia")] SanPhamKhuyenMai spkm)
         {
-            KhuyenMaiModel spm = new KhuyenMaiModel();
+            var spm = new KhuyenMaiModel();
             spm.ThemSPKhuyenMai(spkm);
             return RedirectToAction("DSSanPham", new { makm = spkm.MaKM });
         }
@@ -192,7 +192,7 @@ namespace EC_TH2012_J.Controllers
             {
                 return RedirectToAction("Index");
             }
-            KhuyenMaiModel spm = new KhuyenMaiModel();
+            var spm = new KhuyenMaiModel();
             spm.DelAllSPKM(lstkt[0].MaKM);
             foreach (var item in lstkt)
             {
@@ -204,7 +204,7 @@ namespace EC_TH2012_J.Controllers
 
         public ActionResult SuaCTKhuyenMai(string MaKM)
         {
-            SanPhamModel sp = new SanPhamModel();
+            var sp = new SanPhamModel();
             ViewBag.LoaiSP = new SelectList(sp.GetAllLoaiSP(), "MaLoai", "TenLoai");
             ViewBag.makm = MaKM;
             return View("SuaSPKhuyenMai");
@@ -216,8 +216,8 @@ namespace EC_TH2012_J.Controllers
             ViewBag.key = key;
             ViewBag.maloai = maloai;
             ViewBag.makm = makm;
-            KhuyenMaiModel km = new KhuyenMaiModel();
-            IQueryable<SanPham> lst = km.DSSP(key, maloai, makm);
+            var km = new KhuyenMaiModel();
+            var lst = km.DSSP(key, maloai, makm);
             if (lst.Any())
                 return PhanTrangSP(lst, "DSSanPham", page, null);
             return null;
@@ -228,8 +228,8 @@ namespace EC_TH2012_J.Controllers
             ViewBag.key = key;
             ViewBag.maloai = maloai;
             ViewBag.makm = makm;
-            KhuyenMaiModel km = new KhuyenMaiModel();
-            IQueryable<SanPham> lst = km.DSSanPhamKhuyenMai(key, maloai, makm);
+            var km = new KhuyenMaiModel();
+            var lst = km.DSSanPhamKhuyenMai(key, maloai, makm);
             if (lst.Any())
                 return PhanTrangSP(lst, "DSSanPhamKhuyenMai", page, null);
             return null;
@@ -238,15 +238,15 @@ namespace EC_TH2012_J.Controllers
 
         public ActionResult PhanTrangSP(IQueryable<SanPham> lst, string stringview, int? page, int? pagesize)
         {
-            int pageSize = (pagesize ?? 10);
-            int pageNumber = (page ?? 1);
+            var pageSize = (pagesize ?? 10);
+            var pageNumber = (page ?? 1);
             return PartialView(stringview, lst.OrderBy(m => m.MaSP).ToPagedList(pageNumber, pageSize));
         }
 
         [AllowAnonymous]
         public ActionResult KhuyenMaiPost(string id)
         {
-            KhuyenMaiModel km = new KhuyenMaiModel();
+            var km = new KhuyenMaiModel();
             return View("KhuyenMaiPostView", km.FindById(id));
         }
 

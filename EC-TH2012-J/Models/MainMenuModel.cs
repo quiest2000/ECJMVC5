@@ -17,11 +17,11 @@ namespace EC_TH2012_J.Models
         }
         public List<MenuItem> GetMenuList() 
         { 
-            List<MenuItem> mnlist = new List<MenuItem>();
+            var mnlist = new List<MenuItem>();
             var loaiSPlst = db.LoaiSPs.OrderBy(a => a.MaLoai).Where(a => !a.MaLoai.Equals("NOTTT")).ToList();
             foreach (var item in loaiSPlst)
             {
-                MenuItem mnitem = new MenuItem();
+                var mnitem = new MenuItem();
                 mnitem.LoaiSP = item;
                 mnitem.HangSX = this.GetHangSXLst(item.MaLoai);
                 mnlist.Add(mnitem);
@@ -31,7 +31,7 @@ namespace EC_TH2012_J.Models
 
         private List<HangSanXuat> GetHangSXLst(string maloai)
         {
-            List<HangSanXuat> hsxlist = (from p in db.SanPhams where p.LoaiSP == maloai select p.HangSanXuat).Distinct().ToList();
+            var hsxlist = (from p in db.SanPhams where p.LoaiSP == maloai select p.HangSanXuat).Distinct().ToList();
             return hsxlist;
         }
     }

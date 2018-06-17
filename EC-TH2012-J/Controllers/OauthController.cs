@@ -30,7 +30,7 @@ namespace EC_TH2012_J.Controllers
         #endregion
         [HttpPost]
         [Route("api/oauth/request_token")]
-        public HttpResponseMessage request_tokenfunction([FromBody]Request_token param )
+        public HttpResponseMessage request_tokenfunction([FromBody]RequestToken param )
         {
 
                 var tam = db.Oauths.Where(m => m.Consumer_key == param.consumer_key).FirstOrDefault();
@@ -40,9 +40,9 @@ namespace EC_TH2012_J.Controllers
                 }
                 else
                 {
-                    string request_token = "";
-                    Random rand = new Random();
-                    for(int i = 0 ; i < 20 ; i++)
+                    var request_token = "";
+                    var rand = new Random();
+                    for(var i = 0 ; i < 20 ; i++)
                     {
                         request_token += rand.Next() % 10;
                     }
@@ -80,7 +80,7 @@ namespace EC_TH2012_J.Controllers
         }
         [HttpPost]
         [Route("api/oauth/access_token")]
-        public async Task<HttpResponseMessage> accessToken([FromBody]Access_token param)
+        public async Task<HttpResponseMessage> accessToken([FromBody]AccessToken param)
         {
             try
             {

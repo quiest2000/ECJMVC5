@@ -18,8 +18,8 @@ namespace EC_TH2012_J.Models
         }
 
         public string HoTen { get; set; }
-        public Nullable<System.DateTime> NgaySinh { get; set; }
-        public Nullable<bool> GioiTinh { get; set; }
+        public DateTime? NgaySinh { get; set; }
+        public bool? GioiTinh { get; set; }
         public string DiaChi { get; set; }
         public string Avatar { get; set; }
         public string CMND { get; set; }

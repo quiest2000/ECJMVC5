@@ -32,7 +32,7 @@ namespace EC_TH2012_J.Models
         }
         public void LoadCartfromCookie(HttpRequestBase request)
         {
-            HttpCookie cookie = request.Cookies["Cart"];
+            var cookie = request.Cookies["Cart"];
             if(cookie == null)
             {
                 giohang = new Giohang();
@@ -43,7 +43,7 @@ namespace EC_TH2012_J.Models
         }
         public void SaveTrackingLog(Trackingaction a)
         {
-            using (MainContext db = new MainContext())
+            using (var db = new MainContext())
             {
                 db.Trackingactions.Add(a);
                 db.SaveChanges();
@@ -51,7 +51,7 @@ namespace EC_TH2012_J.Models
         }
         public void Themsanphammoixem(SanPham a)
         {
-            int count = sanPhamMoiXem.Count(m => m.MaSP == a.MaSP);
+            var count = sanPhamMoiXem.Count(m => m.MaSP == a.MaSP);
             if (count == 0)
                 sanPhamMoiXem.Add(a);
         }
@@ -62,7 +62,7 @@ namespace EC_TH2012_J.Models
         public static string GetBaseUrl(string url)
         {
             url = url.Replace("//","*");
-            string []ds = url.Split('/');
+            var ds = url.Split('/');
             url = ds[0].Replace("*","//");
             return url;
         }

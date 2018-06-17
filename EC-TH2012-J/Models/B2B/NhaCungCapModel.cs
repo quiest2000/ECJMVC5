@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using EC_TH2012_J.Models.Domain;
 using EC_TH2012_J.Models.Domain.EfModels;
 
-namespace EC_TH2012_J.Models
+namespace EC_TH2012_J.Models.B2B
 {
     public class NhaCungCapModel
     {
@@ -28,7 +26,7 @@ namespace EC_TH2012_J.Models
 
         internal void DeleteHopDong(string id)
         {
-            Domain.EfModels.HopDongNCC loai = db.HopDongNCCs.Find(id);
+            var loai = db.HopDongNCCs.Find(id);
             db.HopDongNCCs.Remove(loai);
             db.SaveChanges();
         }
@@ -40,19 +38,19 @@ namespace EC_TH2012_J.Models
             loai.TTThanhToan = true;
             db.HopDongNCCs.Add(loai);
             db.SaveChanges();
-            EmailTool sendmail = new EmailTool();
+            var sendmail = new EmailTool();
             sendmail.SendMail(GetParent(loai.MaHD));
             return loai.MaHD;
         }
 
         private EmailModel GetParent(string mahd)
         {
-            Domain.EfModels.HopDongNCC loai = db.HopDongNCCs.Where(m => m.MaHD.Equals(mahd)).FirstOrDefault();
-            NhaCungCap ncc = db.NhaCungCaps.Where(m => m.MaNCC.Equals(loai.MaNCC)).FirstOrDefault();
-            SanPham sp = db.SanPhams.Where(m => m.MaSP.Equals(loai.MaSP)).FirstOrDefault();
-            string mail = ncc.Email;
-            string sub = "[Thông báo] Đã chấp nhận đăng ký cung cấp sản phẩm";
-            string bo = "";
+            var loai = db.HopDongNCCs.Where(m => m.MaHD.Equals(mahd)).FirstOrDefault();
+            var ncc = db.NhaCungCaps.Where(m => m.MaNCC.Equals(loai.MaNCC)).FirstOrDefault();
+            var sp = db.SanPhams.Where(m => m.MaSP.Equals(loai.MaSP)).FirstOrDefault();
+            var mail = ncc.Email;
+            var sub = "[Thông báo] Đã chấp nhận đăng ký cung cấp sản phẩm";
+            var bo = "";
             bo += "Xin chào " + ncc.TenNCC + ",<br>";
             bo += "Chúng tôi rất vinh hạnh được hợp tác với các bạn với sản phẩm: " + sp.TenSP + ". Và sau đây là chi tiết hợp đồng:<br>";
             bo += "Mã hợp đồng: <strong>" + loai.MaHD + "</strong><br>";
@@ -63,18 +61,18 @@ namespace EC_TH2012_J.Models
             bo += "Số lượng cần cung cấp: <strong>" + loai.SLCungCap + "</strong><br>";
             bo += "Số ngày giao kể từ ngày xác nhận giao hàng: <strong>" + loai.SoNgayGiao + "</strong><br>";
             bo += "Xin cảm ơn.";
-            EmailModel email = new EmailModel(mail, sub, bo);
+            var email = new EmailModel(mail, sub, bo);
             return email;
         }
 
         private string TaoMa()
         {
             string maID;
-            Random rand = new Random();
+            var rand = new Random();
             do
             {
                 maID = "";
-                for (int i = 0; i < 5; i++)
+                for (var i = 0; i < 5; i++)
                 {
                     maID += rand.Next(9);
                 }
@@ -107,7 +105,7 @@ namespace EC_TH2012_J.Models
 
         internal void ThemNCC(Register2B2ViewModel model, string p)
         {
-            NhaCungCap ncc = new NhaCungCap();
+            var ncc = new NhaCungCap();
             ncc.MaNCC = TaoMaNCC();
             ncc.TenNCC = model.TenNCC;
             ncc.Net_user = p;
@@ -121,11 +119,11 @@ namespace EC_TH2012_J.Models
         private string TaoMaNCC()
         {
             string maID;
-            Random rand = new Random();
+            var rand = new Random();
             do
             {
                 maID = "";
-                for (int i = 0; i < 5; i++)
+                for (var i = 0; i < 5; i++)
                 {
                     maID += rand.Next(9);
                 }
@@ -149,7 +147,7 @@ namespace EC_TH2012_J.Models
 
         internal void UpdateInfo(EditInfo2B2ViewModel info)
         {
-            NhaCungCap lsp = db.NhaCungCaps.Find(info.MaNCC);
+            var lsp = db.NhaCungCaps.Find(info.MaNCC);
             lsp.TenNCC = info.TenNCC;
             lsp.DiaChi = info.DiaChi;
             lsp.SDT_NCC = info.SDT_NCC;
@@ -174,11 +172,11 @@ namespace EC_TH2012_J.Models
 
         internal void XacNhanDaGiao(string item, bool tt)
         {
-            Domain.EfModels.HopDongNCC lsp = db.HopDongNCCs.Find(item);
+            var lsp = db.HopDongNCCs.Find(item);
 
             if (lsp.TinhTrang == false && tt == true)
             {
-                SanPhamModel sp = new SanPhamModel();
+                var sp = new SanPhamModel();
                 sp.UpdateSL(lsp.MaSP, lsp.SLCungCap, lsp.IsBuy);
             }
 
@@ -190,7 +188,7 @@ namespace EC_TH2012_J.Models
 
         internal void XacNhanDaTT(string item, bool tt)
         {
-            Domain.EfModels.HopDongNCC lsp = db.HopDongNCCs.Find(item);
+            var lsp = db.HopDongNCCs.Find(item);
 
             lsp.TTThanhToan = tt;
             db.Entry(lsp).State = EntityState.Modified;

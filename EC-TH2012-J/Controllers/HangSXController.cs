@@ -28,8 +28,8 @@ namespace EC_TH2012_J.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            HangSanXuatModel lm = new HangSanXuatModel();
-            HangSanXuat sp = lm.FindById(id);
+            var lm = new HangSanXuatModel();
+            var sp = lm.FindById(id);
             if (sp == null)
             {
                 return HttpNotFound();
@@ -41,7 +41,7 @@ namespace EC_TH2012_J.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditHangSX([Bind(Include = "HangSX,TenHang,TruSoChinh,QuocGia")] HangSanXuat loai)
         {
-            HangSanXuatModel spm = new HangSanXuatModel();
+            var spm = new HangSanXuatModel();
             if (ModelState.IsValid)
             {
                 spm.EditHangSX(loai);
@@ -56,7 +56,7 @@ namespace EC_TH2012_J.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            HangSanXuatModel spm = new HangSanXuatModel();
+            var spm = new HangSanXuatModel();
             if (spm.FindById(id) == null)
             {
                 return HttpNotFound();
@@ -69,10 +69,10 @@ namespace EC_TH2012_J.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ThemHangSX([Bind(Include = "TenHang,TruSoChinh,QuocGia")] HangSanXuat loai)
         {
-            HangSanXuatModel spm = new HangSanXuatModel();
+            var spm = new HangSanXuatModel();
             if (ModelState.IsValid && spm.KiemTraTen(loai.TenHang))
             {
-                string maloai = spm.ThemHangSX(loai);
+                var maloai = spm.ThemHangSX(loai);
                 return View("Index");
             }
             return View("Index", loai);
@@ -87,7 +87,7 @@ namespace EC_TH2012_J.Controllers
             }
             foreach (var item in lstdel)
             {
-                HangSanXuatModel spm = new HangSanXuatModel();
+                var spm = new HangSanXuatModel();
                 if (spm.FindById(item) == null)
                 {
                     return HttpNotFound();
@@ -99,21 +99,21 @@ namespace EC_TH2012_J.Controllers
 
         public ActionResult TimHangSX(string key, int? page)
         {
-            HangSanXuatModel spm = new HangSanXuatModel();
+            var spm = new HangSanXuatModel();
             ViewBag.key = key;
             return PhanTrangHangSX(spm.SearchByName(key), page, null);
         }
 
         public ActionResult PhanTrangHangSX(IQueryable<HangSanXuat> lst, int? page, int? pagesize)
         {
-            int pageSize = (pagesize ?? 10);
-            int pageNumber = (page ?? 1);
+            var pageSize = (pagesize ?? 10);
+            var pageNumber = (page ?? 1);
             return PartialView("HangSXPartial", lst.OrderBy(m => m.TenHang).ToPagedList(pageNumber, pageSize));
         }
 
         public ActionResult kiemtra(string key)
         {
-            HangSanXuatModel spm = new HangSanXuatModel();
+            var spm = new HangSanXuatModel();
             if (spm.KiemTraTen(key))
                 return Json(true, JsonRequestBehavior.AllowGet);
             return Json(false, JsonRequestBehavior.AllowGet);

@@ -23,15 +23,15 @@ namespace EC_TH2012_J.Controllers
 
         public ActionResult GiamGiaNhieu()
         {
-            SanPhamModel sp = new SanPhamModel();
-            IQueryable<SanPham> splist = sp.SPKhuyenMai();
+            var sp = new SanPhamModel();
+            var splist = sp.SPKhuyenMai();
             splist = splist.Take(5);
             return PartialView("_GiamGiaNhieuPartial", splist);
         }
 
         public ActionResult KhuyenMaiPost()
         {
-            KhuyenMaiModel km = new KhuyenMaiModel();
+            var km = new KhuyenMaiModel();
             return PartialView("_KhuyenMaiPost",km.TimKhuyenMai(null, null, null).Where(m=> m.NgayBatDau <= DateTime.Today && m.NgayKetThuc >= DateTime.Today));
         }
     }

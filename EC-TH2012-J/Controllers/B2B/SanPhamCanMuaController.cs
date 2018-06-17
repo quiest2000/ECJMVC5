@@ -22,14 +22,14 @@ namespace EC_TH2012_J.Controllers.B2B
 
         public ActionResult TimSPCM(string key, int? page)
         {
-            SanphamcanmuaModel spcm = new SanphamcanmuaModel();
+            var spcm = new SanPhamCanMuaModel();
             ViewBag.key = key;
             return PhanTrangSPCM(spcm.TimSPCM(key), page, null);
         }
 
         public ActionResult DeleteSPCM(int id)
         {
-            SanphamcanmuaModel ncc = new SanphamcanmuaModel();
+            var ncc = new SanPhamCanMuaModel();
             if (ncc.getSanphamcanmua(id) == null)
             {
                 return HttpNotFound();
@@ -45,7 +45,7 @@ namespace EC_TH2012_J.Controllers.B2B
 
             if (ModelState.IsValid)
             {
-                SanphamcanmuaModel ncc = new SanphamcanmuaModel();               
+                var ncc = new SanPhamCanMuaModel();               
                 ncc.ThemSPCM(GetData(loai));
                 return View("Index");
             }
@@ -54,9 +54,9 @@ namespace EC_TH2012_J.Controllers.B2B
 
         public ActionResult EditSPCM(int id)
         {
-            SanphamcanmuaModel sp = new SanphamcanmuaModel();
+            var sp = new SanPhamCanMuaModel();
             var s = sp.getSanphamcanmua(id);
-            SanPhamCanMuaEdit model = new SanPhamCanMuaEdit();
+            var model = new SanPhamCanMuaEdit();
             model.ID = s.ID;
             model.Mota = s.Mota;
             model.Ngayketthuc = s.Ngayketthuc;
@@ -71,7 +71,7 @@ namespace EC_TH2012_J.Controllers.B2B
 
             if (ModelState.IsValid)
             {
-                SanphamcanmuaModel ncc = new SanphamcanmuaModel();
+                var ncc = new SanPhamCanMuaModel();
                 ncc.EditSPCM(loai);
                 return RedirectToAction("Index");
             }
@@ -81,7 +81,7 @@ namespace EC_TH2012_J.Controllers.B2B
 
         private Sanphamcanmua GetData(SanPhamCanMuaAdd loai)
         {
-            Sanphamcanmua sp = new Sanphamcanmua();
+            var sp = new Sanphamcanmua();
             sp.MaSP = loai.MaSP;
             sp.Ngayketthuc = loai.Ngayketthuc;
             sp.Mota = loai.Mota;
@@ -94,7 +94,7 @@ namespace EC_TH2012_J.Controllers.B2B
         {
             foreach (var item in lstdel)
             {
-                SanphamcanmuaModel ncc = new SanphamcanmuaModel();
+                var ncc = new SanPhamCanMuaModel();
                 ncc.DeleteSPCM(Convert.ToInt32(item));
             }
             return TimSPCM(null, null);
@@ -102,8 +102,8 @@ namespace EC_TH2012_J.Controllers.B2B
 
         public ActionResult PhanTrangSPCM(IQueryable<Sanphamcanmua> lst, int? page, int? pagesize)
         {
-            int pageSize = (pagesize ?? 10);
-            int pageNumber = (page ?? 1);
+            var pageSize = (pagesize ?? 10);
+            var pageNumber = (page ?? 1);
             return PartialView("SPCMPartial", lst.OrderByDescending(m => m.Ngaydang).ToPagedList(pageNumber, pageSize));
         }
 	}

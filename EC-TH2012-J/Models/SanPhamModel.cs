@@ -89,7 +89,7 @@ namespace EC_TH2012_J.Models
         internal void EditSP(SanPham sanpham)
         {
             //MaSP,TenSP,LoaiSP,HangSX,XuatXu,GiaTien,MoTa,SoLuong,isnew,ishot
-            SanPham sp = db.SanPhams.Find(sanpham.MaSP);
+            var sp = db.SanPhams.Find(sanpham.MaSP);
             sp.TenSP = sanpham.TenSP;
             sp.LoaiSP = sanpham.LoaiSP;
             sp.HangSX = sanpham.HangSX;
@@ -116,7 +116,7 @@ namespace EC_TH2012_J.Models
 
         internal void DeleteSP(string id)
         {
-            SanPham sanpham = db.SanPhams.Find(id);
+            var sanpham = db.SanPhams.Find(id);
             db.SanPhams.Remove(sanpham);
             db.SaveChanges();
         }
@@ -136,11 +136,11 @@ namespace EC_TH2012_J.Models
         private string TaoMa()
         {
             string maID;
-            Random rand = new Random();
+            var rand = new Random();
             do
             {
                 maID = "";
-                for (int i = 0; i < 5; i++)
+                for (var i = 0; i < 5; i++)
                 {
                     maID += rand.Next(9);
                 }
@@ -151,7 +151,7 @@ namespace EC_TH2012_J.Models
 
         private bool KiemtraID(string maID)
         {
-            using (MainContext db = new MainContext())
+            using (var db = new MainContext())
             {
                 var temp = db.SanPhams.Find(maID);
                 if (temp == null)

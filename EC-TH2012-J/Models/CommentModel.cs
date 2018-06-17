@@ -33,15 +33,15 @@ namespace EC_TH2012_J.Models
             cm.DaTraLoi = "N";
             db.Entry(cm).State = EntityState.Modified;
             db.SaveChanges();
-            EmailTool sendmail = new EmailTool();
+            var sendmail = new EmailTool();
             sendmail.SendMail(GetParent(Comment));
         }
 
         private EmailModel GetParent(BinhLuan Comment)
         {
             var par = db.BinhLuans.Find(Comment.Parent);
-            string sub = "Bình luận sản phẩm " + par.SanPham.TenSP + " của bạn đã được phản hồi";
-            string bo = "";
+            var sub = "Bình luận sản phẩm " + par.SanPham.TenSP + " của bạn đã được phản hồi";
+            var bo = "";
             if (!string.IsNullOrEmpty(par.MaKH))
             {
                 bo += "Xin chào " + par.AspNetUser.UserName + ",\n";
@@ -49,7 +49,7 @@ namespace EC_TH2012_J.Models
                 bo += "Bình luận của bạn: \"" + par.NoiDung + "\"\n";
                 bo += "Phản hồi của chúng tôi: \"" + Comment.NoiDung + "\"\n";
                 bo += "Xin cảm ơn.";
-                EmailModel email = new EmailModel(par.AspNetUser.Email, sub, bo);
+                var email = new EmailModel(par.AspNetUser.Email, sub, bo);
                 return email;
             }
             bo += "Xin chào " + par.HoTen + ",\n";
@@ -57,7 +57,7 @@ namespace EC_TH2012_J.Models
             bo += "Bình luận của bạn: \"" + par.NoiDung + "\"\n";
             bo += "Phản hồi của chúng tôi: \"" + Comment.NoiDung + "\"\n";
             bo += "Xin cảm ơn.";
-            EmailModel mail = new EmailModel(par.Email, sub, bo);
+            var mail = new EmailModel(par.Email, sub, bo);
             return mail;
 
         }

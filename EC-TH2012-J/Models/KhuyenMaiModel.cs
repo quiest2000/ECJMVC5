@@ -19,7 +19,7 @@ namespace EC_TH2012_J.Models
 
         internal void EditKhuyenMai(KhuyenMai loai)
         {
-            KhuyenMai lsp = db.KhuyenMais.Find(loai.MaKM);
+            var lsp = db.KhuyenMais.Find(loai.MaKM);
             lsp.TenCT = loai.TenCT;
             lsp.NgayBatDau = loai.NgayBatDau;
             lsp.NgayKetThuc = loai.NgayKetThuc;
@@ -35,7 +35,7 @@ namespace EC_TH2012_J.Models
             {
                 DeleteSPKhuyenMai(item.MaKM, item.MaSP);
             }
-            KhuyenMai loai = db.KhuyenMais.Find(id);
+            var loai = db.KhuyenMais.Find(id);
             db.KhuyenMais.Remove(loai);
             db.SaveChanges();
         }
@@ -52,11 +52,11 @@ namespace EC_TH2012_J.Models
         private string TaoMa()
         {
             string maID;
-            Random rand = new Random();
+            var rand = new Random();
             do
             {
                 maID = "";
-                for (int i = 0; i < 5; i++)
+                for (var i = 0; i < 5; i++)
                 {
                     maID += rand.Next(9);
                 }
@@ -104,7 +104,7 @@ namespace EC_TH2012_J.Models
         {
             db.SanPhamKhuyenMais.Add(item);
             db.SaveChanges();
-            SanPhamModel s = new SanPhamModel();
+            var s = new SanPhamModel();
             s.UpdateGiaBan(item.MaSP);
         }
         
@@ -143,10 +143,10 @@ namespace EC_TH2012_J.Models
 
         internal void DeleteSPKhuyenMai(string makm, string masp)
         {
-            SanPhamKhuyenMai sp = db.SanPhamKhuyenMais.Where(m=>m.MaSP == masp && m.MaKM == makm).FirstOrDefault();
+            var sp = db.SanPhamKhuyenMais.Where(m=>m.MaSP == masp && m.MaKM == makm).FirstOrDefault();
             db.SanPhamKhuyenMais.Remove(sp);
             db.SaveChanges();
-            SanPhamModel s = new SanPhamModel();
+            var s = new SanPhamModel();
             s.UpdateGiaBan(masp);
             
         }

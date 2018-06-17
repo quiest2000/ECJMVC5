@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using EC_TH2012_J.Models.B2B;
 using EC_TH2012_J.Models;
+using EC_TH2012_J.Models.Donhang;
 
 namespace EC_TH2012_J.Controllers
 {
@@ -30,7 +31,7 @@ namespace EC_TH2012_J.Controllers
                 tos = DateTime.Today;
             ViewBag.froms = froms.Value.ToShortDateString();
             ViewBag.tos = tos.Value.ToShortDateString();
-            DonhangKHModel donhang = new DonhangKHModel();
+            var donhang = new DonHangKHModel();
             return PartialView("TheoTime", donhang.ThongKeDoanhThu(froms, tos).ToList());
         }
 
@@ -42,7 +43,7 @@ namespace EC_TH2012_J.Controllers
                 tos = DateTime.Today;
             ViewBag.froms = froms.Value.ToShortDateString();
             ViewBag.tos = tos.Value.ToShortDateString();
-            DonhangKHModel donhang = new DonhangKHModel();
+            var donhang = new DonHangKHModel();
             return PartialView("TheoTiTrong", donhang.ThongKeTiTrong(froms, tos).ToList());
         }
 	}

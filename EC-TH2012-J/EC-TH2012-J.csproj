@@ -92,6 +92,12 @@
       <Private>True</Private>
       <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Oracle.ManagedDataAccess, Version=4.122.1.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
+      <HintPath>..\packages\Oracle.ManagedDataAccess.12.2.1100\lib\net40\Oracle.ManagedDataAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="Oracle.ManagedDataAccess.EntityFramework, Version=6.122.1.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
+      <HintPath>..\packages\Oracle.ManagedDataAccess.EntityFramework.12.2.1100\lib\net45\Oracle.ManagedDataAccess.EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
       <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
       <Private>True</Private>
@@ -204,13 +210,14 @@
     <Compile Include="Controllers\B2B\HopDongController.cs" />
     <Compile Include="Controllers\B2B\NhaCungCapController.cs" />
     <Compile Include="Controllers\ThongKeController.cs" />
+    <Compile Include="Models\B2B\HopDong.cs" />
+    <Compile Include="Models\B2B\Token.cs" />
     <Compile Include="Models\Domain\EfModels\AspNetRole.cs" />
     <Compile Include="Models\Domain\EfModels\AspNetUser.cs" />
     <Compile Include="Models\Domain\EfModels\AspNetUserClaim.cs" />
     <Compile Include="Models\Domain\EfModels\AspNetUserLogin.cs" />
-    <Compile Include="Models\B2B\Classsupport.cs" />
     <Compile Include="Models\B2B\ConfigAPIModel.cs" />
-    <Compile Include="Models\B2B\DoitacModel.cs" />
+    <Compile Include="Models\B2B\DoiTacModel.cs" />
     <Compile Include="Models\B2B\DSDangKyModel.cs" />
     <Compile Include="Models\B2B\HopdongNCCModel.cs" />
     <Compile Include="Models\B2B\SanPhamCanMuaAdd.cs" />
@@ -234,11 +241,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Access_token.cs" />
+    <Compile Include="Models\AccessToken.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\B2B\DangkisanphamModel.cs" />
+    <Compile Include="Models\B2B\DangKySanPhamModel.cs" />
     <Compile Include="Models\B2B\NhaCungCapModel.cs" />
-    <Compile Include="Models\B2B\SanphamcanmuaModel.cs" />
+    <Compile Include="Models\B2B\SanPhamCanMuaModel.cs" />
     <Compile Include="Models\Domain\EfModels\BinhLuan.cs" />
     <Compile Include="Models\CategoryModel.cs" />
     <Compile Include="Models\Domain\EfModels\ChiTietDonHang.cs" />
@@ -247,10 +254,10 @@
     <Compile Include="Models\Domain\EfModels\ConfigAPI.cs" />
     <Compile Include="Models\Domain\EfModels\DanhsachdangkisanphamNCC.cs" />
     <Compile Include="Models\Domain\EfModels\DonHangKH.cs" />
-    <Compile Include="Models\Donhang\ChitietdonhangModel.cs" />
-    <Compile Include="Models\Donhang\DonhangKHModel.cs" />
+    <Compile Include="Models\Donhang\ChiTietDonHangModel.cs" />
+    <Compile Include="Models\Donhang\DonHangKHModel.cs" />
     <Compile Include="Models\Donhang\Donhangtongquan.cs" />
-    <Compile Include="Models\Chitietgiohang.cs" />
+    <Compile Include="Models\ChiTietGioHang.cs" />
     <Compile Include="Models\EmailModel.cs" />
     <Compile Include="Models\Domain\MainContext.cs" />
     <Compile Include="Models\Domain\EfModels\GiaoDien.cs" />
@@ -266,16 +273,16 @@
     <Compile Include="Models\Domain\EfModels\LoaiSP.cs" />
     <Compile Include="Models\MainMenuModel.cs" />
     <Compile Include="Models\ManagerObiect.cs" />
-    <Compile Include="Models\NGANLUONG.cs" />
+    <Compile Include="Models\NganLuongCheckout.cs" />
     <Compile Include="Models\Domain\EfModels\NhaCungCap.cs" />
     <Compile Include="Models\Domain\EfModels\Oauth.cs" />
-    <Compile Include="Models\Request_token.cs" />
+    <Compile Include="Models\RequestToken.cs" />
     <Compile Include="Models\Domain\EfModels\SanPham.cs" />
     <Compile Include="Models\Domain\EfModels\Sanphamcanmua.cs" />
     <Compile Include="Models\Domain\EfModels\SanPhamKhuyenMai.cs" />
     <Compile Include="Models\SanPhamModel.cs" />
     <Compile Include="Models\Shipping.cs" />
-    <Compile Include="Models\Thanhviennhom.cs" />
+    <Compile Include="Models\Member.cs" />
     <Compile Include="Models\Domain\EfModels\ThongSoKyThuat.cs" />
     <Compile Include="Models\Domain\EfModels\Trackingaction.cs" />
     <Compile Include="Models\UserModel.cs" />
@@ -1716,7 +1723,9 @@
     <Content Include="template\single-product.html" />
     <Content Include="template\switchstylesheet\switchstylesheet.js" />
     <Content Include="template\terms.html" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>

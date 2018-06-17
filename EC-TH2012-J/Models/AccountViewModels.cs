@@ -207,10 +207,10 @@ namespace EC_TH2012_J.Models
         [DataType(DataType.Date)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         [Display(Name = "Ngày sinh")]
-        public Nullable<System.DateTime> NgaySinh { get; set; }
+        public DateTime? NgaySinh { get; set; }
 
         [Display(Name = "Giới tính")]
-        public Nullable<bool> GioiTinh { get; set; }
+        public bool? GioiTinh { get; set; }
 
         [Display(Name = "Địa chỉ")]
         public string DiaChi { get; set; }

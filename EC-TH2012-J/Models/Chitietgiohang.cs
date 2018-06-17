@@ -6,7 +6,7 @@ using EC_TH2012_J.Models.Domain.EfModels;
 
 namespace EC_TH2012_J.Models
 {
-    public class Chitietgiohang
+    public class ChiTietGioHang
     {
         public SanPham sanPham { get; set; }
         public int Soluong { get; set; }

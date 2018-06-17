@@ -18,7 +18,7 @@ namespace EC_TH2012_J.Models
 
         internal void UpdateInfo(EditInfoModel info, string id)
         {
-            AspNetUser user = new AspNetUser();
+            var user = new AspNetUser();
 
             user = db.AspNetUsers.Find(id);
             if (user != null)
@@ -37,7 +37,7 @@ namespace EC_TH2012_J.Models
 
         internal void UpdateImage(string p)
         {
-            AspNetUser user = new AspNetUser();
+            var user = new AspNetUser();
             user = db.AspNetUsers.Find(p);
             if (user != null)
             {
@@ -79,7 +79,7 @@ namespace EC_TH2012_J.Models
 
         internal bool ConfirmMail(string id)
         {
-            AspNetUser user = new AspNetUser();
+            var user = new AspNetUser();
 
             user = db.AspNetUsers.Find(id);
             if (user != null)
@@ -94,13 +94,13 @@ namespace EC_TH2012_J.Models
 
         internal void SendMailConfirm(string p,string url)
         {
-            EmailTool sendmail = new EmailTool();
-            AspNetUser us = db.AspNetUsers.Find(p);
+            var sendmail = new EmailTool();
+            var us = db.AspNetUsers.Find(p);
             if(us != null)
             {
-                string mail = us.Email;
-                string sub = "[Xác nhận email] Xác nhận đăng ký tại TMDT_J shop";
-                string bo = "";
+                var mail = us.Email;
+                var sub = "[Xác nhận email] Xác nhận đăng ký tại TMDT_J shop";
+                var bo = "";
                 bo += "Xin chào " + us.HoTen + ",<br>";
                 bo += "Cảm ơn bạn đã đăng ký tịa TMDT_Shop, đây là link xác nhận email của bạn <br>";
                 bo += "Click vào link bên dưới để xác nhận:<br>";

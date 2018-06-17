@@ -21,7 +21,7 @@ namespace EC_TH2012_J.Controllers.B2B
         }
         public ActionResult TimDS(string tensp, string tenncc, int? tt, int? page)
         {
-            DSDangKyModel DSDK = new DSDangKyModel();
+            var DSDK = new DSDangKyModel();
             ViewBag.tensp = tensp;
             ViewBag.tenncc = tenncc;
             ViewBag.tt = tt;
@@ -31,7 +31,7 @@ namespace EC_TH2012_J.Controllers.B2B
         [HttpPost]
         public ActionResult KyHopDong(string id)
         {
-            SanphamcanmuaModel sp = new SanphamcanmuaModel();
+            var sp = new SanPhamCanMuaModel();
             sp.DeleteSPCM(Convert.ToInt32(id));
             return TimDS(null, null, null, null);
 
@@ -39,7 +39,7 @@ namespace EC_TH2012_J.Controllers.B2B
 
         public ActionResult DeleteDSDK(int id)
         {
-            DSDangKyModel ncc = new DSDangKyModel();
+            var ncc = new DSDangKyModel();
             if (ncc.Findbyid(id) == null)
             {
                 return HttpNotFound();
@@ -53,7 +53,7 @@ namespace EC_TH2012_J.Controllers.B2B
         {
             foreach (var item in lstdel)
             {
-                DSDangKyModel ncc = new DSDangKyModel();
+                var ncc = new DSDangKyModel();
                 ncc.DeleteDSDK(Convert.ToInt32(item));
             }
             return TimDS(null, null, null, null);
@@ -61,8 +61,8 @@ namespace EC_TH2012_J.Controllers.B2B
 
         public ActionResult PhanTrangDSDK(IQueryable<DanhsachdangkisanphamNCC> lst, int? page, int? pagesize)
         {
-            int pageSize = (pagesize ?? 10);
-            int pageNumber = (page ?? 1);
+            var pageSize = (pagesize ?? 10);
+            var pageNumber = (page ?? 1);
             return PartialView("DSDKPartial", lst.OrderByDescending(m => m.NgayDK).ToPagedList(pageNumber, pageSize));
         }
     }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using EC_TH2012_J.Models.Donhang;
 using PagedList;
 using PagedList.Mvc;
 using DonHangKH = EC_TH2012_J.Models.Domain.EfModels.DonHangKH;
@@ -20,7 +21,7 @@ namespace EC_TH2012_J.Controllers
 
         public ActionResult TimDonHang(string key, string mobile, DateTime? date, int? status, int? page)
         {
-            DonhangKHModel spm = new DonhangKHModel();
+            var spm = new DonHangKHModel();
             ViewBag.key = key;
             ViewBag.date = date;
             ViewBag.status = status;
@@ -31,7 +32,7 @@ namespace EC_TH2012_J.Controllers
         [HttpPost]
         public ActionResult UpdateTinhTrangDH(string madh, int? tt)
         {
-            DonhangKHModel dh = new DonhangKHModel();
+            var dh = new DonHangKHModel();
             dh.UpdateTinhTrang(madh, tt);
             return RedirectToAction("TimDonHang");
         }
@@ -48,15 +49,15 @@ namespace EC_TH2012_J.Controllers
 
         public ActionResult PhanTrangDH(IQueryable<DonHangKH> lst, int? page, int? pagesize)
         {
-            int pageSize = (pagesize ?? 10);
-            int pageNumber = (page ?? 1);
+            var pageSize = (pagesize ?? 10);
+            var pageNumber = (page ?? 1);
             return PartialView("DonHangPartial", lst.OrderBy(m => m.TinhTrangDH).ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Donhang
         public ActionResult Chitietdonhang(string id)
         {
-            DonhangKHModel ctdh = new DonhangKHModel();
+            var ctdh = new DonHangKHModel();
             return PartialView("DonHangDetail",ctdh.ChiTietDonHang(id));
         }
     }

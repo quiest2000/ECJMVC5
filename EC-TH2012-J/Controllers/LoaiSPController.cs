@@ -27,8 +27,8 @@ namespace EC_TH2012_J.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CategoryModel lm = new CategoryModel();
-            LoaiSP sp = lm.FindById(id);
+            var lm = new CategoryModel();
+            var sp = lm.FindById(id);
             if (sp == null)
             {
                 return HttpNotFound();
@@ -40,7 +40,7 @@ namespace EC_TH2012_J.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditLoaiSP([Bind(Include = "MaLoai,TenLoai")] LoaiSP loai)
         {
-            CategoryModel spm = new CategoryModel();
+            var spm = new CategoryModel();
             if (ModelState.IsValid)
             {
                 spm.EditLoaiSP(loai);
@@ -55,7 +55,7 @@ namespace EC_TH2012_J.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CategoryModel spm = new CategoryModel();
+            var spm = new CategoryModel();
             if (spm.FindById(id) == null)
             {
                 return HttpNotFound();
@@ -68,10 +68,10 @@ namespace EC_TH2012_J.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ThemLoaiSP([Bind(Include = "TenLoai")] LoaiSP loai)
         {
-            CategoryModel spm = new CategoryModel();
+            var spm = new CategoryModel();
             if (ModelState.IsValid && spm.KiemTraTen(loai.TenLoai))
             {
-                string maloai = spm.ThemLoaiSP(loai);
+                var maloai = spm.ThemLoaiSP(loai);
                 return View("Index");
             }
             return View("Index", loai);
@@ -86,7 +86,7 @@ namespace EC_TH2012_J.Controllers
             }
             foreach (var item in lstdel)
             {
-                CategoryModel spm = new CategoryModel();
+                var spm = new CategoryModel();
                 if (spm.FindById(item) == null)
                 {
                     return HttpNotFound();
@@ -98,21 +98,21 @@ namespace EC_TH2012_J.Controllers
 
         public ActionResult TimLoaiSP(string key, int? page)
         {
-            CategoryModel spm = new CategoryModel();
+            var spm = new CategoryModel();
             ViewBag.key = key;
             return PhanTrangSP(spm.SearchByName(key), page, null);
         }
 
         public ActionResult PhanTrangSP(IQueryable<LoaiSP> lst, int? page, int? pagesize)
         {
-            int pageSize = (pagesize ?? 10);
-            int pageNumber = (page ?? 1);
+            var pageSize = (pagesize ?? 10);
+            var pageNumber = (page ?? 1);
             return PartialView("LoaiSPPartial", lst.OrderBy(m => m.TenLoai).ToPagedList(pageNumber, pageSize));
         }
 
         public ActionResult kiemtra(string key)
         {
-            CategoryModel spm = new CategoryModel();
+            var spm = new CategoryModel();
             if (spm.KiemTraTen(key))
                 return Json(true, JsonRequestBehavior.AllowGet);
             return Json(false, JsonRequestBehavior.AllowGet);

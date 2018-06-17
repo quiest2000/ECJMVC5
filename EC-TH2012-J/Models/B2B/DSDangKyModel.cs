@@ -30,7 +30,7 @@ namespace EC_TH2012_J.Models.B2B
 
         internal void DeleteDSDK(int id)
         {
-            Domain.EfModels.DanhsachdangkisanphamNCC loai = db.DanhsachdangkisanphamNCCs.Find(id);
+            var loai = db.DanhsachdangkisanphamNCCs.Find(id);
             db.DanhsachdangkisanphamNCCs.Remove(loai);
             db.SaveChanges();
         }

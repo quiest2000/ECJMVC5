@@ -16,10 +16,10 @@ namespace EC_TH2012_J.Controllers
             try
             {
                 var temp = db.SanPhams.Find(sp);
-                int index = Kiemtratontai(sp);
+                var index = Kiemtratontai(sp);
                 if(index == -1)
                 {
-                    Chitietgiohang tam = new Chitietgiohang();
+                    var tam = new ChiTietGioHang();
                     tam.sanPham = temp;
                     tam.Soluong = quantity;
                     ManagerObiect.getIntance().giohang.addCart(tam);
@@ -35,7 +35,7 @@ namespace EC_TH2012_J.Controllers
         }
         public int Kiemtratontai(string id)
         {
-            for (int i = 0; i < ManagerObiect.getIntance().giohang.getGiohang().Count; i++)
+            for (var i = 0; i < ManagerObiect.getIntance().giohang.getGiohang().Count; i++)
             {
                 if (ManagerObiect.getIntance().giohang.getGiohang()[i].sanPham.MaSP == id)
                     return i;

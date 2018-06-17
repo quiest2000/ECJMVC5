@@ -15,10 +15,10 @@ namespace EC_TH2012_J.App_Start
         {
             if (filterContext.ActionParameters.ContainsKey("id"))
             {
-                string maSP = filterContext.ActionParameters["id"].ToString();
+                var maSP = filterContext.ActionParameters["id"].ToString();
                 var temp = generateTracking(filterContext,maSP);
                 // them san pham da xem
-                SanPhamModel sp = new SanPhamModel();
+                var sp = new SanPhamModel();
                 ManagerObiect.getIntance().Themsanphammoixem(sp.getSanPham(maSP));
                 ManagerObiect.getIntance().SaveTrackingLog(temp);
             }
@@ -26,7 +26,7 @@ namespace EC_TH2012_J.App_Start
 
         private Trackingaction generateTracking(ActionExecutingContext filterContext, string maSP)
         {
-            Trackingaction temp = new Trackingaction()
+            var temp = new Trackingaction()
             {
                 Username = (ManagerObiect.getIntance().userName ?? " "),
                 MaSP = maSP,

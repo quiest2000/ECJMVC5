@@ -8,6 +8,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using EC_TH2012_J.Models.B2B;
 using EC_TH2012_J.Models.Domain.EfModels;
 using PagedList;
 using PagedList.Mvc;
@@ -20,7 +21,7 @@ namespace EC_TH2012_J.Controllers
         // GET: AdminB2B
         public ActionResult Taohopdong()
         {
-            HopdongNCCModel Ncc = new HopdongNCCModel();
+            var Ncc = new HopdongNCCModel();
             ViewBag.TenNCC = new SelectList(Ncc.getDsNhaCC(), "MaNCC", "TenNCC");
             ViewBag.MaSP = new SelectList(Ncc.getDsSanPham(), "ID", "TenSP");
             return View();
@@ -28,13 +29,13 @@ namespace EC_TH2012_J.Controllers
         [HttpPost]
         public ActionResult Taohopdong(HopDongNCC a)
         {
-            HopdongNCCModel Ncc = new HopdongNCCModel();
+            var Ncc = new HopdongNCCModel();
             if (ModelState.IsValid)
             {
                 string MaHD;
                 if((MaHD = Ncc.ThemmoiHopDongNCC(a)) != "")
                 {
-                    ConfigAPI a1 = new ConfigAPI();
+                    var a1 = new ConfigAPI();
                     a1.MaNCC = a.MaNCC;
                     return View("ConfigAPI", a1);
                 }
@@ -51,14 +52,14 @@ namespace EC_TH2012_J.Controllers
         }
         public ActionResult ConfigAPI(string MaNCC)
         {
-            ConfigAPI a1 = new ConfigAPI();
+            var a1 = new ConfigAPI();
             a1.MaNCC = MaNCC;
             return View(a1);
         }
         [HttpPost]
         public ActionResult ConfigAPI(ConfigAPI a)
         {
-            ConfigAPIModel model = new ConfigAPIModel();
+            var model = new ConfigAPIModel();
             if(model.ThemmoiConfig(a))
             {
                 return RedirectToAction("GetNhaDoiTac");
@@ -75,7 +76,7 @@ namespace EC_TH2012_J.Controllers
         {
             if (verifier_token != null)
             {
-                using (HttpClient client = new HttpClient())
+                using (var client = new HttpClient())
                 {
                     client.DefaultRequestHeaders.Accept.Clear();
                     client.DefaultRequestHeaders.Accept.Add(
@@ -87,7 +88,7 @@ namespace EC_TH2012_J.Controllers
                         verifier_token = verifier_token,
                         request_token = request_token
                     };
-                    HttpResponseMessage response = client.PostAsJsonAsync(
+                    var response = client.PostAsJsonAsync(
                         ManagerObiect.configAPI.LinkAccessToken,
                         model
                     ).Result;
@@ -110,20 +111,20 @@ namespace EC_TH2012_J.Controllers
         {
             if(ManagerObiect.DoitacID != null)
             {
-                using(HttpClient client = new HttpClient())
+                using(var client = new HttpClient())
                 {
-                    string authInfo = user + ":" + pass;
+                    var authInfo = user + ":" + pass;
                     authInfo = Convert.ToBase64String(Encoding.Default.GetBytes(authInfo));
                     client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", authInfo);
 
                     //client.BaseAddress = new Uri(ManagerObiect.GetBaseUrl(ManagerObiect.configAPI.LinkAccessToken));
 
-                    HttpResponseMessage response = client.GetAsync(ManagerObiect.configAPI.LinkKiemTraLuongTon + supplier_key).Result;
+                    var response = client.GetAsync(ManagerObiect.configAPI.LinkKiemTraLuongTon + supplier_key).Result;
                     if (response.IsSuccessStatusCode)
                     {
-                        string code = response.StatusCode.ToString();
+                        var code = response.StatusCode.ToString();
                         // Parse the response body. Blocking!
-                        var data = response.Content.ReadAsAsync<List<Hopdong>>().Result;
+                        var data = response.Content.ReadAsAsync<List<HopDong>>().Result;
                         return View(data);
                     }
                 }
@@ -136,16 +137,16 @@ namespace EC_TH2012_J.Controllers
         {
             if (ManagerObiect.DoitacID != null)
             {
-                using (HttpClient client = new HttpClient())
+                using (var client = new HttpClient())
                 {
                     client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", access_token);
 
-                    HttpResponseMessage response = client.GetAsync(ManagerObiect.configAPI.LinkKiemTraLuongTon + supplier_key).Result;
+                    var response = client.GetAsync(ManagerObiect.configAPI.LinkKiemTraLuongTon + supplier_key).Result;
                     if (response.IsSuccessStatusCode)
                     {
-                        string code = response.StatusCode.ToString();
+                        var code = response.StatusCode.ToString();
                         // Parse the response body. Blocking!
-                        var data = response.Content.ReadAsAsync<List<Hopdong>>().Result;
+                        var data = response.Content.ReadAsAsync<List<HopDong>>().Result;
                         return View("GetOrders", data);
                     }
                 }
@@ -188,15 +189,15 @@ namespace EC_TH2012_J.Controllers
         [AuthLog(Roles = "Quản trị viên,Nhân viên")]
         public ActionResult TimDoiTac(string key, int? page)
         {
-            DoitacModel model = new DoitacModel();
+            var model = new DoiTacModel();
             ViewBag.key = key;
             return PhanTrangDoitac(model.LayDoitac(), page, null);
         }
         [AuthLog(Roles = "Quản trị viên,Nhân viên")]
         public ActionResult PhanTrangDoitac(List<NhaCungCap> lst, int? page, int? pagesize)
         {
-            int pageSize = (pagesize ?? 10);
-            int pageNumber = (page ?? 1);
+            var pageSize = (pagesize ?? 10);
+            var pageNumber = (page ?? 1);
             return PartialView("DoitacPartial", lst.OrderBy(m => m.TenNCC).ToPagedList(pageNumber, pageSize));
         }
         // Xác nhận giao hàng
@@ -208,7 +209,7 @@ namespace EC_TH2012_J.Controllers
             {
                 return RedirectToAction("ConfigAPI", new { MaNCC = doiTacID });
             }
-            HopdongNCCModel model = new HopdongNCCModel();
+            var model = new HopdongNCCModel();
             ViewBag.doitac = doiTacID;
             ViewBag.HD = new SelectList(model.getMaHD(doiTacID), "Mahd", "Mahd");
             return View();
@@ -224,10 +225,10 @@ namespace EC_TH2012_J.Controllers
         }
         // 
         [HttpPost]
-        public ActionResult XemXacNhanGiaoHang(Hopdong a, string access_token, string username, string password, string doitac)
+        public ActionResult XemXacNhanGiaoHang(HopDong a, string access_token, string username, string password, string doitac)
         {
-            NhaCungCapModel modelNCC = new NhaCungCapModel();
-            HopdongNCCModel modelhd = new HopdongNCCModel();
+            var modelNCC = new NhaCungCapModel();
+            var modelhd = new HopdongNCCModel();
             ViewBag.doitac = doitac;
             ViewBag.HD = new SelectList(modelhd.getMaHD(doitac), "Mahd", "Mahd");
             if(!modelNCC.Checkthanhtoan(a.order_id))
@@ -240,13 +241,13 @@ namespace EC_TH2012_J.Controllers
             {
                 if ((username != "" && password != "") && (username != null && password!=null))
                 {
-                    using (HttpClient client = new HttpClient())
+                    using (var client = new HttpClient())
                     {
                         client.DefaultRequestHeaders.Accept.Clear();
                         client.DefaultRequestHeaders.Accept.Add(
                             new MediaTypeWithQualityHeaderValue("application/json")
                         );
-                        string authInfo = username + ":" + password;
+                        var authInfo = username + ":" + password;
                         authInfo = Convert.ToBase64String(Encoding.Default.GetBytes(authInfo));
                         client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", authInfo);
                         var model = new
@@ -257,7 +258,7 @@ namespace EC_TH2012_J.Controllers
                             product_quantity = a.product_quantity,
                             product_date = a.product_date
                         };
-                        HttpResponseMessage response = client.PostAsJsonAsync(
+                        var response = client.PostAsJsonAsync(
                             ManagerObiect.configAPI.LinkXacNhanGiaoHang,
                             model
                         ).Result;
@@ -281,7 +282,7 @@ namespace EC_TH2012_J.Controllers
             }
             else
             {
-                using (HttpClient client = new HttpClient())
+                using (var client = new HttpClient())
                 {
                     client.DefaultRequestHeaders.Accept.Clear();
                     client.DefaultRequestHeaders.Accept.Add(
@@ -296,7 +297,7 @@ namespace EC_TH2012_J.Controllers
                         product_quantity = a.product_quantity,
                         product_date = a.product_date
                     };
-                    HttpResponseMessage response = client.PostAsJsonAsync(
+                    var response = client.PostAsJsonAsync(
                         ManagerObiect.configAPI.LinkXacNhanGiaoHang,
                         model
                     ).Result;
@@ -316,8 +317,8 @@ namespace EC_TH2012_J.Controllers
         }
         public JsonResult GetMaspFromMahd(string MaHD)
         {
-            HopdongNCCModel model = new HopdongNCCModel();
-            string masp = model.GetMaSP(MaHD);
+            var model = new HopdongNCCModel();
+            var masp = model.GetMaSP(MaHD);
             return Json(masp, JsonRequestBehavior.AllowGet);
         }
         public ActionResult Theodoithanhtoan()

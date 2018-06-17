@@ -22,7 +22,7 @@ namespace EC_TH2012_J.Controllers
         [AuthLog(Roles = "Quản trị viên,Nhân viên")]
         public ActionResult TimBinhLuan(string key, DateTime? date, string status, int? page)
         {
-            CommentModel spm = new CommentModel();
+            var spm = new CommentModel();
             ViewBag.key = key;
             ViewBag.date = date;
             ViewBag.status = status;
@@ -32,8 +32,8 @@ namespace EC_TH2012_J.Controllers
         [AuthLog(Roles = "Quản trị viên,Nhân viên")]
         public ActionResult PhanTrangBL(IQueryable<BinhLuan> lst, int? page, int? pagesize)
         {
-            int pageSize = (pagesize ?? 10);
-            int pageNumber = (page ?? 1);
+            var pageSize = (pagesize ?? 10);
+            var pageNumber = (page ?? 1);
             return PartialView("BinhLuanPartial", lst.OrderByDescending(m => m.NgayDang).ToPagedList(pageNumber, pageSize));
         }
 
@@ -42,12 +42,12 @@ namespace EC_TH2012_J.Controllers
         //Tai danh sach binh luan
         public ActionResult LoadComment(string masp, int? page)
         {
-            CommentModel cm = new CommentModel();
+            var cm = new CommentModel();
             //cai dat phan trang
             //So san pham tren 1 trang
-            int pageSize = 10;
+            var pageSize = 10;
             //So trang
-            int pageNumber = (page ?? 1);
+            var pageNumber = (page ?? 1);
             ViewBag.masp = masp;
             return PartialView("_CommentListPartial", cm.FindByMaSP(masp).OrderByDescending(m => m.NgayDang).ToPagedList(pageNumber, pageSize));
         }
@@ -55,7 +55,7 @@ namespace EC_TH2012_J.Controllers
         [AllowAnonymous]
         public ActionResult ChilComment(int mabl)
         {
-            CommentModel cm = new CommentModel();
+            var cm = new CommentModel();
             return PartialView("_ChilComment",cm.FindChild(mabl));
         }
 
@@ -68,7 +68,7 @@ namespace EC_TH2012_J.Controllers
             Comment.NgayDang = DateTime.Now;
             Comment.MaKH = User.Identity.GetUserId();
             Comment.DaTraLoi = "C";
-            CommentModel cm = new CommentModel();
+            var cm = new CommentModel();
             cm.AddComment(Comment);
             return RedirectToAction("LoadComment", new { masp = Comment.MaSP });
         }
@@ -80,7 +80,7 @@ namespace EC_TH2012_J.Controllers
         {
             Comment.NgayDang = DateTime.Now;
             Comment.MaKH = User.Identity.GetUserId();
-            CommentModel cm = new CommentModel();
+            var cm = new CommentModel();
             cm.AddComment(Comment);
             cm.UpdateComment(Comment);
             return RedirectToAction("TimBinhLuan");
@@ -92,10 +92,10 @@ namespace EC_TH2012_J.Controllers
         {
             ViewBag.masp = masp;
 
-            string userid = User.Identity.GetUserId();
+            var userid = User.Identity.GetUserId();
             if (userid != null)
             {
-                UserModel us = new UserModel();
+                var us = new UserModel();
                 var user = us.FindById(userid);
                 ViewBag.Name = user.UserName;
             }
@@ -105,7 +105,7 @@ namespace EC_TH2012_J.Controllers
         [AuthLog(Roles = "Quản trị viên,Nhân viên")]
         public ActionResult AddRepl(string masp, int parent)
         {
-            BinhLuan bl = new BinhLuan();
+            var bl = new BinhLuan();
             bl.MaSP = masp;
             bl.Parent = parent;
             return View("RepComment", bl);
@@ -114,7 +114,7 @@ namespace EC_TH2012_J.Controllers
         [AuthLog(Roles = "Quản trị viên,Nhân viên")]
         public ActionResult DeleteBinhLuan(int id)
         {
-            CommentModel cm = new CommentModel();
+            var cm = new CommentModel();
             cm.DeleteBinhLuan(id);
             return RedirectToAction("TimBinhLuan");
         }
@@ -125,7 +125,7 @@ namespace EC_TH2012_J.Controllers
         {
             foreach (var item in lstdel)
             {
-                CommentModel spm = new CommentModel();
+                var spm = new CommentModel();
                 spm.DeleteBinhLuan(item);
             }
             return RedirectToAction("TimBinhLuan");
