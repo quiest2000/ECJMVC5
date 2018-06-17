@@ -3,12 +3,13 @@ using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using ECommerce.Models;
+using ECommerce.Models.Constants;
 using ECommerce.Models.Domain.EfModels;
 using PagedList;
 
 namespace ECommerce.Controllers
 {
-    [AuthLog(Roles = "Quản trị viên,Nhân viên")]
+    [AuthLog(Roles =RoleNames.Administrator + "," + RoleNames.Employee)]
     public class LoaiSPController : Controller
     {
         //

@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using ECommerce.Models.Constants;
 using ECommerce.Models.Donhang;
 using PagedList;
 using DonHangKH = ECommerce.Models.Domain.EfModels.DonHangKH;
 
 namespace ECommerce.Controllers
 {
-    [AuthLog(Roles = "Quản trị viên,Nhân viên")]
+    [AuthLog(Roles = RoleNames.Administrator + "," + RoleNames.Employee)]
     public class DonhangController : Controller
     {
         public ActionResult Index()

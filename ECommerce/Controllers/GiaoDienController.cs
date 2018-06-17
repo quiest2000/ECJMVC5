@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Web.Mvc;
 using ECommerce.Models;
+using ECommerce.Models.Constants;
 using ECommerce.Models.Domain.EfModels;
 
 namespace ECommerce.Controllers
@@ -18,7 +19,7 @@ namespace ECommerce.Controllers
             return View(model);
         }
 
-        [AuthLog(Roles = "Quản trị viên,Nhân viên")]
+        [AuthLog(Roles = RoleNames.Administrator + "," + RoleNames.Employee)]
         public ActionResult General()
         {
             var dd = new GiaoDienModel();

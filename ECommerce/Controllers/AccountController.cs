@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using ECommerce.Models;
 using ECommerce.Models.B2B;
+using ECommerce.Models.Constants;
 using ECommerce.Models.Domain.EfModels;
 using ECommerce.Utils;
 using Microsoft.AspNet.Identity;
@@ -61,7 +62,7 @@ namespace ECommerce.Controllers
                 {
                     await SignInAsync(user, model.RememberMe);
                     ManagerObiect.getIntance().userName = model.UserName;
-                    if(UserManager.GetRoles(user.Id).FirstOrDefault() == "Nhà cung cấuserId")
+                    if(UserManager.GetRoles(user.Id).FirstOrDefault() == "Nhà cung cấp")
                     {
                         return RedirectToLocal("/Auction/index");
                     }
@@ -103,7 +104,7 @@ namespace ECommerce.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    UserManager.AddToRole(user.Id, "Nhà cung cấuserId");
+                    UserManager.AddToRole(user.Id, RoleNames.Vendor);
                     var ncc = new NhaCungCapModel();
                     ncc.ThemNCC(model, user.Id.ToInt());
                     await SignInAsync(user, isPersistent: false);
@@ -135,7 +136,7 @@ namespace ECommerce.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    UserManager.AddToRole(user.Id, "Khách hàng");
+                    UserManager.AddToRole(user.Id, RoleNames.Customer);
                     //UserManager.AddToRole(user.Id, "Nhà cung cấuserId");
                     await SignInAsync(user, isPersistent: false);
                     ManagerObiect.getIntance().userName = model.UserName;
@@ -333,7 +334,7 @@ namespace ECommerce.Controllers
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
-                    UserManager.AddToRole(user.Id, "Khách hàng");
+                    UserManager.AddToRole(user.Id, RoleNames.Customer);
                     result = await UserManager.AddLoginAsync(user.Id, info.Login);
                     if (result.Succeeded)
                     {
@@ -565,7 +566,7 @@ namespace ECommerce.Controllers
 
 
         //Phần back-end. Bao gồm thêm user mới, chỉnh quyền user, xem  thông tin user
-        [AuthLog(Roles = "Quản trị viên")]
+        [AuthLog(Roles = RoleNames.Administrator)]
         public ActionResult Index()
         {
             var us = new UserModel();
@@ -574,7 +575,7 @@ namespace ECommerce.Controllers
             return View();
         }
 
-        [AuthLog(Roles = "Quản trị viên")]
+        [AuthLog(Roles = RoleNames.Administrator)]
         [HttpPost]
         public ActionResult PhanQuyen(List<string> lstu, string quyen)
         {
@@ -590,14 +591,14 @@ namespace ECommerce.Controllers
             return TimUser(null, null, null, null, null, null);
         }
 
-        [AuthLog(Roles = "Quản trị viên")]
+        [AuthLog(Roles = RoleNames.Administrator)]
         public ActionResult UserDetail(int id)
         {
             var usm = new UserModel();
             return PartialView("UserDetail", usm.FindById(id));
         }
 
-        [AuthLog(Roles = "Quản trị viên")]
+        [AuthLog(Roles = RoleNames.Administrator)]
         public ActionResult TimUser(string key, string email, string hoten, string phone, string quyen, int? page)
         {
             var spm = new UserModel();
@@ -609,7 +610,7 @@ namespace ECommerce.Controllers
             return PhanTrangUser(spm.SearchUser(key, email, hoten, phone, quyen), page, null);
         }
 
-        [AuthLog(Roles = "Quản trị viên")]
+        [AuthLog(Roles = RoleNames.Administrator)]
         public ActionResult PhanTrangUser(IQueryable<AspNetUser> lst, int? page, int? pagesize)
         {
             var pageSize = (pagesize ?? 10);

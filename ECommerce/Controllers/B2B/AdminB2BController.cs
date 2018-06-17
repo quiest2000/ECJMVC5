@@ -8,6 +8,7 @@ using System.Text;
 using System.Web.Mvc;
 using ECommerce.Models;
 using ECommerce.Models.B2B;
+using ECommerce.Models.Constants;
 using ECommerce.Models.Domain.EfModels;
 using PagedList;
 using HopDongNcc = ECommerce.Models.Domain.EfModels.HopDongNcc;
@@ -104,7 +105,7 @@ namespace ECommerce.Controllers.B2B
         }
         //xu li get orders
         [HttpPost]
-        [AuthLog(Roles = "Quản trị viên,Nhân viên")]
+        [AuthLog(Roles = RoleNames.Administrator+","+RoleNames.Employee)]
         public ActionResult GetOrders(string user, string pass, string supplier_key)
         {
             if(ManagerObiect.DoitacID != null)
@@ -130,7 +131,7 @@ namespace ECommerce.Controllers.B2B
             return Content("Error");
         }
         [HttpPost]
-        [AuthLog(Roles = "Quản trị viên,Nhân viên")]
+        [AuthLog(Roles = RoleNames.Administrator+","+RoleNames.Employee)]
         public ActionResult GetOrdersOauth(string access_token,string supplier_key)
         {
             if (ManagerObiect.DoitacID != null)
@@ -173,25 +174,25 @@ namespace ECommerce.Controllers.B2B
             }
             return RedirectToAction("", "");
         }
-        [AuthLog(Roles = "Quản trị viên,Nhân viên")]
+        [AuthLog(Roles = RoleNames.Administrator+","+RoleNames.Employee)]
         public ActionResult GetDanhsachNhaDoiTac()
         {
             return View();
         }
         // get danh sach các Nhà đối tác.
-        [AuthLog(Roles = "Quản trị viên,Nhân viên")]
+        [AuthLog(Roles = RoleNames.Administrator+","+RoleNames.Employee)]
         public ActionResult GetNhaDoiTac()
         {
             return View();
         }
-        [AuthLog(Roles = "Quản trị viên,Nhân viên")]
+        [AuthLog(Roles = RoleNames.Administrator+","+RoleNames.Employee)]
         public ActionResult TimDoiTac(string key, int? page)
         {
             var model = new DoiTacModel();
             ViewBag.key = key;
             return PhanTrangDoitac(model.LayDoitac(), page, null);
         }
-        [AuthLog(Roles = "Quản trị viên,Nhân viên")]
+        [AuthLog(Roles = RoleNames.Administrator+","+RoleNames.Employee)]
         public ActionResult PhanTrangDoitac(List<NhaCungCap> lst, int? page, int? pagesize)
         {
             var pageSize = (pagesize ?? 10);

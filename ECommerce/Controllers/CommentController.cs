@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using ECommerce.Models;
+using ECommerce.Models.Constants;
 using ECommerce.Models.Domain.EfModels;
 using ECommerce.Utils;
 using Microsoft.AspNet.Identity;
@@ -12,13 +13,13 @@ namespace ECommerce.Controllers
 {
     public class CommentController : Controller
     {
-        [AuthLog(Roles = "Quản trị viên,Nhân viên")]
+        [AuthLog(Roles = RoleNames.Administrator + "," + RoleNames.Employee)]
         public ActionResult Index()
         {
             return View();
         }
 
-        [AuthLog(Roles = "Quản trị viên,Nhân viên")]
+        [AuthLog(Roles = RoleNames.Administrator + "," + RoleNames.Employee)]
         public ActionResult TimBinhLuan(string key, DateTime? date, string status, int? page)
         {
             var spm = new CommentModel();
@@ -28,7 +29,7 @@ namespace ECommerce.Controllers
             return PhanTrangBL(spm.TimBinhLuan(key, date, status), page, null);
         }
 
-        [AuthLog(Roles = "Quản trị viên,Nhân viên")]
+        [AuthLog(Roles = RoleNames.Administrator + "," + RoleNames.Employee)]
         public ActionResult PhanTrangBL(IQueryable<BinhLuan> lst, int? page, int? pagesize)
         {
             var pageSize = (pagesize ?? 10);
@@ -72,7 +73,7 @@ namespace ECommerce.Controllers
             return RedirectToAction("LoadComment", new { masp = Comment.SanPhamId });
         }
 
-        [AuthLog(Roles = "Quản trị viên,Nhân viên")]
+        [AuthLog(Roles = RoleNames.Administrator + "," + RoleNames.Employee)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult AddRepl(BinhLuan Comment)
@@ -101,7 +102,7 @@ namespace ECommerce.Controllers
             return PartialView("_CommentFormPartial");
         }
 
-        [AuthLog(Roles = "Quản trị viên,Nhân viên")]
+        [AuthLog(Roles = RoleNames.Administrator + "," + RoleNames.Employee)]
         public ActionResult AddRepl(int masp, int parent)
         {
             var bl = new BinhLuan();
@@ -110,7 +111,7 @@ namespace ECommerce.Controllers
             return View("RepComment", bl);
         }
 
-        [AuthLog(Roles = "Quản trị viên,Nhân viên")]
+        [AuthLog(Roles = RoleNames.Administrator + "," + RoleNames.Employee)]
         public ActionResult DeleteBinhLuan(int id)
         {
             var cm = new CommentModel();
@@ -118,7 +119,7 @@ namespace ECommerce.Controllers
             return RedirectToAction("TimBinhLuan");
         }
 
-        [AuthLog(Roles = "Quản trị viên,Nhân viên")]
+        [AuthLog(Roles = RoleNames.Administrator + "," + RoleNames.Employee)]
         [HttpPost]
         public ActionResult MultibleDel(List<int> lstdel)
         {

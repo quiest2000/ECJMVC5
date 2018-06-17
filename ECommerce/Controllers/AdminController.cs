@@ -5,6 +5,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ECommerce.Models;
+using ECommerce.Models.Constants;
 using ECommerce.Models.Domain.EfModels;
 using PagedList;
 
@@ -12,14 +13,14 @@ namespace ECommerce.Controllers
 {
     public class AdminController : Controller
     {
-        [AuthLog(Roles = "Quản trị viên,Nhân viên")]
+        [AuthLog(Roles = RoleNames.Administrator + "," + RoleNames.Employee)]
         // GET: Admin
         public ActionResult Index()
         {
             return View();
         }
 
-        [AuthLog(Roles = "Quản trị viên,Nhân viên")]
+        [AuthLog(Roles = RoleNames.Administrator + "," + RoleNames.Employee)]
         public ActionResult SanPham()
         {
             var spm = new SanPhamModel();
@@ -28,7 +29,7 @@ namespace ECommerce.Controllers
             return View();
         }
 
-        [AuthLog(Roles = "Quản trị viên,Nhân viên")]
+        [AuthLog(Roles = RoleNames.Administrator + "," + RoleNames.Employee)]
         public ActionResult EditSP(int spId)
         {
             if (spId == null)
@@ -46,7 +47,7 @@ namespace ECommerce.Controllers
             return View(sp);
         }
 
-        [AuthLog(Roles = "Quản trị viên,Nhân viên")]
+        [AuthLog(Roles = RoleNames.Administrator + "," + RoleNames.Employee)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult EditSP([Bind(Include = "Id,TenSP,LoaiSpId,Id,XuatXu,GiaGoc,MoTa,SoLuong,isnew,ishot")] SanPham sanpham, HttpPostedFileBase ad, HttpPostedFileBase an, HttpPostedFileBase ak)
@@ -55,13 +56,13 @@ namespace ECommerce.Controllers
             if (ModelState.IsValid)
             {
                 spm.EditSP(sanpham);
-                UploadAnh(ad,sanpham.Id + "1");
+                UploadAnh(ad, sanpham.Id + "1");
                 UploadAnh(an, sanpham.Id + "2");
                 UploadAnh(ak, sanpham.Id + "3");
                 return RedirectToAction("SanPham");
             }
             ViewBag.HangSX = new SelectList(spm.GetAllHangSX(), "Id", "TenHang", sanpham.HangSxId);
-            ViewBag.LoaiSP = new SelectList(spm.GetAllLoaiSP(), "Id", "TenLoai", sanpham.LoaiSpId);            
+            ViewBag.LoaiSP = new SelectList(spm.GetAllLoaiSP(), "Id", "TenLoai", sanpham.LoaiSpId);
             return View(sanpham);
         }
 
@@ -77,11 +78,11 @@ namespace ECommerce.Controllers
             DeleteAnh(spm.FindById(id).AnhNen);
             DeleteAnh(spm.FindById(id).AnhKhac);
             spm.DeleteSP(id);
-            return TimSP(null,null,null);
+            return TimSP(null, null, null);
         }
 
-        [AuthLog(Roles = "Quản trị viên,Nhân viên")]
-        public bool UploadAnh(HttpPostedFileBase file,string tenfile)
+        [AuthLog(Roles = RoleNames.Administrator + "," + RoleNames.Employee)]
+        public bool UploadAnh(HttpPostedFileBase file, string tenfile)
         {
             // Verify that the user selected a file
             if (file != null && file.ContentLength > 0)
@@ -101,7 +102,7 @@ namespace ECommerce.Controllers
             return false;
         }
 
-        [AuthLog(Roles = "Quản trị viên,Nhân viên")]
+        [AuthLog(Roles = RoleNames.Administrator + "," + RoleNames.Employee)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult ThemSP([Bind(Include = "TenSP,LoaiSpId,Id,XuatXu,GiaGoc,MoTa,SoLuong,isnew,ishot")] SanPham sanpham, HttpPostedFileBase ad, HttpPostedFileBase an, HttpPostedFileBase ak)
@@ -121,10 +122,10 @@ namespace ECommerce.Controllers
             }
             ViewBag.HangSX = new SelectList(spm.GetAllHangSX(), "Id", "TenHang", sanpham.HangSxId);
             ViewBag.LoaiSP = new SelectList(spm.GetAllLoaiSP(), "Id", "TenLoai", sanpham.LoaiSpId);
-            return View("SanPham",sanpham);
+            return View("SanPham", sanpham);
         }
 
-        [AuthLog(Roles = "Quản trị viên,Nhân viên")]
+        [AuthLog(Roles = RoleNames.Administrator + "," + RoleNames.Employee)]
         public ActionResult SPDetail(int id)
         {
             var sp = new SanPhamModel();
@@ -146,15 +147,15 @@ namespace ECommerce.Controllers
                 DeleteAnh(spm.FindById(item).AnhNen);
                 DeleteAnh(spm.FindById(item).AnhKhac);
                 spm.DeleteSP(item);
-            } 
-            return TimSP(null,null,null);
+            }
+            return TimSP(null, null, null);
         }
 
-        [AuthLog(Roles = "Quản trị viên,Nhân viên")]
+        [AuthLog(Roles = RoleNames.Administrator + "," + RoleNames.Employee)]
         [HttpPost]
-        public ActionResult ThemThongSoKT(List<ThongSoKyThuat> lstkt) 
+        public ActionResult ThemThongSoKT(List<ThongSoKyThuat> lstkt)
         {
-            if(lstkt.Count == 0)
+            if (lstkt.Count == 0)
             {
                 return RedirectToAction("SanPham");
             }
@@ -164,10 +165,10 @@ namespace ECommerce.Controllers
                 if (!string.IsNullOrEmpty(item.ThuocTinh))
                     spm.ThemTSKT(item);
             }
-            return RedirectToAction("SanPham"); 
+            return RedirectToAction("SanPham");
         }
 
-        [AuthLog(Roles = "Quản trị viên,Nhân viên")]
+        [AuthLog(Roles = RoleNames.Administrator + "," + RoleNames.Employee)]
         [HttpPost]
         public ActionResult SuaThongSoKT(List<ThongSoKyThuat> lstkt)
         {
@@ -185,7 +186,7 @@ namespace ECommerce.Controllers
             return RedirectToAction("SanPham");
         }
 
-        [AuthLog(Roles = "Quản trị viên,Nhân viên")]
+        [AuthLog(Roles = RoleNames.Administrator + "," + RoleNames.Employee)]
         public ActionResult SuaThongSoKT(int masp)
         {
             var spm = new SanPhamModel();
@@ -197,20 +198,20 @@ namespace ECommerce.Controllers
                 lst.Add(ts);
                 return View("ThemThongSoKT", lst);
             }
-            return View("SuaThongSoKT",spm.GetTSKT(masp).ToList());
+            return View("SuaThongSoKT", spm.GetTSKT(masp).ToList());
         }
 
-        [AuthLog(Roles = "Quản trị viên,Nhân viên")]
-        public ActionResult TimSP(string key,string maloai,int? page)
+        [AuthLog(Roles = RoleNames.Administrator + "," + RoleNames.Employee)]
+        public ActionResult TimSP(string key, string maloai, int? page)
         {
             var spm = new SanPhamModel();
             ViewBag.key = key;
             ViewBag.maloai = maloai;
-            return PhanTrangSP(spm.AdvancedSearch(key, maloai, null, null, null),page,null);
+            return PhanTrangSP(spm.AdvancedSearch(key, maloai, null, null, null), page, null);
         }
 
-        [AuthLog(Roles = "Quản trị viên,Nhân viên")]
-        public ActionResult PhanTrangSP(IQueryable<SanPham> lst,int? page, int? pagesize)
+        [AuthLog(Roles = RoleNames.Administrator + "," + RoleNames.Employee)]
+        public ActionResult PhanTrangSP(IQueryable<SanPham> lst, int? page, int? pagesize)
         {
             var pageSize = (pagesize ?? 10);
             var pageNumber = (page ?? 1);

@@ -24,24 +24,4 @@ namespace ECommerce.Models
         public string Avatar { get; set; }
         public string CMND { get; set; }
     }
-
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
-    {
-        public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
-        {
-        }
-
-        protected override void OnModelCreating(System.Data.Entity.DbModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
-
-            modelBuilder.Entity<ApplicationUser>().ToTable("AspNetUsers");
-        }
-
-        public static ApplicationDbContext Create()
-        {
-            return new ApplicationDbContext();
-        }
-    }
 }

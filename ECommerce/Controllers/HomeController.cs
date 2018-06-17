@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Web.Mvc;
 using ECommerce.Models;
+using ECommerce.Models.Constants;
 using ECommerce.Models.Domain;
 using ECommerce.Models.Donhang;
 using ECommerce.Utils;
@@ -17,7 +18,7 @@ namespace ECommerce.Controllers
         public ActionResult Index()
         {
             ManagerObiect.getIntance();
-            
+
             return View();
         }
 
@@ -84,13 +85,13 @@ namespace ECommerce.Controllers
             }
             return View(Ds_Group);
         }
-        
+
         public ActionResult Cart()
         {
             return View(ManagerObiect.getIntance().giohang);
         }
 
-        [AuthLog(Roles = "Quản trị viên,Nhân viên,Khách hàng")]
+        [AuthLog(Roles = RoleNames.Administrator + "," + RoleNames.Employee + "," + RoleNames.Customer)]
         //Đơn hàng
         public ActionResult Xemdonhang(int maKH)
         {
@@ -103,7 +104,7 @@ namespace ECommerce.Controllers
             return View(temp);
         }
 
-        [AuthLog(Roles = "Quản trị viên,Nhân viên,Khách hàng")]
+        [AuthLog(Roles = RoleNames.Administrator + "," + RoleNames.Employee + "," + RoleNames.Customer)]
         public ActionResult Huydonhang(string maDH)
         {
             var dh = new DonHangKHModel();
@@ -132,7 +133,7 @@ namespace ECommerce.Controllers
             }
         }
 
-        [AuthLog(Roles = "Quản trị viên,Nhân viên,Khách hàng")]
+        [AuthLog(Roles = RoleNames.Administrator + "," + RoleNames.Employee + "," + RoleNames.Customer)]
         [HttpPost]
         public ActionResult Checkout(Donhangtongquan dh)
         {
@@ -194,7 +195,7 @@ namespace ECommerce.Controllers
         public ActionResult SPBanChay()
         {
             var sp = new SanPhamModel();
-            var splist = sp.SPBanChay(7);      
+            var splist = sp.SPBanChay(7);
             if (splist.Any())
                 return PartialView("_BestSellerPartial", splist.ToList());
             else

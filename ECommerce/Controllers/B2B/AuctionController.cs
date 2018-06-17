@@ -1,6 +1,7 @@
 ﻿using System.Web.Mvc;
 using ECommerce.Models;
 using ECommerce.Models.B2B;
+using ECommerce.Models.Constants;
 using ECommerce.Models.Domain.EfModels;
 
 namespace ECommerce.Controllers.B2B
@@ -8,7 +9,7 @@ namespace ECommerce.Controllers.B2B
     public class AuctionController : Controller
     {
         // GET: Auction
-        [AuthLog(Roles = "Quản trị viên,Nhân viên,Nhà cung cấp")]
+        [AuthLog(Roles = RoleNames.Administrator + "," + RoleNames.Employee + "," + RoleNames.Vendor)]
         public ActionResult Index()
         {
             return View();
@@ -17,7 +18,7 @@ namespace ECommerce.Controllers.B2B
         {
             var sp = new SanPhamCanMuaModel();
             var temp = sp.getDS(0, 5);
-            return View(temp);        
+            return View(temp);
         }
         public ActionResult ProductFilterB2B()
         {
@@ -40,13 +41,13 @@ namespace ECommerce.Controllers.B2B
         public ActionResult ModalRegister(int ID)
         {
             var model = new DangKySanPhamModel();
-            var temp = model.createDangKiSanPham(User.Identity.Name,ID);
+            var temp = model.createDangKiSanPham(User.Identity.Name, ID);
             return View(temp);
         }
         [HttpPost]
         public ActionResult RegisterProduct(DangKySanPhamModel a)
         {
-            if(new DangKySanPhamModel().ThemDanhKi(a))
+            if (new DangKySanPhamModel().ThemDanhKi(a))
             {
                 Session["TB"] = true;
             }

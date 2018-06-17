@@ -210,8 +210,10 @@
     <Compile Include="Controllers\B2B\HopDongController.cs" />
     <Compile Include="Controllers\B2B\NhaCungCapController.cs" />
     <Compile Include="Controllers\ThongKeController.cs" />
+    <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\B2B\HopDong.cs" />
     <Compile Include="Models\B2B\Token.cs" />
+    <Compile Include="Models\Constants\RoleNames.cs" />
     <Compile Include="Models\Domain\EfModels\AspNetRole.cs" />
     <Compile Include="Models\Domain\EfModels\AspNetUser.cs" />
     <Compile Include="Models\Domain\EfModels\AspNetUserClaim.cs" />

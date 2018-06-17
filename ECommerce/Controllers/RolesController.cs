@@ -1,11 +1,12 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
 using ECommerce.Models;
+using ECommerce.Models.Constants;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace ECommerce.Controllers
 {
-    [AuthLog(Roles = "Quản trị viên")]
+    [AuthLog(Roles = RoleNames.Administrator)]
     public class RolesController : Controller
     {
         ApplicationDbContext context;
