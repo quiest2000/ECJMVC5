@@ -1,4 +1,4 @@
-﻿@model List<EC_TH2012_J.Models.Donhang.DonhangKHModel>
+﻿@model List<ECommerce.Models.Donhang.DonHangKHModel>
 @{
     ViewBag.Title = "Xem don hang";
     Layout = "~/Views/Shared/_LayoutFrontEnd.cshtml";
@@ -12,7 +12,7 @@
             {
                 <div class="itemphieu">
                     <div class="col-md-1 itemthumbphieu">
-                        <a href="javascript:;" onclick="ChiTietItem('@Url.Action("Chitietdonhang","Donhang")', '@Model[i].donHang.MaDH')"><img src="~/images/cartphieu.jpg" alt="img" title="xem chi tiết" /></a>
+                        <a href="javascript:;" onclick="ChiTietItem('@Url.Action("Chitietdonhang","Donhang")', '@Model[i].donHang.Id')"><img src="~/images/cartphieu.jpg" alt="img" title="xem chi tiết" /></a>
                     </div>
                     <div class="col-md-5">
                         <div class="itemnamemua">
@@ -44,7 +44,7 @@
                                     <i>Trạng thái : @Model[i].tinhTrangDH .</i>
                                 </div>
                                 <div class="itemnamghichu">
-                                    <a href="javascript:;" onclick="Huydonhang('@Model[i].donHang.MaDH')">Hủy đơn đặt hàng</a>
+                                    <a href="javascript:;" onclick="Huydonhang('@Model[i].donHang.Id')">Hủy đơn đặt hàng</a>
                                 </div>
                             }
                             else

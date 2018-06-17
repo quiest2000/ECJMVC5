@@ -10,7 +10,7 @@ namespace ECommerce.Models.Domain.EfModels
         [Key, Column(Order = 1)]
         public string ProviderKey { get; set; }
         [Key, Column(Order = 2)]
-        public int AspNetUserId { get; set; }
+        public string AspNetUserId { get; set; }
         [ForeignKey(nameof(AspNetUserId))]
         public virtual AspNetUser AspNetUser { get; set; }
     }

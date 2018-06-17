@@ -21,7 +21,7 @@ namespace ECommerce.Models.Domain.EfModels
         public string SDT_NCC { get; set; }
         public string Email { get; set; }
         public string Website { get; set; }
-        public int NetUserId { get; set; }
+        public string NetUserId { get; set; }
     
         public virtual ICollection<HopDongNcc> HopDongNCCs { get; set; }
         public virtual ICollection<Oauth> Oauths { get; set; }

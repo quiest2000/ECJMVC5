@@ -1,4 +1,4 @@
-﻿@model EC_TH2012_J.Models.Domain.EfModels.LoaiSP
+﻿@model ECommerce.Models.Domain.EfModels.LoaiSanPham
 @{
     ViewBag.Title = "EditSP";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
@@ -27,7 +27,7 @@
                             @Html.ValidationSummary()
                             <span id="kiemtratrung"></span>
                         </div>
-                        @Html.HiddenFor(model => model.MaLoai)
+                        @Html.HiddenFor(model => model.Id)
                         <div class="form-group">
                             @Html.LabelFor(model => model.TenLoai, new { @class = "control-label col-md-2" })
                             <div class="col-md-4">

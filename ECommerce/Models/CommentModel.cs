@@ -40,7 +40,7 @@ namespace ECommerce.Models
             var par = db.BinhLuans.Find(Comment.Parent);
             var sub = "Bình luận sản phẩm " + par.SanPham.TenSP + " của bạn đã được phản hồi";
             var bo = "";
-            if (par.KhachHangId > 0)
+            if (!string.IsNullOrEmpty(par.KhachHangId))
             {
                 bo += "Xin chào " + par.AspNetUser.UserName + ",\n";
                 bo += "Bình luận sản phẩm " + par.SanPham.TenSP + " đã được phản hồi.\n";

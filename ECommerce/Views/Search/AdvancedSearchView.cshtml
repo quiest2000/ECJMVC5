@@ -2,10 +2,8 @@
     ViewBag.Title = "Tìm kiếm sản phẩm";
     Layout = "~/Views/Shared/_LayoutWithSideBar.cshtml";
 }
-@using EC_TH2012_J.Models;
-@using PagedList;
-@using PagedList.Mvc;
-@model PagedList.IPagedList<EC_TH2012_J.Models.Domain.EfModels.SanPham>
+
+@model PagedList.IPagedList<ECommerce.Models.Domain.EfModels.SanPham>
 
 @*Code ajax phân trang*@
 <script language="javascript" type="text/javascript">

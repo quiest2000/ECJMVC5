@@ -16,8 +16,8 @@ namespace ECommerce.Models.Domain.EfModels
             AspNetRoles = new HashSet<AspNetRole>();
             NhaCungCaps = new HashSet<NhaCungCap>();
         }
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+        [Key]
+        public string Id { get; set; }
         public string Email { get; set; }
         public bool EmailConfirmed { get; set; }
         public string PasswordHash { get; set; }

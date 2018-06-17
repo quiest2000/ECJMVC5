@@ -1,7 +1,6 @@
-﻿@using EC_TH2012_J.Models;
-@using PagedList;
-@using PagedList.Mvc;
-@model PagedList.IPagedList<EC_TH2012_J.Models.Domain.EfModels.HangSanXuat>
+﻿@@using PagedList.Mvc;
+@using PagedList.Mvc
+@model PagedList.IPagedList<ECommerce.Models.Domain.EfModels.HangSanXuat>
 
 
 <table class="table table-striped table-bordered bootstrap-datatable datatable responsive">
@@ -21,17 +20,17 @@
         {
             <tr>
                 <td>
-                    <input type="checkbox" name="lstdel" value="@item.HangSX" />
+                    <input type="checkbox" name="lstdel" value="@item.Id" />
                 </td>
                 <td class="center">@item.TenHang</td>
                 <td class="center">@item.TruSoChinh</td>
                 <td class="center">@item.QuocGia</td>
                 <td class="center">
-                    <a class="btn btn-info" href="@Url.Action("EditHangSX", "HangSX", new { id = item.HangSX })">
+                    <a class="btn btn-info" href="@Url.Action("EditHangSX", "HangSX", new { id = item.Id })">
                         <i class="glyphicon glyphicon-edit icon-white"></i>
                         Sửa
                     </a>
-                    <a class="btn btn-danger" href='javascript:XoaItem("@Url.Action("DeleteHangSX", "HangSX")","@item.HangSX")'>
+                    <a class="btn btn-danger" href='javascript:XoaItem("@Url.Action("DeleteHangSX", "HangSX")","@item.Id")'>
                         <i class="glyphicon glyphicon-trash icon-white"></i>
                         Xóa
                     </a>

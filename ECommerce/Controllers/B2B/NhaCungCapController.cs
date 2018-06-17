@@ -29,7 +29,7 @@ namespace ECommerce.Controllers.B2B
         {
             var ncc = new NhaCungCapModel();
             ViewBag.key = key;
-            return PhanTrangNCC(ncc.TimNCC(key).Where(m => m.NetUserId > 0), page, null);
+            return PhanTrangNCC(ncc.TimNCC(key).Where(m =>!string.IsNullOrEmpty(m.NetUserId)), page, null);
         }
 
         public ActionResult PhanTrangNCC(IQueryable<NhaCungCap> lst, int? page, int? pagesize)

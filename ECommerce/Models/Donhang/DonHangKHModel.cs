@@ -19,10 +19,11 @@ namespace ECommerce.Models.Donhang
             {
                 var listDh = new List<DonHangKHModel>();
                 db.DonHangKHs.AsNoTracking();
-                var danhsach = from p in db.DonHangKHs where p.KhachHangId == makh select p;
+                var strMaKh = makh.ToString();
+                var danhsach = from p in db.DonHangKHs where p.KhachHangId == strMaKh select p;
                 foreach (var temp in danhsach.ToList())
                 {
-                    var users = (from p in db.AspNetUsers where p.Id == makh select p).FirstOrDefault();
+                    var users = (from p in db.AspNetUsers where p.Id == strMaKh select p).FirstOrDefault();
 
                     listDh.Add(new DonHangKHModel()
                     {
@@ -83,7 +84,8 @@ namespace ECommerce.Models.Donhang
         {
             using (var db = new MainContext())
             {
-                var users = (from p in db.AspNetUsers where p.Id == userId select p).FirstOrDefault();
+                var strUserId = userId.ToString();
+                var users = (from p in db.AspNetUsers where p.Id == strUserId select p).FirstOrDefault();
                 return users;
             }
         }
@@ -94,7 +96,7 @@ namespace ECommerce.Models.Donhang
                 using (var db = new MainContext())
                 {
                     var dhkh = new Domain.EfModels.DonHangKH();
-                    dhkh.KhachHangId = maKH;
+                    dhkh.KhachHangId = maKH.ToString();
 
                     dhkh.Diachi = a.address;
                     dhkh.Dienthoai = a.phoneNumber;

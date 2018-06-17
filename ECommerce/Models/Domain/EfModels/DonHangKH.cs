@@ -10,7 +10,7 @@ namespace ECommerce.Models.Domain.EfModels
         [Display(Name = "Mã đơn hàng")]
         public int Id { get; set; }
         [Display(Name = "Mã khách hàng")]
-        public int KhachHangId { get; set; }
+        public string KhachHangId { get; set; }
         [Display(Name = "Phí vận chuyển ")]
         public decimal? PhiVanChuyen { get; set; }
         [Display(Name = "Phương thức giao dịch")]

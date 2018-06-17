@@ -25,8 +25,7 @@
 </script>
 
 <!-- ========================================= PRODUCT FILTER ========================================= -->
-@using EC_TH2012_J.Models;
-@using EC_TH2012_J.Models.Domain.EfModels
+@using ECommerce.Models;
 <div class="widget">
     <h1>Lọc sản phẩm</h1>
     <form id="productfilterfrm" action="@Url.Action("AdvancedSearchView", "Search")" autocomplete="off">
@@ -41,7 +40,7 @@
                         var catlist = cat.GetCategory();
                         foreach (var item in catlist)
                         {
-                            <li><input name="loai" class="le-checkbox" type="radio" value="@item.MaLoai" /> <label>@item.TenLoai</label></li>
+                            <li><input name="loai" class="le-checkbox" type="radio" value="@item.Id" /> <label>@item.TenLoai</label></li>
                         }
                     }
                 </ul>
@@ -52,7 +51,7 @@
                         var hanlist = han.GetHangSX();
                         foreach (var item in hanlist)
                         {
-                            <li><input name="hangsx" class="le-checkbox" type="radio" value="@item.HangSX" /> <label>@item.TenHang</label></li>
+                            <li><input name="hangsx" class="le-checkbox" type="radio" value="@item.Id" /> <label>@item.TenHang</label></li>
                         }
                     }
                 </ul>

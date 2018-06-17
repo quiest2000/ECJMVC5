@@ -1,4 +1,4 @@
-﻿@model List<EC_TH2012_J.Models.Donhang.DonhangKHModel>
+﻿@model List<ECommerce.Models.Donhang.DonHangKHModel>
 @for (var i = 0; i < @Model.Count; i++)
 {
     <div class="itemphieu">
@@ -35,7 +35,7 @@
                     <i>Trạng thái : @Model[i].tinhTrangDH .</i>
                 </div>
                 <div class="itemnamghichu">
-                    <a href="javascript:;" onclick="Huydonhang('@Model[i].donHang.MaDH')">Hủy đơn đặt hàng</a>
+                    <a href="javascript:;" onclick="Huydonhang('@Model[i].donHang.Id')">Hủy đơn đặt hàng</a>
                 </div>
             }
             else

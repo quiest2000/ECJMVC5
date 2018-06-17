@@ -1,5 +1,4 @@
-﻿@using EC_TH2012_J.Models;
-@model List<EC_TH2012_J.Models.Domain.EfModels.SanPham>
+﻿@model List<ECommerce.Models.Domain.EfModels.SanPham>
 
 <div class="product-grid-holder medium">
 
@@ -54,7 +53,7 @@
             </div>
             <div class="prices text-right">
                 <div class="price-current inline">@string.Format("{0:0,0}", Model[0].GiaTien) VNĐ</div>
-                <a href="javascript:;" class="le-button big inline" onclick="Addcart('@Model[0].MaSP',1)">Thêm vào giỏ</a>
+                <a href="javascript:;" class="le-button big inline" onclick="Addcart('@Model[0].Id',1)">Thêm vào giỏ</a>
             </div>
         </div><!-- /.product-item-holder -->
     </div><!-- /.col -->

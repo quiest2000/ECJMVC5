@@ -1,4 +1,4 @@
-﻿@model EC_TH2012_J.Models.Domain.EfModels.HopDongNCC
+﻿@model ECommerce.Models.Domain.EfModels.HopDongNcc
 @{
     ViewBag.Title = "Hợp đồng";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
@@ -182,10 +182,10 @@
                             @Html.ValidationSummary()
                         </div>
                         <div class="form-group">
-                            @Html.LabelFor(model => model.MaNCC, new { @class = "control-label col-md-2" })
+                            @Html.LabelFor(model => model.Id, new { @class = "control-label col-md-2" })
                             <div class="col-md-3">
-                                @Html.TextBoxFor(model => model.MaNCC, new { @class = "form-control", id = "nhacungcap", oninput = "GetAliasDetailsncc()",required = "required" })
-                                @Html.ValidationMessageFor(model => model.MaNCC)
+                                @Html.TextBoxFor(model => model.Id, new { @class = "form-control", id = "nhacungcap", oninput = "GetAliasDetailsncc()",required = "required" })
+                                @Html.ValidationMessageFor(model => model.Id)
                                 <div id="divAutoCompletencc" style="position:absolute; z-index:100; padding-top: 10px">
                                 </div>
                             </div>
@@ -216,10 +216,10 @@
 
 
                         <div class="form-group">
-                            @Html.LabelFor(model => model.MaSP, new { @class = "control-label col-md-2" })
+                            @Html.LabelFor(model => model.SanPhamId, new { @class = "control-label col-md-2" })
                             <div class="col-md-3">
-                                @Html.TextBoxFor(model => model.MaSP, new { @class = "form-control", id = "sanpham", oninput = "GetAliasDetails()", required = "required" })
-                                @Html.ValidationMessageFor(model => model.MaSP)
+                                @Html.TextBoxFor(model => model.SanPhamId, new { @class = "form-control", id = "sanpham", oninput = "GetAliasDetails()", required = "required" })
+                                @Html.ValidationMessageFor(model => model.SanPhamId)
                                 <div id="divAutoComplete" style="position:absolute; z-index:100; padding-top: 10px">
                                 </div>
                             </div>

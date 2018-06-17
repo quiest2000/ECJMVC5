@@ -2,7 +2,7 @@
     ViewBag.Title = "ProductDetail";
     Layout = "~/Views/Shared/_LayoutFrontEnd.cshtml";
 }
-@model EC_TH2012_J.Models.Domain.EfModels.SanPham
+@model ECommerce.Models.Domain.EfModels.SanPham
 <script language="javascript" type="text/javascript">
     $(document).ready(function () {
         $(document).on("click", "#nav a[href]", function () {
@@ -107,7 +107,7 @@
                             <a class="plus" href="javascript:;"></a>
                         </form>
                     </div>
-                    <a id="addto-cart" href="javascript:;" onclick="Addcart('@Model.MaSP',0)" class="le-button huge">Cho vào giỏ</a>
+                    <a id="addto-cart" href="javascript:;" onclick="Addcart('@Model.Id',0)" class="le-button huge">Cho vào giỏ</a>
                 </div><!-- /.qnt-holder -->
             </div><!-- /.body -->
         </div><!-- /.body-holder -->
@@ -129,28 +129,28 @@
                     <div class="meta-row">
                         <div class="inline">
                             <label>Loại:</label>
-                            <span><a href="@Url.Action("AdvancedSearchView", "Search", new { loai = Model.LoaiSP })">@Model.LoaiSP1.TenLoai</a></span>
+                            <span><a href="@Url.Action("AdvancedSearchView", "Search", new { loai = Model.LoaiSpId.ToString() })">@Model.LoaiSanPham.TenLoai</a></span>
                         </div><!-- /.inline -->
                         <span class="seperator">/</span>
                         <div class="inline">
                             <label>Hãng sản xuất:</label>
-                            <span><a href="@Url.Action("AdvancedSearchView", "Search", new { loai = Model.HangSX })">@Model.HangSanXuat.TenHang</a></span>
+                            <span><a href="@Url.Action("AdvancedSearchView", "Search", new { loai = Model.HangSxId })">@Model.HangSanXuat.TenHang</a></span>
                         </div><!-- /.inline -->
                     </div><!-- /.meta-row -->
                 </div><!-- /.tab-pane #description -->
                 <div class="tab-pane" id="additional-info">
                     <h2>Thông số kỹ thuật của @Model.TenSP</h2>
-                    @Html.Action("ThongSoKyThuat", "SanPham", new { MaSP = Model.MaSP })
+                    @Html.Action("ThongSoKyThuat", "SanPham", new { MaSP = Model.Id })
                 </div><!-- /.tab-pane #additional-info -->
 
                 <div class="tab-pane" id="reviews">
                     <div class="comments" id="Comments">
-                        @Html.Action("LoadComment", "Comment", new RouteValueDictionary { { "masp", @Model.MaSP } })
+                        @Html.Action("LoadComment", "Comment", new RouteValueDictionary { { "masp", @Model.Id } })
                     </div><!-- /.comments -->
                     <div class="add-review row">
                         <div class="col-sm-8 col-xs-12">
                             <div class="new-review-form">
-                                @Html.Action("AddComment", "Comment", new RouteValueDictionary { { "masp", @Model.MaSP } })
+                                @Html.Action("AddComment", "Comment", new RouteValueDictionary { { "masp", @Model.Id } })
                             </div><!-- /.new-review-form -->
                         </div><!-- /.col -->
                     </div><!-- /.add-review -->
@@ -382,7 +382,7 @@
             </div><!-- /.carousel-holder -->
         </div><!-- /.container -->
     </section>*@<!-- /#recently-reviewd -->
-@Html.Action("Loadsplienquan", "SanPham", new { maloai = @Model.LoaiSP, sl = 6 });
+@Html.Action("Loadsplienquan", "SanPham", new { maloai = @Model.LoaiSpId, sl = 6 });
 <!-- ========================================= RECENTLY VIEWED : END ========================================= -->
 <script type="text/javascript">
     $('.le-quantity a').click(function (e) {

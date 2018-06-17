@@ -1,17 +1,19 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using ECommerce.Models.Constants;
 using ECommerce.Models.Domain.EfModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Oracle.ManagedDataAccess.Client;
 
 namespace ECommerce.Models.Domain
 {
     public class MainContext : DbContext
     {
         public MainContext()
-            : base("name=OracleDbContext") //oracle database
-                                           //: base("name=MainDbConnection") //sql database
+        : base("name=OracleDbContext") //oracle database
+        //: base("name=MainDbConnection") //sql database
         {
             Database.SetInitializer(new MainContextInitializer());
         }
@@ -42,7 +44,7 @@ namespace ECommerce.Models.Domain
 
     public class MainContextInitializer : CreateDatabaseIfNotExists<MainContext>
     {
-        protected override async void Seed(MainContext context)
+        protected override void Seed(MainContext context)
         {
             base.Seed(context);
             const string defaultPass = "123456";
@@ -58,7 +60,7 @@ namespace ECommerce.Models.Domain
                 new AspNetRole{Name = RoleNames.Administrator},
             };
             context.AspNetRoles.AddRange(roles);
-            await context.SaveChangesAsync();
+             context.SaveChanges();
             //AspNetUsers admin
 
             var adminUser = new ApplicationUser
@@ -69,8 +71,8 @@ namespace ECommerce.Models.Domain
                 HoTen = "Nguyễn Thanh Tâm",
             };
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
-            await userManager.CreateAsync(new ApplicationUser(), defaultPass);
-            await userManager.AddToRoleAsync(adminUser.Id, RoleNames.Administrator);
+             userManager.Create(new ApplicationUser(), defaultPass);
+             userManager.AddToRole(adminUser.Id, RoleNames.Administrator);
             //GiaoDien
             var giaoDiens = new List<GiaoDien>
             {
@@ -103,7 +105,7 @@ namespace ECommerce.Models.Domain
                 },
             };
             context.GiaoDiens.AddRange(giaoDiens);
-            await context.SaveChangesAsync();
+             context.SaveChanges();
             //HangSx
             var manufacturers = new List<HangSanXuat>
             {
@@ -124,7 +126,7 @@ namespace ECommerce.Models.Domain
                 new HangSanXuat {TenHang = "Vivo", TruSoChinh = "", QuocGia = "Trung Quốc"},
             };
             context.HangSanXuats.AddRange(manufacturers);
-            await context.SaveChangesAsync();
+             context.SaveChanges();
             //KhuyenMai - sanphamKhuyenMai
             //link
             //LoaiSP
@@ -138,7 +140,7 @@ namespace ECommerce.Models.Domain
                 new LoaiSanPham{TenLoai = "Khác"},
             };
             context.LoaiSPs.AddRange(loaiSps);
-            await context.SaveChangesAsync();
+             context.SaveChanges();
 
             //NCC
             var nccs = new List<NhaCungCap>
@@ -152,7 +154,7 @@ namespace ECommerce.Models.Domain
                 new NhaCungCap{TenNCC = ""},
             };
             context.NhaCungCaps.AddRange(nccs);
-            await context.SaveChangesAsync();
+             context.SaveChanges();
 
             //SP
             var sanphams = new List<SanPham>
@@ -836,7 +838,7 @@ namespace ECommerce.Models.Domain
                 },
             };
             context.SanPhams.AddRange(sanphams);
-            await context.SaveChangesAsync();
+             context.SaveChanges();
             //thongsokythuat
             var tskt = new List<ThongSoKyThuat>
             {
@@ -1041,7 +1043,7 @@ namespace ECommerce.Models.Domain
                 },
             };
             context.ThongSoKyThuats.AddRange(tskt);
-            await context.SaveChangesAsync();
+             context.SaveChanges();
         }
     }
 }

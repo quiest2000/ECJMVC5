@@ -1,4 +1,4 @@
-﻿@model IQueryable<EC_TH2012_J.Models.Domain.EfModels.ChiTietDonHang>
+﻿@model IQueryable<ECommerce.Models.Domain.EfModels.ChiTietDonHang>
 
 <div class="modal fade in" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" style="display: block;">
 
@@ -6,7 +6,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" onclick="closeDialog();">×</button>
-                <h3> Chi tiết đơn hàng #@Model.First().MaDH </h3>
+                <h3> Chi tiết đơn hàng #@Model.First().DonHangId.ToString() </h3>
             </div>
             <div class="modal-body">
                 <table class="table-hover table-bordered">

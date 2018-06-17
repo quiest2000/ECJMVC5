@@ -65,8 +65,8 @@ D:\PROJECTS_BIN\PROJECTS\ECJMVC5\ECommerce\bin\System.Web.Razor.xml
 D:\PROJECTS_BIN\PROJECTS\ECJMVC5\ECommerce\bin\System.Web.WebPages.xml
 D:\PROJECTS_BIN\PROJECTS\ECJMVC5\ECommerce\bin\System.Web.WebPages.Deployment.xml
 D:\PROJECTS_BIN\PROJECTS\ECJMVC5\ECommerce\bin\System.Web.WebPages.Razor.xml
-D:\PROJECTS_BIN\PROJECTS\ECJMVC5\ECommerce\obj\Debug\ECommerce.csprojResolveAssemblyReference.cache
 D:\PROJECTS_BIN\PROJECTS\ECJMVC5\ECommerce\obj\Debug\ECommerce.csproj.CoreCompileInputs.cache
 D:\PROJECTS_BIN\PROJECTS\ECJMVC5\ECommerce\obj\Debug\ECommerce.csproj.CopyComplete
 D:\PROJECTS_BIN\PROJECTS\ECJMVC5\ECommerce\obj\Debug\ECommerce.dll
 D:\PROJECTS_BIN\PROJECTS\ECJMVC5\ECommerce\obj\Debug\ECommerce.pdb
+D:\PROJECTS_BIN\PROJECTS\ECJMVC5\ECommerce\obj\Debug\ECommerce.csprojResolveAssemblyReference.cache

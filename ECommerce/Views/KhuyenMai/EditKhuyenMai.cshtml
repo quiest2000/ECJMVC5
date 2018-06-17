@@ -1,4 +1,4 @@
-﻿@model EC_TH2012_J.Models.Domain.EfModels.KhuyenMai
+﻿@model ECommerce.Models.Domain.EfModels.KhuyenMai
 @{
     ViewBag.Title = "Sửa thông tin hãng sản xuất";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
@@ -27,7 +27,7 @@
                             @Html.ValidationSummary()
                             <span id="kiemtratrung"></span>
                         </div>
-                        @Html.HiddenFor(model => model.MaKM)
+                        @Html.HiddenFor(model => model.Id)
                         <div class="form-group">
                             @Html.LabelFor(model => model.TenCT, new { @class = "control-label col-md-2" })
                             <div class="col-md-4">
@@ -74,7 +74,7 @@
 
                         <div class="form-group">
                             <div class="col-md-offset-2 col-md-10">
-                                <a class="btn btn-danger" href="@Url.Action("SuaCTKhuyenMai", "KhuyenMai", new { MaKM = Model.MaKM })">
+                                <a class="btn btn-danger" href="@Url.Action("SuaCTKhuyenMai", "KhuyenMai", new { MaKM = Model.Id })">
                                     <i class="glyphicon glyphicon-wrench icon-white"></i>
                                     Sửa danh sách sản phẩm
                                 </a>

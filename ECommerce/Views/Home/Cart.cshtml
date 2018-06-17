@@ -1,4 +1,4 @@
-﻿@model EC_TH2012_J.Models.Giohang
+﻿@model ECommerce.Models.Giohang
 @{
     ViewBag.Title = "Giỏ hàng";
     Layout = "~/Views/Shared/_LayoutFrontEnd.cshtml";
@@ -17,9 +17,9 @@
                     </div>
                     <div class="col-xs-12 col-sm-5 ">
                         <div class="title">
-                            <a href="@Url.Action("Index", "SanPham", new { ID = @Model.getGiohang()[i].sanPham.MaSP })">@Model.getGiohang()[i].sanPham.TenSP</a>
+                            <a href="@Url.Action("Index", "SanPham", new { ID = @Model.getGiohang()[i].sanPham.Id.ToString() })">@Model.getGiohang()[i].sanPham.TenSP</a>
                         </div>
-                        <div class="brand">@Model.getGiohang()[i].sanPham.HangSX</div>
+                        <div class="brand">@Model.getGiohang()[i].sanPham.HangSxId</div>
                     </div>
                     <div class="col-xs-12 col-sm-3 no-margin">
                         <div class="quantity">

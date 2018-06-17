@@ -1,6 +1,6 @@
-﻿@model List<EC_TH2012_J.Models.Domain.EfModels.LoaiSP>
+﻿@model List<ECommerce.Models.Domain.EfModels.LoaiSanPham>
 
 @foreach (var item in Model)
 {
-    <li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("AdvancedSearchView", "Search", new { loai = item.MaLoai })">@item.TenLoai</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="@Url.Action("AdvancedSearchView", "Search", new { loai = item.Id })">@item.TenLoai</a></li>
 }

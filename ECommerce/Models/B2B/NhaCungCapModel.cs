@@ -108,7 +108,7 @@ namespace ECommerce.Models.B2B
             var ncc = new NhaCungCap();
             //ncc.Id = TaoMaNCC();
             ncc.TenNCC = model.TenNCC;
-            ncc.NetUserId = userId;
+            ncc.NetUserId = userId.ToString();
             ncc.DiaChi = model.DiaChi;
             ncc.SDT_NCC = model.SDT_NCC;
             ncc.Email = model.Email;

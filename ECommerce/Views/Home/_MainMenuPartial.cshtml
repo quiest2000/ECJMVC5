@@ -1,4 +1,4 @@
-﻿@using EC_TH2012_J.Models;
+﻿@using ECommerce.Models;
 @model List<MenuItem>
 <nav id="top-megamenu-nav" class="megamenu-vertical animate-dropdown">
     <div class="container">
@@ -20,7 +20,7 @@
                             <ul class="dropdown-menu">
                                 @foreach(var i in item.HangSX)
                                 {
-                                    <li><a href="@Url.Action("AdvancedSearchView", "Search", new { loai = item.LoaiSP.MaLoai, hangsx = i.HangSX })">@i.TenHang</a></li>
+                                    <li><a href="@Url.Action("AdvancedSearchView", "Search", new { loai = item.LoaiSP.Id, hangsx = i.Id })">@i.TenHang</a></li>
                                 }
                             </ul>
                         </li>

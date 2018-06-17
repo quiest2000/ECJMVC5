@@ -1,7 +1,5 @@
-﻿@using EC_TH2012_J.Models;
-@using PagedList;
-@using PagedList.Mvc;
-@model PagedList.IPagedList<EC_TH2012_J.Models.Domain.EfModels.SanPham>
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<ECommerce.Models.Domain.EfModels.SanPham>
 <script src="~/ckeditor/ckeditor.js"></script>
 <script>
     function ThemSPKhuyenMai(val1, val2) {
@@ -30,7 +28,7 @@
                 <input type="checkbox" onclick="toggle(this)" />
             </th>
             <th>@Html.DisplayNameFor(model => model.First().TenSP)</th>
-            <th>@Html.DisplayNameFor(model => model.First().LoaiSP1.TenLoai)</th>
+            <th>@Html.DisplayNameFor(model => model.First().LoaiSanPham.TenLoai)</th>
             <th>@Html.DisplayNameFor(model => model.First().SoLuong)</th>
             <th>@Html.DisplayNameFor(model => model.First().GiaTien)</th>
             <th>Hành động</th>
@@ -41,14 +39,14 @@
         {
             <tr>
                 <td>
-                    <input type="checkbox" name="lstdel" value="@item.MaSP" />
+                    <input type="checkbox" name="lstdel" value="@item.Id" />
                 </td>
                 <td class="center">@item.TenSP</td>
-                <td class="center">@item.LoaiSP1.TenLoai</td>
+                <td class="center">@item.LoaiSanPham.TenLoai</td>
                 <td class="center">@item.SoLuong</td>
                 <td class="center">@string.Format("{0:0,0}", item.GiaTien) VNĐ</td>
                 <td class="center">
-                    <a class="btn btn-info" href='javascript:ThemSPKhuyenMai("@ViewBag.makm","@item.MaSP")'>
+                    <a class="btn btn-info" href='javascript:ThemSPKhuyenMai("@ViewBag.makm","@item.Id")'>
                         <i class="glyphicon glyphicon-plus icon-white"></i>
                         Thêm vào chương trình khuyến mại
                     </a>

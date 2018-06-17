@@ -25,8 +25,8 @@
 </script>
 
 <!-- ========================================= PRODUCT FILTER ========================================= -->
-@model IQueryable<EC_TH2012_J.Models.Domain.EfModels.LoaiSP>
-@using EC_TH2012_J.Models;
+@model IQueryable<ECommerce.Models.Domain.EfModels.LoaiSanPham>
+@using ECommerce.Models;
 <div class="widget">
     <h1>Lọc sản phẩm</h1>
     <form id="productfilterfrm" action="@Url.Action("AdvancedSearchView", "Search")" autocomplete="off">
@@ -39,7 +39,7 @@
                     @{
                         foreach (var item in Model)
                         {
-                            <li><input name="loai" class="le-checkbox" type="radio" value="@item.MaLoai" /> <label>@item.TenLoai</label></li>
+                            <li><input name="loai" class="le-checkbox" type="radio" value="@item.Id" /> <label>@item.TenLoai</label></li>
                         }
                     }
                 </ul>

@@ -66,7 +66,7 @@ namespace ECommerce.Controllers
         public ActionResult AddComment(BinhLuan Comment)
         {
             Comment.NgayDang = DateTime.Now;
-            Comment.KhachHangId = User.Identity.GetUserId().ToInt();
+            Comment.KhachHangId = User.Identity.GetUserId();
             Comment.DaTraLoi = "C";
             var cm = new CommentModel();
             cm.AddComment(Comment);
@@ -79,7 +79,7 @@ namespace ECommerce.Controllers
         public ActionResult AddRepl(BinhLuan Comment)
         {
             Comment.NgayDang = DateTime.Now;
-            Comment.KhachHangId = User.Identity.GetUserId().ToInt();
+            Comment.KhachHangId = User.Identity.GetUserId();
             var cm = new CommentModel();
             cm.AddComment(Comment);
             cm.UpdateComment(Comment);

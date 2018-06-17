@@ -1,4 +1,4 @@
-﻿@model EC_TH2012_J.Models.Domain.EfModels.SanPham
+﻿@model ECommerce.Models.Domain.EfModels.SanPham
 
 <div class="product-item">
     @if (Model.GiaTien < Model.GiaGoc)
@@ -22,7 +22,7 @@
             <div class="label-discount clear"></div>
             @*<div class="label-discount green">Giảm 50%</div>*@
             <div class="title">
-                <a href="@Url.Action("Index", "SanPham", new { id = @Model.MaSP })">@Model.TenSP</a>
+                <a href="@Url.Action("Index", "SanPham", new { id = @Model.Id.ToString() })">@Model.TenSP</a>
             </div>
             <div class="brand">@Model.HangSanXuat.TenHang</div>
         </div>
@@ -32,7 +32,7 @@
         </div>
         <div class="hover-area">
             <div class="add-cart-button">
-                <a href="javascript:;" class="le-button" onclick="Addcart('@Model.MaSP',1)">Cho vào giỏ</a>
+                <a href="javascript:;" class="le-button" onclick="Addcart('@Model.Id',1)">Cho vào giỏ</a>
             </div>
             <div class="wish-compare">
                 <a class="btn-add-to-wishlist" href="#">Yêu thích</a>

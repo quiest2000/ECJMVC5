@@ -1,7 +1,5 @@
-﻿@using EC_TH2012_J.Models;
-@using PagedList;
-@using PagedList.Mvc;
-@model PagedList.IPagedList<EC_TH2012_J.Models.Domain.EfModels.LoaiSP>
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<ECommerce.Models.Domain.EfModels.LoaiSanPham>
 
 
 <table class="table table-striped table-bordered bootstrap-datatable datatable responsive">
@@ -19,15 +17,15 @@
         {
             <tr>
                 <td>
-                    <input type="checkbox" name="lstdel" value="@item.MaLoai" />
+                    <input type="checkbox" name="lstdel" value="@item.Id" />
                 </td>
                 <td class="center">@item.TenLoai</td>
                 <td class="center">
-                    <a class="btn btn-info" href="@Url.Action("EditLoaiSP", "LoaiSP", new { id = item.MaLoai })">
+                    <a class="btn btn-info" href="@Url.Action("EditLoaiSP", "LoaiSP", new { id = item.Id })">
                         <i class="glyphicon glyphicon-edit icon-white"></i>
                         Sửa
                     </a>
-                    <a class="btn btn-danger" href='javascript:XoaItem("@Url.Action("DeleteLoaiSP", "LoaiSP")","@item.MaLoai")'>
+                    <a class="btn btn-danger" href='javascript:XoaItem("@Url.Action("DeleteLoaiSP", "LoaiSP")","@item.Id")'>
                         <i class="glyphicon glyphicon-trash icon-white"></i>
                         Xóa
                     </a>

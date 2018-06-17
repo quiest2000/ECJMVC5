@@ -1,5 +1,5 @@
 ﻿@using Microsoft.AspNet.Identity
-@model EC_TH2012_J.Models.Domain.EfModels.BinhLuan
+@model ECommerce.Models.Domain.EfModels.BinhLuan
 
 <script>
     function test() {
@@ -15,7 +15,7 @@
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @Html.HiddenFor(model => model.MaSP, new { htmlAttributes = new { @class = "le-input" } })
+    @Html.HiddenFor(model => model.SanPhamId, new { htmlAttributes = new { @class = "le-input" } })
     <div class="row field-row">
         @if (!Request.IsAuthenticated)
         {
