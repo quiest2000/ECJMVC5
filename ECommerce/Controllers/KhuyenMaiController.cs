@@ -137,7 +137,7 @@ namespace ECommerce.Controllers
             return PhanTrangKhuyenMai(spm.TimKhuyenMai(key, start, end), page, null);
         }
 
-        public ActionResult PhanTrangKhuyenMai(IQueryable<KhuyenMai> lst, int? page, int? pagesize)
+        public ActionResult PhanTrangKhuyenMai(IList<KhuyenMai> lst, int? page, int? pagesize)
         {
             var pageSize = (pagesize ?? 10);
             var pageNumber = (page ?? 1);

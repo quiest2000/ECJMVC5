@@ -39,7 +39,7 @@ namespace ECommerce.Models
 
         internal bool KiemTraTen(string p)
         {
-            var temp = db.HangSanXuats.Where(m => m.TenHang.Equals(p)).ToList();
+            var temp = db.HangSanXuats.Where(m => m.TenHang==(p)).ToList();
             if (temp.Count == 0)
                 return true;
             return false;

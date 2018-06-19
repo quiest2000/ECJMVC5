@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ECommerce.Models.Domain.EfModels
 {
+    [Table("AspNetUsers")]
     public class AspNetUser
     {
         public AspNetUser()

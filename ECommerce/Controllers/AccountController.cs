@@ -62,7 +62,7 @@ namespace ECommerce.Controllers
                 {
                     await SignInAsync(user, model.RememberMe);
                     ManagerObiect.getIntance().userName = model.UserName;
-                    if(UserManager.GetRoles(user.Id).FirstOrDefault() == "Nhà cung cấp")
+                    if(UserManager.GetRoles(user.Id).FirstOrDefault() == RoleNames.Vendor)
                     {
                         return RedirectToLocal("/Auction/index");
                     }

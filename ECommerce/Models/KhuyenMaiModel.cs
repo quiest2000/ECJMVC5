@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using ECommerce.Models.Domain;
 using ECommerce.Models.Domain.EfModels;
+using ECommerce.Utils;
 
 namespace ECommerce.Models
 {
@@ -28,7 +30,7 @@ namespace ECommerce.Models
 
         internal void DeleteKhuyenMai(int khuyenMaiId)
         {
-            var lst = db.SanPhamKhuyenMais.Where(m => m.KhuyenMaiId.Equals(khuyenMaiId)).ToList();
+            var lst = db.SanPhamKhuyenMais.Where(m => m.KhuyenMaiId==(khuyenMaiId)).ToList();
             foreach (var item in lst)
             {
                 DeleteSPKhuyenMai(item.KhuyenMaiId, item.SanPhamId);
@@ -70,7 +72,7 @@ namespace ECommerce.Models
         //    return false;
         //}
 
-        internal IQueryable<KhuyenMai> TimKhuyenMai(string key, DateTime? start, DateTime? end)
+        internal IList<KhuyenMai> TimKhuyenMai(string key, DateTime? start, DateTime? end)
         {
             IQueryable<KhuyenMai> lst = db.KhuyenMais;
             if (!string.IsNullOrEmpty(key))
@@ -79,12 +81,12 @@ namespace ECommerce.Models
                 lst = db.KhuyenMais.Where(u => u.NgayBatDau >= start);
             if (end != null)
                 lst = db.KhuyenMais.Where(u => u.NgayKetThuc <= end);
-            return lst;
+            return lst.ToList();
         }
 
         internal bool KiemTraTen(string key)
         {
-            var temp = db.KhuyenMais.Where(m => m.TenCT.Equals(key)).ToList();
+            var temp = db.KhuyenMais.Where(m => m.TenCT==(key)).ToList();
             if (temp.Count == 0)
                 return true;
             return false;
@@ -92,7 +94,8 @@ namespace ECommerce.Models
 
         internal IQueryable<SanPhamKhuyenMai> CTKhuyenMai(string key)
         {
-            return db.SanPhamKhuyenMais.Where(m => m.KhuyenMaiId.Equals(key));
+            var id = key.ToInt();
+            return db.SanPhamKhuyenMais.Where(m => m.KhuyenMaiId==(id));
         }
 
 
@@ -124,7 +127,7 @@ namespace ECommerce.Models
             if (!string.IsNullOrEmpty(key))
                 lst1 = lst1.Where(m => m.TenSP.Contains(key));
             if (maloai > 0)
-                lst1 = lst1.Where(m => m.LoaiSpId.Equals(maloai));
+                lst1 = lst1.Where(m => m.LoaiSpId==(maloai));
             return lst1;
         }
 
@@ -134,7 +137,7 @@ namespace ECommerce.Models
             if (!string.IsNullOrEmpty(key))
                 lst = lst.Where(m => m.TenSP.Contains(key));
             if (maloai > 0)
-                lst = lst.Where(m => m.LoaiSpId.Equals(maloai));
+                lst = lst.Where(m => m.LoaiSpId==(maloai));
             return lst;
         }
 

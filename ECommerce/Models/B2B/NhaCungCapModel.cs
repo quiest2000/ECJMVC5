@@ -45,9 +45,9 @@ namespace ECommerce.Models.B2B
 
         private EmailModel GetParent(int mahd)
         {
-            var loai = db.HopDongNccs.FirstOrDefault(m => m.Id.Equals(mahd));
-            var ncc = db.NhaCungCaps.FirstOrDefault(m => m.Id.Equals(loai.NccId));
-            var sp = db.SanPhams.FirstOrDefault(m => m.Id.Equals(loai.SanPhamId));
+            var loai = db.HopDongNccs.FirstOrDefault(m => m.Id==(mahd));
+            var ncc = db.NhaCungCaps.FirstOrDefault(m => m.Id==(loai.NccId));
+            var sp = db.SanPhams.FirstOrDefault(m => m.Id==(loai.SanPhamId));
             var mail = ncc.Email;
             var sub = "[Thông báo] Đã chấp nhận đăng ký cung cấp sản phẩm";
             var bo = "";
@@ -142,7 +142,7 @@ namespace ECommerce.Models.B2B
 
         internal NhaCungCap FindByNetUser(string p)
         {
-            return db.NhaCungCaps.Where(m => m.NetUserId.Equals(p)).FirstOrDefault();
+            return db.NhaCungCaps.FirstOrDefault(m => m.NetUserId==(p));
         }
 
         internal void UpdateInfo(EditInfo2B2ViewModel info)

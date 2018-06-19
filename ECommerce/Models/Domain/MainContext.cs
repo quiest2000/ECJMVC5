@@ -12,11 +12,16 @@ namespace ECommerce.Models.Domain
     public class MainContext : DbContext
     {
         public MainContext()
-        : base("name=OracleDbContext") //oracle database
+        : base("name=MainDbConnection") //oracle database
         //: base("name=MainDbConnection") //sql database
         {
             Database.SetInitializer(new MainContextInitializer());
         }
+
+        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        //{
+        //    modelBuilder.HasDefaultSchema("QUINN");
+        //}
 
         public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
         public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
@@ -60,19 +65,19 @@ namespace ECommerce.Models.Domain
                 new AspNetRole{Name = RoleNames.Administrator},
             };
             context.AspNetRoles.AddRange(roles);
-             context.SaveChanges();
+            context.SaveChanges();
             //AspNetUsers admin
 
-            var adminUser = new ApplicationUser
-            {
-                Email = "admin@gmail.com",
-                DiaChi = "TPHCM",
-                EmailConfirmed = true,
-                HoTen = "Nguyễn Thanh Tâm",
-            };
-            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
-             userManager.Create(new ApplicationUser(), defaultPass);
-             userManager.AddToRole(adminUser.Id, RoleNames.Administrator);
+            //var adminUser = new ApplicationUser
+            //{
+            //    Email = "admin@gmail.com",
+            //    DiaChi = "TPHCM",
+            //    EmailConfirmed = true,
+            //    HoTen = "Nguyễn Thanh Tâm",
+            //};
+            //var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+            //userManager.Create(adminUser, defaultPass);
+            //userManager.AddToRole(adminUser.Id, RoleNames.Administrator);
             //GiaoDien
             var giaoDiens = new List<GiaoDien>
             {
@@ -105,7 +110,7 @@ namespace ECommerce.Models.Domain
                 },
             };
             context.GiaoDiens.AddRange(giaoDiens);
-             context.SaveChanges();
+            context.SaveChanges();
             //HangSx
             var manufacturers = new List<HangSanXuat>
             {
@@ -126,7 +131,7 @@ namespace ECommerce.Models.Domain
                 new HangSanXuat {TenHang = "Vivo", TruSoChinh = "", QuocGia = "Trung Quốc"},
             };
             context.HangSanXuats.AddRange(manufacturers);
-             context.SaveChanges();
+            context.SaveChanges();
             //KhuyenMai - sanphamKhuyenMai
             //link
             //LoaiSP
@@ -140,7 +145,7 @@ namespace ECommerce.Models.Domain
                 new LoaiSanPham{TenLoai = "Khác"},
             };
             context.LoaiSPs.AddRange(loaiSps);
-             context.SaveChanges();
+            context.SaveChanges();
 
             //NCC
             var nccs = new List<NhaCungCap>
@@ -154,7 +159,7 @@ namespace ECommerce.Models.Domain
                 new NhaCungCap{TenNCC = ""},
             };
             context.NhaCungCaps.AddRange(nccs);
-             context.SaveChanges();
+            context.SaveChanges();
 
             //SP
             var sanphams = new List<SanPham>
@@ -221,7 +226,7 @@ namespace ECommerce.Models.Domain
                     AnhKhac = "236053.jpg",
                     SoLuong = 20,
                     isnew = false,
-                    ishot = false
+                    ishot = true
                 },
                 new SanPham
                 {
@@ -236,8 +241,8 @@ namespace ECommerce.Models.Domain
                     AnhNen = "236412.jpg",
                     AnhKhac = "236413.jpg",
                     SoLuong = 0,
-                    isnew = false,
-                    ishot = false
+                    isnew = true,
+                    ishot = true
                 },
                 new SanPham
                 {
@@ -252,7 +257,7 @@ namespace ECommerce.Models.Domain
                     AnhNen = "241732.jpg",
                     AnhKhac = "241733.jpg",
                     SoLuong = 40,
-                    isnew = false,
+                    isnew = true,
                     ishot = false
                 },
                 new SanPham
@@ -285,7 +290,7 @@ namespace ECommerce.Models.Domain
                     AnhKhac = "330583.jpg",
                     SoLuong = 40,
                     isnew = false,
-                    ishot = false
+                    ishot = true
                 },
                 new SanPham
                 {
@@ -300,7 +305,7 @@ namespace ECommerce.Models.Domain
                     AnhNen = "351222.jpg",
                     AnhKhac = "351223.jpg",
                     SoLuong = 9,
-                    isnew = false,
+                    isnew = true,
                     ishot = false
                 },
                 new SanPham
@@ -332,8 +337,8 @@ namespace ECommerce.Models.Domain
                     AnhNen = "477102.jpg",
                     AnhKhac = "477103.jpg",
                     SoLuong = 2,
-                    isnew = false,
-                    ishot = false
+                    isnew = true,
+                    ishot = true
                 },
                 new SanPham
                 {
@@ -380,8 +385,8 @@ namespace ECommerce.Models.Domain
                     AnhNen = "771282.jpg",
                     AnhKhac = "771283.jpg",
                     SoLuong = 5,
-                    isnew = false,
-                    ishot = false
+                    isnew = true,
+                    ishot = true
                 },
                 new SanPham
                 {
@@ -412,8 +417,8 @@ namespace ECommerce.Models.Domain
                     AnhNen = "824322.jpg",
                     AnhKhac = "824323.jpg",
                     SoLuong = 20,
-                    isnew = false,
-                    ishot = false
+                    isnew = true,
+                    ishot = true
                 },
                 new SanPham
                 {
@@ -444,7 +449,7 @@ namespace ECommerce.Models.Domain
                     AnhNen = "876322.jpg",
                     AnhKhac = "876323.jpg",
                     SoLuong = 13,
-                    isnew = false,
+                    isnew = true,
                     ishot = false
                 },
                 new SanPham
@@ -461,7 +466,7 @@ namespace ECommerce.Models.Domain
                     AnhKhac = "",
                     SoLuong = 38,
                     isnew = false,
-                    ishot = false
+                    ishot = true
                 },
                 new SanPham
                 {
@@ -492,7 +497,7 @@ namespace ECommerce.Models.Domain
                     AnhNen = "",
                     AnhKhac = "",
                     SoLuong = 37,
-                    isnew = false,
+                    isnew = true,
                     ishot = false
                 },
                 new SanPham
@@ -510,7 +515,7 @@ namespace ECommerce.Models.Domain
                     AnhKhac = "DT0013.jpg",
                     SoLuong = 7,
                     isnew = false,
-                    ishot = false
+                    ishot = true
                 },
                 new SanPham
                 {
@@ -542,7 +547,7 @@ namespace ECommerce.Models.Domain
                     AnhKhac = "",
                     SoLuong = 60,
                     isnew = false,
-                    ishot = false
+                    ishot = true
                 },
                 new SanPham
                 {
@@ -590,7 +595,7 @@ namespace ECommerce.Models.Domain
                     AnhKhac = "",
                     SoLuong = 17,
                     isnew = false,
-                    ishot = false
+                    ishot = true
                 },
                 new SanPham
                 {
@@ -622,7 +627,7 @@ namespace ECommerce.Models.Domain
                     AnhKhac = "",
                     SoLuong = 39,
                     isnew = false,
-                    ishot = false
+                    ishot = true
                 },
                 new SanPham
                 {
@@ -654,7 +659,7 @@ namespace ECommerce.Models.Domain
                     AnhKhac = "",
                     SoLuong = 100,
                     isnew = false,
-                    ishot = false
+                    ishot = true
                 },
                 new SanPham
                 {
@@ -838,7 +843,7 @@ namespace ECommerce.Models.Domain
                 },
             };
             context.SanPhams.AddRange(sanphams);
-             context.SaveChanges();
+            context.SaveChanges();
             //thongsokythuat
             var tskt = new List<ThongSoKyThuat>
             {
@@ -1043,7 +1048,7 @@ namespace ECommerce.Models.Domain
                 },
             };
             context.ThongSoKyThuats.AddRange(tskt);
-             context.SaveChanges();
+            context.SaveChanges();
         }
     }
 }

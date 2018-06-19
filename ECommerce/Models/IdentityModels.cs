@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -16,7 +17,6 @@ namespace ECommerce.Models
             // Add custom user claims here
             return userIdentity;
         }
-
         public string HoTen { get; set; }
         public DateTime? NgaySinh { get; set; }
         public bool? GioiTinh { get; set; }

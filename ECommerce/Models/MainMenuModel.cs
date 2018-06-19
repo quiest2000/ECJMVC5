@@ -11,12 +11,12 @@ namespace ECommerce.Models
 
         public List<Link> GetMenuLink()
         {
-            return db.Links.Where(m => m.Group.Equals("MainMenu")).ToList();
+            return db.Links.Where(m => m.Group==("MainMenu")).ToList();
         }
         public List<MenuItem> GetMenuList() 
         { 
             var mnlist = new List<MenuItem>();
-            var loaiSPlst = db.LoaiSPs.OrderBy(a => a.Id).Where(a => !a.Id.Equals("NOTTT")).ToList();
+            var loaiSPlst = db.LoaiSPs.OrderBy(a => a.Id).ToList();
             foreach (var item in loaiSPlst)
             {
                 var mnitem = new MenuItem();

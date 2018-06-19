@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using ECommerce.Models;
 using ECommerce.Models.Domain;
+using ECommerce.Utils;
 
 namespace ECommerce.Controllers
 {
@@ -26,7 +27,8 @@ namespace ECommerce.Controllers
 
         public ActionResult SearchByType(string MaLoai)
         {
-            var splist = (from p in db.SanPhams where p.LoaiSpId.Equals(MaLoai) select p);
+            var iMaLoai = MaLoai?.ToInt();
+            var splist = (from p in db.SanPhams where p.LoaiSpId==iMaLoai select p);
             return View(splist);
         }
         public ActionResult Loadsplienquan(string maloai,int sl)

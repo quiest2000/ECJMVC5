@@ -81,7 +81,7 @@ namespace ECommerce.Models
 
         internal bool KiemTraTen(string p)
         {
-            var temp = db.LoaiSPs.Where(m=>m.TenLoai.Equals(p)).ToList();
+            var temp = db.LoaiSPs.Where(m=>m.TenLoai==(p)).ToList();
             if (temp.Count == 0)
                 return true;
             return false;

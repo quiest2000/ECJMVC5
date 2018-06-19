@@ -1,4 +1,5 @@
-﻿@using PagedList.Mvc;
+﻿@using ECommerce.Models.Constants
+@using PagedList.Mvc;
 @model PagedList.IPagedList<ECommerce.Models.Domain.EfModels.AspNetUser>
 
 
@@ -30,19 +31,19 @@
                 <td class="center">@item.Email</td>
                 <td class="center">@item.PhoneNumber</td>
                 <td class="center">
-                    @if (@item.AspNetRoles.First().Name.Equals("Khách hàng"))
+                    @if (@item.AspNetRoles.First().Name==(RoleNames.Customer))
                     {
                         <span class="label label-success">@item.AspNetRoles.First().Name</span>
                     }
-                    else if (@item.AspNetRoles.First().Name.Equals("Quản trị viên"))
+                    else if (@item.AspNetRoles.First().Name==(RoleNames.Administrator))
                     {
                         <span class="label label-danger">@item.AspNetRoles.First().Name</span>
                     }
-                    else if (@item.AspNetRoles.First().Name.Equals("Nhân viên"))
+                    else if (@item.AspNetRoles.First().Name==(RoleNames.Employee))
                     {
                         <span class="label label-info">@item.AspNetRoles.First().Name</span>
                     }
-                    else if (@item.AspNetRoles.First().Name.Equals("Nhà cung cấp"))
+                    else if (@item.AspNetRoles.First().Name==(RoleNames.Vendor))
                     {
                         <span class="label label-warning">@item.AspNetRoles.First().Name</span>
                     }

@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using ECommerce.Models.Domain;
 using ECommerce.Models.Domain.EfModels;
+using ECommerce.Utils;
 
 namespace ECommerce.Models
 {
@@ -19,13 +20,15 @@ namespace ECommerce.Models
 
         public IQueryable<SanPham> AdvancedSearch(string term, string loai, string hangsx, int? minprice, int? maxprice)
         {
+            var iLoai = loai.ToInt();
+            var iHang = hangsx.ToInt();
             IQueryable<SanPham> lst = db.SanPhams;
             if (!string.IsNullOrEmpty(term))
                 lst = SearchByName(term);
             if (!string.IsNullOrEmpty(loai))
-                lst = from p in lst where p.LoaiSpId.Equals(loai) select p;
+                lst = from p in lst where p.LoaiSpId==(iLoai) select p;
             if (!string.IsNullOrEmpty(hangsx))
-                lst = from p in lst where p.HangSxId.Equals(hangsx) select p;
+                lst = from p in lst where p.HangSxId==(iHang) select p;
             if (minprice != null)
                 lst = from p in lst where p.GiaTien >= minprice select p;
             if (maxprice != null)
@@ -34,7 +37,8 @@ namespace ECommerce.Models
         }
         public IQueryable<SanPham> SearchByType(string term)
         {
-            var splist = (from p in db.SanPhams where p.LoaiSpId.Equals(term) select p);
+            var id = term.ToInt();
+            var splist = (from p in db.SanPhams where p.LoaiSpId==(id) select p);
             return splist;
         }
 
@@ -105,7 +109,7 @@ namespace ECommerce.Models
 
         private decimal? tinhgiatien(int masp, decimal? giagoc)
         {
-            IQueryable<SanPhamKhuyenMai> s = db.SanPhamKhuyenMais.Where(m => m.SanPhamId.Equals(masp)).OrderByDescending(m => m.GiamGia);
+            IQueryable<SanPhamKhuyenMai> s = db.SanPhamKhuyenMais.Where(m => m.SanPhamId==(masp)).OrderByDescending(m => m.GiamGia);
             if (s.Any())
             {
                 return (giagoc * (100 - s.First().GiamGia) / 100);

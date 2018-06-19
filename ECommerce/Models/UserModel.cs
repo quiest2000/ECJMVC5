@@ -2,6 +2,7 @@
 using System.Linq;
 using ECommerce.Models.Domain;
 using ECommerce.Models.Domain.EfModels;
+using ECommerce.Utils;
 
 namespace ECommerce.Models
 {
@@ -46,6 +47,7 @@ namespace ECommerce.Models
 
         internal IQueryable<AspNetUser> SearchUser(string key, string email, string hoten, string phone, string quyen)
         {
+            var iQuyen = quyen.ToInt();
             IQueryable<AspNetUser> lst = db.AspNetUsers;
             if (!string.IsNullOrEmpty(key))
                 lst = lst.Where(m => m.UserName.Contains(key));
@@ -56,7 +58,7 @@ namespace ECommerce.Models
             if (!string.IsNullOrEmpty(phone))
                 lst = lst.Where(m => m.PhoneNumber.Contains(phone));
             if (!string.IsNullOrEmpty(quyen))
-                lst = lst.Where(m => m.AspNetRoles.FirstOrDefault().Id.Equals(quyen));
+                lst = lst.Where(m => m.AspNetRoles.FirstOrDefault().Id==(iQuyen));
             return lst;
         }
 
