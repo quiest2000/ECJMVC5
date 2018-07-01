@@ -17,9 +17,9 @@ namespace EC_TH2012_J.Models
     public partial class AspNetUserClaim
     {
         public int Id { get; set; }
-        public string UserId { get; set; }
-        public string ClaimType { get; set; }
-        public string ClaimValue { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(1024)] public string UserId { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(1024)] public string ClaimType { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(1024)] public string ClaimValue { get; set; }
         [ForeignKey(nameof(UserId))]
         public virtual AspNetUser AspNetUser { get; set; }
     }

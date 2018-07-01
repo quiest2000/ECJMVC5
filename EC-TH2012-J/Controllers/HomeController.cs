@@ -16,7 +16,6 @@ namespace EC_TH2012_J.Controllers
         public ActionResult Index()
         {
             ManagerObiect.getIntance();
-            
             return View();
         }
 
@@ -83,7 +82,7 @@ namespace EC_TH2012_J.Controllers
             }
             return View(Ds_Group);
         }
-        
+
         public ActionResult Cart()
         {
             return View(ManagerObiect.getIntance().giohang);
@@ -193,7 +192,7 @@ namespace EC_TH2012_J.Controllers
         public ActionResult SPBanChay()
         {
             SanPhamModel sp = new SanPhamModel();
-            IQueryable<SanPham> splist = sp.SPBanChay(7);      
+            IQueryable<SanPham> splist = sp.SPBanChay(7);
             if (splist.Any())
                 return PartialView("_BestSellerPartial", splist.ToList());
             else

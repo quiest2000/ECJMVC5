@@ -19,12 +19,12 @@ namespace EC_TH2012_J.Models
     public partial class SanPhamKhuyenMai
     {
         [Key, Column(Order = 0)]
-        public string MaKM { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(1024)] public string MaKM { get; set; }
         [Key, Column(Order = 1)]
-        public string MaSP { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(1024)] public string MaSP { get; set; }
 
         [AllowHtml]
-        public string MoTa { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(1024)] public string MoTa { get; set; }
         public Nullable<int> GiamGia { get; set; }
         [ForeignKey(nameof(MaKM))]
         public virtual KhuyenMai KhuyenMai { get; set; }

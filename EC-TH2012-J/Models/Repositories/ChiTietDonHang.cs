@@ -19,9 +19,9 @@ namespace EC_TH2012_J.Models
     {
         [Key]
         [Display(Name = "Mã đơn hàng")]
-        public string MaDH { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(1024)] public string MaDH { get; set; }
         [Display(Name = "Mã sản phẩm")]
-        public string MaSP { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(1024)] public string MaSP { get; set; }
         [Display(Name = "Số Lượng")]
         public Nullable<int> SoLuong { get; set; }
         [Display(Name = "Thành tiền")]

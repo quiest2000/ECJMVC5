@@ -19,11 +19,11 @@ namespace EC_TH2012_J.Models
     {
         [Key]
         public int ID { get; set; }
-        public string MaNCC { get; set; }
-        public string LinkRequesrToken { get; set; }
-        public string LinkAccessToken { get; set; }
-        public string LinkKiemTraLuongTon { get; set; }
-        public string LinkXacNhanGiaoHang { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(1024)] public string MaNCC { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(1024)] public string LinkRequesrToken { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(1024)] public string LinkAccessToken { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(1024)] public string LinkKiemTraLuongTon { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(1024)] public string LinkXacNhanGiaoHang { get; set; }
         [ForeignKey(nameof(MaNCC))]
         public virtual NhaCungCap NhaCungCap { get; set; }
     }

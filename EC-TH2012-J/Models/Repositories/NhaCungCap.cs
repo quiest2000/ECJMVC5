@@ -19,19 +19,19 @@ namespace EC_TH2012_J.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public NhaCungCap()
         {
-            this.HopDongNCCs = new HashSet<HopDongNCC>();
-            this.Oauths = new HashSet<Oauth>();
-            this.ConfigAPIs = new HashSet<ConfigAPI>();
-            this.DanhsachdangkisanphamNCCs = new HashSet<DanhsachdangkisanphamNCC>();
+            this.HopDongNCCs = new List<HopDongNCC>();
+            this.Oauths = new List<Oauth>();
+            this.ConfigAPIs = new List<ConfigAPI>();
+            this.DanhsachdangkisanphamNCCs = new List<DanhsachdangkisanphamNCC>();
         }
         [System.ComponentModel.DataAnnotations.Key]
-        public string MaNCC { get; set; }
-        public string TenNCC { get; set; }
-        public string DiaChi { get; set; }
-        public string SDT_NCC { get; set; }
-        public string Email { get; set; }
-        public string Website { get; set; }
-        public string Net_user { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(1024)] public string MaNCC { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(1024)] public string TenNCC { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(1024)] public string DiaChi { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(1024)] public string SDT_NCC { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(1024)] public string Email { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(1024)] public string Website { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(1024)] public string Net_user { get; set; }
     
         public virtual ICollection<HopDongNCC> HopDongNCCs { get; set; }
         public virtual ICollection<Oauth> Oauths { get; set; }

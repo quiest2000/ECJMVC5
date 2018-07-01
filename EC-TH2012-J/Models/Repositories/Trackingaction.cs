@@ -16,10 +16,10 @@ namespace EC_TH2012_J.Models
     {
         [System.ComponentModel.DataAnnotations.Key]
         public int Id { get; set; }
-        public string Username { get; set; }
-        public string MaSP { get; set; }
-        public string Controller { get; set; }
-        public string Action { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(1024)] public string Username { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(1024)] public string MaSP { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(1024)] public string Controller { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(1024)] public string Action { get; set; }
         public Nullable<System.DateTime> Ngaythuchien { get; set; }
     }
 }

@@ -20,28 +20,28 @@ namespace EC_TH2012_J.Models
         //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public SanPham()
         {
-            this.BinhLuans = new HashSet<BinhLuan>();
-            this.ChiTietDonHangs = new HashSet<ChiTietDonHang>();
-            this.HopDongNCCs = new HashSet<HopDongNCC>();
-            this.SanPhamKhuyenMais = new HashSet<SanPhamKhuyenMai>();
-            this.ThongSoKyThuats = new HashSet<ThongSoKyThuat>();
-            this.Sanphamcanmuas = new HashSet<Sanphamcanmua>();
+            this.BinhLuans = new List<BinhLuan>();
+            this.ChiTietDonHangs = new List<ChiTietDonHang>();
+            this.HopDongNCCs = new List<HopDongNCC>();
+            this.SanPhamKhuyenMais = new List<SanPhamKhuyenMai>();
+            this.ThongSoKyThuats = new List<ThongSoKyThuat>();
+            this.Sanphamcanmuas = new List<Sanphamcanmua>();
         }
         [System.ComponentModel.DataAnnotations.Key]
-        public string MaSP { get; set; }
-        public string TenSP { get; set; }
-        public string LoaiSP { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(1024)] public string MaSP { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(1024)] public string TenSP { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(1024)] public string LoaiSP { get; set; }
         [ForeignKey(nameof(LoaiSP))]
         public virtual LoaiSP LoaiSanPham { get; set; }
         public Nullable<int> SoLuotXemSP { get; set; }
-        public string HangSX { get; set; }
-        public string XuatXu { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(1024)] public string HangSX { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(1024)] public string XuatXu { get; set; }
         public Nullable<decimal> GiaTien { get; set; }
         [AllowHtml]
-        public string MoTa { get; set; }
-        public string AnhDaiDien { get; set; }
-        public string AnhNen { get; set; }
-        public string AnhKhac { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(1024)] public string MoTa { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(1024)] public string AnhDaiDien { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(1024)] public string AnhNen { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(1024)] public string AnhKhac { get; set; }
         public Nullable<int> SoLuong { get; set; }
         public Nullable<bool> isnew { get; set; }
         public Nullable<bool> ishot { get; set; }

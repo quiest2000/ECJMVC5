@@ -16,10 +16,12 @@ namespace EC_TH2012_J.Models
     [System.ComponentModel.DataAnnotations.Schema.Table("AspNetUserLogins")]
     public partial class AspNetUserLogin
     {
-        public string LoginProvider { get; set; }
-        public string ProviderKey { get; set; }
-        [System.ComponentModel.DataAnnotations.Key]
-        public string UserId { get; set; }
+        [System.ComponentModel.DataAnnotations.Key, Column(Order = 0)]
+        [System.ComponentModel.DataAnnotations.StringLength(1024)] public string LoginProvider { get; set; }
+        [System.ComponentModel.DataAnnotations.Key, Column(Order = 1)] 
+        [System.ComponentModel.DataAnnotations.StringLength(1024)] public string ProviderKey { get; set; }
+        [System.ComponentModel.DataAnnotations.Key, Column(Order = 2)]
+        [System.ComponentModel.DataAnnotations.StringLength(1024)] public string UserId { get; set; }
         [ForeignKey(nameof(UserId))]
         public virtual AspNetUser AspNetUser { get; set; }
     }

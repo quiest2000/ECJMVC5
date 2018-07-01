@@ -22,9 +22,9 @@ namespace EC_TH2012_J.Models
         [Display(Name = "Mã Sản phẩm cần mua")]
         public Nullable<int> MaSPCanMua { get; set; }
         [Display(Name = "Mã nhà cung cấp")]
-        public string MaNCC { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(1024)] public string MaNCC { get; set; }
         [Display(Name = "Ghi chú")]
-        public string Ghichu { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(1024)] public string Ghichu { get; set; }
         [Display(Name = "Ngày đăng kí")]
         public Nullable<System.DateTime> NgayDK { get; set; }
         [Display(Name = "Trạng thái")]

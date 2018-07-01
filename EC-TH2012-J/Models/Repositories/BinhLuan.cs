@@ -21,19 +21,19 @@ namespace EC_TH2012_J.Models
         [Display(Name = "Mã bình luận")]
         public int MaBL { get; set; }
         [Display(Name = "Mã sản phẩm")]
-        public string MaSP { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(1024)] public string MaSP { get; set; }
         [Display(Name = "Mã Khách Hàng")]
-        public string MaKH { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(1024)] public string MaKH { get; set; }
         [Display(Name = "Nội Dung Bình Luận")]
-        public string NoiDung { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(1024)] public string NoiDung { get; set; }
         [Display(Name = "Ngày Đăng")]
         public Nullable<System.DateTime> NgayDang { get; set; }
         [Display(Name = "Họ Tên")]
-        public string HoTen { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(1024)] public string HoTen { get; set; }
         [Display(Name = "Email")]
-        public string Email { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(1024)] public string Email { get; set; }
         [Display(Name = "Đã trả lời")]
-        public string DaTraLoi { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(1024)] public string DaTraLoi { get; set; }
         public Nullable<int> Parent { get; set; }
         [ForeignKey(nameof(MaKH))]
         public virtual AspNetUser AspNetUser { get; set; }

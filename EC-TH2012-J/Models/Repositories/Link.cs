@@ -16,9 +16,9 @@ namespace EC_TH2012_J.Models
     {
         [System.ComponentModel.DataAnnotations.Key]
         public int id { get; set; }
-        public string Url { get; set; }
-        public string Image { get; set; }
-        public string Text { get; set; }
-        public string Group { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(1024)] public string Url { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(1024)] public string Image { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(1024)] public string Text { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(1024)] public string Group { get; set; }
     }
 }

@@ -17,17 +17,17 @@ namespace EC_TH2012_J.Models
     {
         public HangSanXuat()
         {
-            this.SanPhams = new HashSet<SanPham>();
+            this.SanPhams = new List<SanPham>();
         }
         [System.ComponentModel.DataAnnotations.Key]
         [Display(Name = "Hãng sản xuất")]
-        public string HangSX { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(1024)] public string HangSX { get; set; }
         [Display(Name = "Tên Hãng")]
-        public string TenHang { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(1024)] public string TenHang { get; set; }
         [Display(Name = "Trụ sở chính")]
-        public string TruSoChinh { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(1024)] public string TruSoChinh { get; set; }
         [Display(Name = "Quốc gia")]
-        public string QuocGia { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(1024)] public string QuocGia { get; set; }
     
         public virtual ICollection<SanPham> SanPhams { get; set; }
     }

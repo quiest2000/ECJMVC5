@@ -17,12 +17,12 @@ namespace EC_TH2012_J.Models
     public partial class HopDongNCC
     {
         [Key]
-        public string MaHD { get; set; }
-        public string MaNCC { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(1024)] public string MaHD { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(1024)] public string MaNCC { get; set; }
         public Nullable<System.DateTime> NgayKy { get; set; }
         public Nullable<int> ThoiHanHD { get; set; }
         public Nullable<System.DateTime> TGGiaoHang { get; set; }
-        public string MaSP { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(1024)] public string MaSP { get; set; }
         public Nullable<int> SLToiThieu { get; set; }
         public Nullable<int> SLCungCap { get; set; }
         public Nullable<System.DateTime> Dateaccept { get; set; }

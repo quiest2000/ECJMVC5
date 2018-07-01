@@ -19,17 +19,17 @@ namespace EC_TH2012_J.Models
     {
         public Sanphamcanmua()
         {
-            this.DanhsachdangkisanphamNCCs = new HashSet<DanhsachdangkisanphamNCC>();
+            this.DanhsachdangkisanphamNCCs = new List<DanhsachdangkisanphamNCC>();
         }
         [System.ComponentModel.DataAnnotations.Key]
         public int ID { get; set; }
-        public string MaSP { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(1024)] public string MaSP { get; set; }
         public Nullable<int> Soluong { get; set; }
         public Nullable<System.DateTime> Ngayketthuc { get; set; }
         public Nullable<System.DateTime> Ngaydang { get; set; }
 
         [AllowHtml]
-        public string Mota { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(1024)] public string Mota { get; set; }
         [ForeignKey(nameof(MaSP))]
         public virtual SanPham SanPham { get; set; }
         public virtual ICollection<DanhsachdangkisanphamNCC> DanhsachdangkisanphamNCCs { get; set; }

@@ -17,14 +17,14 @@ namespace EC_TH2012_J.Models
     public partial class Oauth
     {
         [System.ComponentModel.DataAnnotations.Key]
-        public string ID { get; set; }
-        public string Consumer_key { get; set; }
-        public string Callback { get; set; }
-        public string Request_token { get; set; }
-        public string Verifier_token { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(1024)] public string ID { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(1024)] public string Consumer_key { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(1024)] public string Callback { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(1024)] public string Request_token { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(1024)] public string Verifier_token { get; set; }
         public Nullable<System.DateTime> Date_comsumer { get; set; }
-        public string MaNCC { get; set; }
-        public string Token { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(1024)] public string MaNCC { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(1024)] public string Token { get; set; }
         public Nullable<System.DateTime> ExpiresTime { get; set; }
         [ForeignKey(nameof(MaNCC))]
         public virtual NhaCungCap NhaCungCap { get; set; }

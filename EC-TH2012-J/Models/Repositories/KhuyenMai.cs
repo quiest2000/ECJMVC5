@@ -19,11 +19,11 @@ namespace EC_TH2012_J.Models
     {
         public KhuyenMai()
         {
-            this.SanPhamKhuyenMais = new HashSet<SanPhamKhuyenMai>();
+            this.SanPhamKhuyenMais = new List<SanPhamKhuyenMai>();
         }
         [Key]
         [Display(Name = "Mã khuyến mãi ")]
-        public string MaKM { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(1024)] public string MaKM { get; set; }
         [Display(Name = "Ngày bắt đầu")]
         [DataType(DataType.Date)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
@@ -34,11 +34,11 @@ namespace EC_TH2012_J.Models
         public Nullable<System.DateTime> NgayKetThuc { get; set; }
         [Display(Name = "Nội dung")]
         [AllowHtml]
-        public string NoiDung { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(1024)] public string NoiDung { get; set; }
         [Display(Name = "Tên chương trình")]
-        public string TenCT { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(1024)] public string TenCT { get; set; }
         [Display(Name = "Ảnh chương trình")]
-        public string AnhCT { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(1024)] public string AnhCT { get; set; }
 
         public virtual ICollection<SanPhamKhuyenMai> SanPhamKhuyenMais { get; set; }
     }

@@ -16,7 +16,7 @@ namespace EC_TH2012_J.Models
     {
         [System.ComponentModel.DataAnnotations.Key]
         public int Id { get; set; }
-        public string ThuocTinh { get; set; }
-        public string GiaTri { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(1024)] public string ThuocTinh { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(1024)] public string GiaTri { get; set; }
     }
 }

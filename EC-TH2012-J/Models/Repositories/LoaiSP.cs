@@ -16,11 +16,11 @@ namespace EC_TH2012_J.Models
     {
         public LoaiSP()
         {
-            this.SanPhams = new HashSet<SanPham>();
+            this.SanPhams = new List<SanPham>();
         }
         [System.ComponentModel.DataAnnotations.Key]
-        public string MaLoai { get; set; }
-        public string TenLoai { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(1024)] public string MaLoai { get; set; }
+        [System.ComponentModel.DataAnnotations.StringLength(1024)] public string TenLoai { get; set; }
     
         public virtual ICollection<SanPham> SanPhams { get; set; }
     }
