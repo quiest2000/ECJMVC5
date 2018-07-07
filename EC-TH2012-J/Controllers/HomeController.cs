@@ -40,44 +40,8 @@ namespace EC_TH2012_J.Controllers
                 Ds_Group.Add(new Thanhviennhom
                 {
                     MSSV = "1212293",
-                    Hoten = "Nguyễn Ngọc Phúc",
-                    LinkFacebook = "https://www.facebook.com/phuc.nguyen.eccentric?fref=pb_friends"
-                });
-                Ds_Group.Add(new Thanhviennhom
-                {
-                    MSSV = "1212080",
-                    Hoten = "Huỳnh Phạm Hải Đăng",
-                    LinkFacebook = "https://www.facebook.com/wayne.pham.507?fref=pb_friends"
-                });
-                Ds_Group.Add(new Thanhviennhom
-                {
-                    MSSV = "1212276",
-                    Hoten = "Nguyễn Thành Nhân",
-                    LinkFacebook = "https://www.facebook.com/GanderNguyen?fref=pb_friends"
-                });
-                Ds_Group.Add(new Thanhviennhom
-                {
-                    MSSV = "1212437",
-                    Hoten = "Phan Ngọc Triều",
-                    LinkFacebook = "https://www.facebook.com/taolibra?fref=pb_friends"
-                });
-                Ds_Group.Add(new Thanhviennhom
-                {
-                    MSSV = "1212502",
-                    Hoten = "Nguyễn Văn Ty",
-                    LinkFacebook = "https://www.facebook.com/vanty8"
-                });
-                Ds_Group.Add(new Thanhviennhom
-                {
-                    MSSV = "1212526",
-                    Hoten = "Nguyễn Trương Vương",
-                    LinkFacebook = "https://www.facebook.com/vuongtruong.nguyen?fref=pb_friends"
-                });
-                Ds_Group.Add(new Thanhviennhom
-                {
-                    MSSV = "1212535",
-                    Hoten = "Vũ Thị Thanh Xuân",
-                    LinkFacebook = "https://www.facebook.com/harusame.927?fref=pb_friends"
+                    Hoten = "Nguyễn Ngọc Quí",
+                    LinkFacebook = "https://www.facebook.com/nguyenngocqui88"
                 });
             }
             return View(Ds_Group);
