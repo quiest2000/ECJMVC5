@@ -12,7 +12,7 @@
             </th>
             <th>@Html.DisplayNameFor(model => model.First().AnhDaiDien)</th>
             <th>@Html.DisplayNameFor(model => model.First().TenSP)</th>
-            <th>@Html.DisplayNameFor(model => model.First().LoaiSP1.TenLoai)</th>
+            <th>@*@Html.DisplayNameFor(model => model.First().LoaiSP1.TenLoai)*@</th>
             <th>@Html.DisplayNameFor(model => model.First().SoLuong)</th>
             <th>@Html.DisplayNameFor(model => model.First().GiaTien)</th>
             <th>Hành động</th>
@@ -27,7 +27,7 @@
                 </td>
                 <td><img src="@Url.Content("~/images/products/")@item.AnhDaiDien" width="90" height="120" /></td>
                 <td class="center">@item.TenSP</td>
-                <td class="center">@item.LoaiSP1.TenLoai</td>
+                <td class="center">@*@item.LoaiSP1.TenLoai*@</td>
                 <td class="center">@item.SoLuong</td>
                 <td class="center">@string.Format("{0:0,0}", item.GiaTien) VNĐ</td>
                 <td class="center">

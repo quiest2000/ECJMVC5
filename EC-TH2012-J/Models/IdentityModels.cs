@@ -28,7 +28,7 @@ namespace EC_TH2012_J.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("SqlContext", throwIfV1Schema: false)
         {
         }
 

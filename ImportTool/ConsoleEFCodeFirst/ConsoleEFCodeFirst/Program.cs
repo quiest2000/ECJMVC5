@@ -62,7 +62,7 @@ namespace ConsoleEFCodeFirst
                             return;
                         oUser.AspNetRoles.Add(oRoles.FirstOrDefault(aa=>aa.Id.Equals(sRoleId)));
                     });
-
+                    
                     oracleContext.SaveChanges();
                     Console.WriteLine("All done!");
                 }

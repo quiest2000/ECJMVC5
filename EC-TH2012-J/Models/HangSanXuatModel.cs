@@ -17,7 +17,7 @@ namespace EC_TH2012_J.Models
 
         internal HangSanXuat FindById(string id)
         {
-            return db.HangSanXuats.Find(id);
+            return db.HangSanXuats.FirstOrDefault(aa => aa.HangSX == id);
         }
 
         internal void EditHangSX(HangSanXuat loai)

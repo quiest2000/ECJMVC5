@@ -211,6 +211,11 @@
     <Compile Include="Controllers\B2B\AuctionController.cs" />
     <Compile Include="Controllers\B2B\DanhSachDKController.cs" />
     <Compile Include="Controllers\B2B\HopDongController.cs" />
+    <Compile Include="Controllers\B2B\NewFolder1\AspNetRole.cs" />
+    <Compile Include="Controllers\B2B\NewFolder1\AspNetUser.cs" />
+    <Compile Include="Controllers\B2B\NewFolder1\AspNetUserClaim.cs" />
+    <Compile Include="Controllers\B2B\NewFolder1\AspNetUserLogin.cs" />
+    <Compile Include="Controllers\B2B\NewFolder1\SqlContext.cs" />
     <Compile Include="Controllers\B2B\NhaCungCapController.cs" />
     <Compile Include="Controllers\ThongKeController.cs" />
     <Compile Include="Models\Repositories\AspNetRole.cs" />

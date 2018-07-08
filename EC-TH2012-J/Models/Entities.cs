@@ -43,7 +43,7 @@ namespace EC_TH2012_J.Models
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<BinhLuan> BinhLuans { get; set; }
         public virtual DbSet<ChiTietDonHang> ChiTietDonHangs { get; set; }
-        public virtual DbSet<DonHangKH> DonHangKHs { get; set; }
+        public virtual DbSet<Models.DonHangKH> DonHangKHs { get; set; }
         public virtual DbSet<GiaoDien> GiaoDiens { get; set; }
         public virtual DbSet<HangSanXuat> HangSanXuats { get; set; }
         public virtual DbSet<HopDongNCC> HopDongNCCs { get; set; }

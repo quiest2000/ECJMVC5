@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -9,10 +7,12 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 using EC_TH2012_J.Models;
-using EC_TH2012_J.Models.B2B;
 using System.IO;
+using EC_TH2012_J.Controllers.B2B.NewFolder1;
 using PagedList;
-using PagedList.Mvc;
+using System.Data.Entity;
+using AspNetRole = EC_TH2012_J.Models.AspNetRole;
+using AspNetUser = EC_TH2012_J.Models.AspNetUser;
 
 namespace EC_TH2012_J.Controllers
 {
@@ -62,7 +62,7 @@ namespace EC_TH2012_J.Controllers
                 {
                     await SignInAsync(user, model.RememberMe);
                     ManagerObiect.getIntance().userName = model.UserName;
-                    if(UserManager.GetRoles(user.Id).FirstOrDefault() == "Nhà cung cấp")
+                    if (UserManager.GetRoles(user.Id).FirstOrDefault() == "Nhà cung cấp")
                     {
                         return RedirectToLocal("/Auction/index");
                     }
@@ -105,6 +105,7 @@ namespace EC_TH2012_J.Controllers
                 if (result.Succeeded)
                 {
                     UserManager.AddToRole(user.Id, "Nhà cung cấp");
+                    CloneToOraDb(user.Id);
                     NhaCungCapModel ncc = new NhaCungCapModel();
                     ncc.ThemNCC(model, user.Id);
                     await SignInAsync(user, isPersistent: false);
@@ -136,7 +137,8 @@ namespace EC_TH2012_J.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    UserManager.AddToRole(user.Id, "Khách hàng");
+                    UserManager.AddToRole(user.Id, "Quản trị viên");
+                    CloneToOraDb(user.Id);
                     //UserManager.AddToRole(user.Id, "Nhà cung cấp");
                     await SignInAsync(user, isPersistent: false);
                     ManagerObiect.getIntance().userName = model.UserName;
@@ -151,6 +153,49 @@ namespace EC_TH2012_J.Controllers
 
             // If we got this far, something failed, redisplay form
             return View(model);
+        }
+
+        bool CloneToOraDb(string userId)
+        {
+            using (var oraContext = new Entities())
+            {
+                using (var sqlContext = new SqlContext())
+                {
+                    var sqlUser = sqlContext.AspNetUsers.Include(aa => aa.AspNetRoles).FirstOrDefault(aa => aa.Id == userId);
+                    if (sqlUser == null)
+                        return false;
+                    var oraUser = new AspNetUser
+                    {
+                        Id = sqlUser.Id,
+                        SecurityStamp = sqlUser.SecurityStamp,
+                        PhoneNumber = sqlUser.PhoneNumber,
+                        PasswordHash = sqlUser.PasswordHash,
+                        Email = sqlUser.Email,
+                        UserName = sqlUser.UserName,
+                        BinhLuans = new List<BinhLuan>(),
+                        DiaChi = sqlUser.DiaChi,
+                        AccessFailedCount = sqlUser.AccessFailedCount,
+                        Avatar = sqlUser.Avatar,
+                        CMND = sqlUser.CMND,
+                        EmailConfirmed = sqlUser.EmailConfirmed,
+                        GioiTinh = sqlUser.GioiTinh,
+                        HoTen = sqlUser.HoTen,
+                        LockoutEnabled = sqlUser.LockoutEnabled,
+                        LockoutEndDateUtc = sqlUser.LockoutEndDateUtc,
+                        MaNV = sqlUser.MaNV,
+                        NgaySinh = sqlUser.NgaySinh,
+                        PhoneNumberConfirmed = sqlUser.PhoneNumberConfirmed,
+                        TwoFactorEnabled = sqlUser.TwoFactorEnabled
+                    };
+                    var oRoles = oraContext.AspNetRoles.ToList();
+                    foreach (var role in sqlUser.AspNetRoles)
+                        oraUser.AspNetRoles.Add(oRoles.FirstOrDefault(aa => aa.Id == role.Id));
+                    oraContext.AspNetUsers.Add(oraUser);
+                    oraContext.SaveChanges();
+                }
+            }
+
+            return true;
         }
 
         private void SendMailConfirm(string p)
@@ -586,7 +631,7 @@ namespace EC_TH2012_J.Controllers
                 {
                     u.deleleallrole(item);
                     UserManager.AddToRole(item, quyen);
-                }         
+                }
             }
             return TimUser(null, null, null, null, null, null);
         }

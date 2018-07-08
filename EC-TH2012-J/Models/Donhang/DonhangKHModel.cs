@@ -92,17 +92,18 @@ namespace EC_TH2012_J.Models
             {
                 using (Entities db = new Entities())
                 {
-                    DonHangKH dhkh = new DonHangKH();
-                    dhkh.MaDH = RandomMa();
-                    dhkh.MaKH = maKH;
-
-                    dhkh.Diachi = a.address;
-                    dhkh.Dienthoai = a.phoneNumber;
-                    dhkh.Ghichu = a.Note;
-                    dhkh.NgayDatMua = DateTime.Now;
-                    dhkh.TinhTrangDH = 1;
-                    dhkh.Tongtien = giohang.TinhtongtienCart();
-                    dhkh.PhiVanChuyen = 0;
+                    var dhkh = new DonHangKH
+                    {
+                        MaDH = RandomMa(),
+                        MaKH = maKH,
+                        Diachi = a.address,
+                        Dienthoai = a.phoneNumber,
+                        Ghichu = a.Note,
+                        NgayDatMua = DateTime.Now,
+                        TinhTrangDH = 1,
+                        Tongtien = giohang.TinhtongtienCart(),
+                        PhiVanChuyen = 0,
+                    };
 
                     dhkh = db.DonHangKHs.Add(dhkh);
                     db.SaveChanges();

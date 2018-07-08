@@ -18,7 +18,6 @@ namespace EC_TH2012_J.Controllers
             ManagerObiect.getIntance();
             return View();
         }
-
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
